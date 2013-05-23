@@ -43,3 +43,35 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+# Better Errors replaces the standard Rails error page with a much better and more useful error page
+gem 'better_errors'
+
+# Bullet will watch your queries while you develop your application and notify you when you should add eager loading (N+1 queries), when you’re using eager loading that isn’t necessary and when you should use counter cache
+# gem 'bullet'
+
+# Capybara simulates how a real user would interact with a web application
+# gem 'capybara'
+
+# Automatically creates JavaScript client-side validations from your existing server-side model validations
+# gem 'client_side_validations'
+
+# Fixture replacement
+# gem 'fabrication'
+
+# Dummy data
+# gem 'ffaker'
+
+# Unit test
+# gem 'rspec-rails'
+
+# DSL for building forms and no opinion on markup
+# gem 'simple_form'
+
+# SOLR powered full-text search engine
+# gem 'sunspot'
+
+
+
+
+
