@@ -63,7 +63,7 @@ gem 'better_errors'
 # gem 'ffaker'
 
 # Unit test
-# gem 'rspec-rails'
+gem 'rspec-rails'
 
 # DSL for building forms and no opinion on markup
 # gem 'simple_form'
