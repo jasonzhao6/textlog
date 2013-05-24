@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.0.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0.rc1'
@@ -71,7 +72,8 @@ gem 'rspec-rails'
 # SOLR powered full-text search engine
 # gem 'sunspot'
 
+# Use Twillio to receive text messages
+gem 'twilio-ruby'
 
-
-
-
+# Share localhost web servers to the rest of the world
+gem 'localtunnel'
