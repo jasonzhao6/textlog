@@ -11,15 +11,49 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130524043800) do
+ActiveRecord::Schema.define(version: 20130524075842) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activities", force: true do |t|
+    t.integer "message_id"
+    t.string  "name"
+    t.string  "category"
+    t.string  "accomplishment"
+    t.string  "company_id"
+    t.integer "duration"
+    t.string  "mood"
+    t.string  "location"
+    t.string  "formatted_address"
+    t.string  "lat"
+    t.string  "lng"
+    t.string  "viewport"
+  end
+
+  create_table "companies", force: true do |t|
+    t.integer "activity_id"
+    t.integer "friend_id"
+  end
+
+  create_table "friends", force: true do |t|
+    t.string "name"
+    t.string "fb_id"
+  end
 
   create_table "messages", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "body"
+    t.boolean  "parsed"
+  end
+
+  create_table "rules", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "parent_id"
+    t.string   "command"
+    t.string   "args"
   end
 
 end
