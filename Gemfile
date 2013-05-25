@@ -80,3 +80,5 @@ gem 'localtunnel'
 
 # Make rspec faster
 gem 'spork-rails', git: 'https://github.com/A-gen/spork-rails.git'
+
+gem 'nyan-cat-formatter'
