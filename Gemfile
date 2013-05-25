@@ -61,7 +61,7 @@ gem 'better_errors'
 # gem 'fabrication'
 
 # Dummy data
-# gem 'ffaker'
+gem 'ffaker'
 
 # Unit test
 gem 'rspec-rails'
@@ -77,3 +77,6 @@ gem 'twilio-ruby'
 
 # Share localhost web servers to the rest of the world
 gem 'localtunnel'
+
+# Make rspec faster
+gem 'spork-rails', git: 'https://github.com/A-gen/spork-rails.git'
