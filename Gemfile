@@ -1,70 +1,67 @@
 source 'https://rubygems.org'
+
+# Tell Heroku that this is a ruby 2 application
 ruby '2.0.0'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.0.rc1'
+group :development do
+  # Better Errors replaces the standard Rails error page with a much better and more useful error page
+  gem 'better_errors'
 
-# Use postgresql as the database for Active Record
-gem 'pg'
+  # Bullet will watch your queries while you develop your application and notify you when you should add eager loading (N+1 queries), when you’re using eager loading that isn’t necessary and when you should use counter cache
+  gem 'bullet'
 
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0.rc1'
+  # Use CoffeeScript for .js.coffee assets and views
+  gem 'coffee-rails', '~> 4.0.0'
 
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+  # Share localhost web servers to the rest of the world
+  gem 'localtunnel'
 
-# Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
+  # Use SCSS for stylesheets
+  gem 'sass-rails', '~> 4.0.0.rc1'
 
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
-
-# Use jquery as the JavaScript library
-gem 'jquery-rails'
-
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
-
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 1.0.1'
+  # Use Uglifier as compressor for JavaScript assets
+  gem 'uglifier', '>= 1.3.0'
+end
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
 end
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
+group :test do
+  # Capybara simulates how a real user would interact with a web application
+  # gem 'capybara'
 
-# Use unicorn as the app server
-# gem 'unicorn'
+  # Fixture replacement
+  # gem 'fabrication'
 
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
+  # Dummy data
+  gem 'ffaker'
 
-# Use debugger
-# gem 'debugger', group: [:development, :test]
+  # Make rspec result look pretty in command line
+  gem 'nyan-cat-formatter'
 
-# Better Errors replaces the standard Rails error page with a much better and more useful error page
-gem 'better_errors'
+  # Unit test
+  gem 'rspec-rails'
 
-# Bullet will watch your queries while you develop your application and notify you when you should add eager loading (N+1 queries), when you’re using eager loading that isn’t necessary and when you should use counter cache
-# gem 'bullet'
-
-# Capybara simulates how a real user would interact with a web application
-# gem 'capybara'
+  # Make rspec faster
+  gem 'spork-rails', git: 'https://github.com/A-gen/spork-rails.git'
+end
 
 # Automatically creates JavaScript client-side validations from your existing server-side model validations
 # gem 'client_side_validations'
 
-# Fixture replacement
-# gem 'fabrication'
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'jbuilder', '~> 1.0.1'
 
-# Dummy data
-gem 'ffaker'
+# Use jquery as the JavaScript library
+gem 'jquery-rails'
 
-# Unit test
-gem 'rspec-rails'
+# Use postgresql as the database for Active Record
+gem 'pg'
+
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '4.0.0.rc1'
 
 # DSL for building forms and no opinion on markup
 # gem 'simple_form'
@@ -72,13 +69,8 @@ gem 'rspec-rails'
 # SOLR powered full-text search engine
 # gem 'sunspot'
 
+# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+gem 'turbolinks'
+
 # Use Twillio to receive text messages
 gem 'twilio-ruby'
-
-# Share localhost web servers to the rest of the world
-gem 'localtunnel'
-
-# Make rspec faster
-gem 'spork-rails', git: 'https://github.com/A-gen/spork-rails.git'
-
-gem 'nyan-cat-formatter'
