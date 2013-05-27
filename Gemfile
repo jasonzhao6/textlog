@@ -3,6 +3,11 @@ source 'https://rubygems.org'
 # Tell Heroku that this is a ruby 2 application
 ruby '2.0.0'
 
+group :development, :test do
+  # Debugger
+  gem 'pry'
+end
+
 group :development do
   # Better Errors replaces the standard Rails error page with a much better and more useful error page
   gem 'better_errors'

@@ -2,17 +2,15 @@ class CreateRules < ActiveRecord::Migration
   def change
     # when parsing, start with top of decision tree, i.e. rule without rule_id
     # then trickle down decision tree depth-first
-    # TODO: rules downloadable as seed file, included in rspec
-    # http://stackoverflow.com/questions/8386604/auto-load-the-seed-data-from-db-seeds-rb-with-rake
     create_table :rules do |t|
       t.timestamps
       t.integer :parent_id # link to parent rule, think decision tree
       t.string :command # . means subject is message, # means activity
       t.string :args # serialized json
-      # Biked Butterlap with Scott, Alan, Mary Ann. 1 hr 30 min. Engaged.
-      # Biked Butterlap in 1 hr 30 min. Engaged.
-      # Biked Butterlap. Engaged.
-      # ex.
+      # Biked Butterlap with Scott, Alan, Mary Ann. 1 hr 30 min. Felt engaged.
+      # Biked Butterlap in 1 hr 30 min. Felt engaged.
+      # Biked Butterlap. Felt engaged.
+      # eg.
       # command: ".split", { by: "." } return array of trimmed segments
       #   GROUP: name, category, accomplishment
       #   command: ".=~", { pattern: "^Biked" } return [n..-1]

@@ -22,12 +22,12 @@ describe Activity do
       its(:category) { should == 'Workout' }
     end
     
-    describe "#set_accomplishment" do
+    describe "#set_objective" do
       let(:str) { 'butterlap' }
       before(:each) do
-        activity.set_accomplishment(str)
+        activity.set_objective(str)
       end
-      its(:accomplishment) { should == 'Butterlap' }
+      its(:objective) { should == 'Butterlap' }
     end
     
     describe "#set_mood" do
@@ -71,21 +71,21 @@ describe Activity do
       end
     end
     
-    describe "#add_duration" do
+    describe "#add_time" do
       let(:num) { '1' }
       let(:unit) { 'minute' }
       before(:each) do
-        activity.add_duration(num, unit)
+        activity.add_time(num, unit)
       end
-      its(:duration) { should == 60 }
+      its(:time) { should == 60 }
       
-      context "when adding additional duration" do
+      context "when adding additional time" do
         let(:num2) { '2' }
         let(:unit2) { 'hour' }
         before(:each) do
-          activity.add_duration(num2, unit2)
+          activity.add_time(num2, unit2)
         end
-        its(:duration) { should == 7260 }
+        its(:time) { should == 7260 }
       end
     end
   end
