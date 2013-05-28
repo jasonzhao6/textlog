@@ -6,7 +6,7 @@
 # rule in a depth-first-search fashion.
 #
 # Each rule is made of a command and optional arguments.
-# A command prefixed with '.' (eg. '.match' ) is performed on raw text messages.
+# A command prefixed with '.' (eg. '.match') is performed on raw text messages.
 # A command prefixed with '#' (eg. '#set_name) is performed on activity model.
 # 
 # Users are free to create any rules they want, but they are limited to a
@@ -19,19 +19,24 @@ class RulesEngine
     @activity = Activity.new
     @rules = Rule.all
     @matches = nil
-    get_roots.each { |rule| execute(rule) }
-    preview
+    execute(get_roots)
   end
   
-  def execute(rule = nil)
-    subject, method, arg = parse_rule(rule)
-    retval = subject.send(method, arg)
-    set_match_data(retval) if method == 'match'
-    get_children(rule).each { |rule| execute(rule) }
+  def execute(rules)
+    rules.each do |rule|
+      subject, method, arg = parse_rule(rule)
+      retval = subject.send(method, arg)
+      set_match_data(retval) if method == 'match'
+      execute(get_children(rule)) if retval
+    end
   end
   
-  def preview
-    p @activity.to_json
+  def preview_activity
+    @activity.preview
+  end
+  
+  def save_activity
+    @activity.save
   end
   
   private
@@ -57,6 +62,6 @@ class RulesEngine
     end
     
     def set_match_data(obj)
-      p @matches = obj.is_a?(MatchData) ? Hash[obj.names.zip(obj.captures)] : nil
+      @matches = obj.is_a?(MatchData) ? Hash[obj.names.zip(obj.captures)] : nil
     end
 end
