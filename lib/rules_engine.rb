@@ -18,7 +18,7 @@ class RulesEngine
     @message = message
     @activity = Activity.new
     @rules = Rule.all
-    @match_data = nil
+    @matches = nil
     get_roots.each { |rule| execute(rule) }
     preview
   end
@@ -46,17 +46,17 @@ class RulesEngine
     def parse_rule(rule)
       case rule.command[0]
       when '.'
-        subject = @message.body
-        arg = rule.args
+        subject = @message
+        arg = rule.arg
       when '#'
         subject = @activity
-        arg = rule.args || @match_data
+        arg = rule.arg || @matches
       end
       method = rule.command[1..-1]
       [subject, method, arg]
     end
     
     def set_match_data(obj)
-      @match_data = obj.nil? ? nil : Hash[obj.names.zip(obj.captures)]
+      p @matches = obj.is_a?(MatchData) ? Hash[obj.names.zip(obj.captures)] : nil
     end
 end

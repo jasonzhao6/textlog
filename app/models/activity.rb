@@ -14,23 +14,19 @@ class Activity < ActiveRecord::Base
               'add_time']
   
   def set_name(str)
-    str = normalize_str(str)
-    self.name = str if str
+    self.name = normalize_str(str)
   end
   
   def set_category(str)
-    str = normalize_str(str)
-    self.category = str if str
+    self.category = normalize_str(str)
   end
   
-  def set_objective(str)
-    str = normalize_str(str)
-    self.objective = str if str
+  def set_objective(hsh)
+    self.objective = normalize_str(hsh['objective'])
   end
   
   def set_mood(str)
-    str = normalize_str(str)
-    self.mood = "#{str}!" # Good mood! Bad mood!
+    self.mood = "#{normalize_str(str)}!" # Good mood! Bad mood!
   end
   
   def add_friend(name, fb_id)
@@ -48,6 +44,6 @@ class Activity < ActiveRecord::Base
   private
   
     def normalize_str(str)
-      str.strip.titlecase if str
+      str.is_a?(String) ? str.strip.titlecase : nil
     end
 end

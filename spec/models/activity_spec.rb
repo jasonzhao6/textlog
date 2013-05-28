@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Activity do
-  
   describe "COMMANDS" do
     let(:activity) { Activity.new }
     subject { activity }
@@ -23,9 +22,9 @@ describe Activity do
     end
     
     describe "#set_objective" do
-      let(:str) { 'butterlap' }
+      let(:hsh) { {'objective' => 'Butterlap '} }
       before(:each) do
-        activity.set_objective(str)
+        activity.set_objective(hsh)
       end
       its(:objective) { should == 'Butterlap' }
     end

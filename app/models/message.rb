@@ -5,4 +5,8 @@ class Message < ActiveRecord::Base
   # 
   COMMANDS = ['match']
   
+  def match(pattern)
+    self.body.match(/#{pattern}/i)
+  end
+  
 end
