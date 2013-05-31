@@ -79,3 +79,6 @@ gem 'turbolinks'
 
 # Use Twillio to receive text messages
 gem 'twilio-ruby'
+
+# Use Twitter Bootstrap
+gem 'twitter-bootstrap-rails'

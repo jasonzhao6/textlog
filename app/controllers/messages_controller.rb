@@ -9,7 +9,22 @@ class MessagesController < ApplicationController
     render nothing: true
   end
   
-  def index
-    @messages = Message.all
+  def edit
+    @message = Message.find(params[:id])
   end
+  
+  def index
+    @messages = Message.order(:created_at).all
+  end
+  
+  def update
+    Message.find(params[:id]).update_attributes(message_params)
+    redirect_to messages_path
+  end
+  
+  private
+  
+    def message_params
+      params.require(:message).permit(:body)
+    end
 end
