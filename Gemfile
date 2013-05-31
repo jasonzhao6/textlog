@@ -20,12 +20,6 @@ group :development do
 
   # Share localhost web servers to the rest of the world
   gem 'localtunnel'
-
-  # Use SCSS for stylesheets
-  gem 'sass-rails', '~> 4.0.0.rc1'
-
-  # Use Uglifier as compressor for JavaScript assets
-  gem 'uglifier', '>= 1.3.0'
 end
 
 group :doc do
@@ -67,12 +61,18 @@ gem 'pg'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0.rc1'
+  
+# Use SCSS for stylesheets
+gem 'sass-rails', '~> 4.0.0.rc1'
 
 # DSL for building forms and no opinion on markup
 # gem 'simple_form'
 
 # SOLR powered full-text search engine
 # gem 'sunspot'
+
+# See https://github.com/sstephenson/execjs#readme for more supported runtimes
+# gem 'therubyracer', platforms: :ruby
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
@@ -82,3 +82,6 @@ gem 'twilio-ruby'
 
 # Use Twitter Bootstrap
 gem 'twitter-bootstrap-rails'
+
+# Use Uglifier as compressor for JavaScript assets
+gem 'uglifier', '>= 1.3.0'
