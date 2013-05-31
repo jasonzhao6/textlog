@@ -6,7 +6,7 @@
   <% @messages.each do |message| %>
     <li>
       <%= message.body %>
-      <a class='edit' href='<%= edit_message_path(message.id) %>'></a>
+      <a class='edit' href='<%= edit_message_path(message.id) %>'>edit</a>
     </li>
   <% end %>
 </ol>

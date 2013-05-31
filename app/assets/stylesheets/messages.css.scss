@@ -2,25 +2,17 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.messages-index {
-  .edit:before {
-    content: 'edit';
+.messages-edit .edit_message {
+  #message_body {
+    box-sizing: border-box;
+    height: 72px;
+  }
+  .btn {
+    display: block;
+    margin-top: 4px;
+  }
+  .cancel {
+    line-height: 38px;
   }
 }
 
-.messages-edit {
-  .edit_message {
-    #message_body, .btn {
-      min-width: 210px;
-    }
-    #message_body {
-      box-sizing: border-box;
-    }
-    .btn {
-      display: block;
-    }
-    .cancel {
-      line-height: 28px;
-    }
-  }
-}
