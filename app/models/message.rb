@@ -1,4 +1,5 @@
 class Message < ActiveRecord::Base
+  scope :unparsed, where(parsed: nil)
   
   # 
   # Commands that can be executed on message models by rules engine
