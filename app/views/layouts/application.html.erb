@@ -41,7 +41,7 @@
     <div class="container-fluid">
       <div class="row-fluid">
         <% if content_for? :sidebar %>
-          <div class="span3">
+          <div class="span3 hidden-phone">
             <%= yield :sidebar %>
           </div>
         <% end %>
