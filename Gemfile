@@ -20,6 +20,9 @@ group :development do
 
   # Share localhost web servers to the rest of the world
   gem 'localtunnel'
+  
+  # Turn off the Rails asset pipeline log
+  gem 'quiet_assets'
 end
 
 group :doc do
