@@ -1,5 +1,9 @@
 <div class="well sidebar-nav">
   <ul class="nav nav-list">
+    <li class="nav-header">Top friends</li>
+    <li><%= link_to "Link1", "/path1"  %></li>
+    <li><%= link_to "Link2", "/path2"  %></li>
+    <li><%= link_to "Link3", "/path3"  %></li>
     <li class="nav-header">Top activities</li>
     <li><%= link_to "Link1", "/path1"  %></li>
     <li><%= link_to "Link2", "/path2"  %></li>
@@ -12,13 +16,14 @@
     <li><%= link_to "Link1", "/path1"  %></li>
     <li><%= link_to "Link2", "/path2"  %></li>
     <li><%= link_to "Link3", "/path3"  %></li>
-    <li class="nav-header">Top moods</li>
-    <li><%= link_to "Link1", "/path1"  %></li>
-    <li><%= link_to "Link2", "/path2"  %></li>
-    <li><%= link_to "Link3", "/path3"  %></li>
-    <li class="nav-header">Top friends</li>
-    <li><%= link_to "Link1", "/path1"  %></li>
-    <li><%= link_to "Link2", "/path2"  %></li>
-    <li><%= link_to "Link3", "/path3"  %></li>
+    <li class="nav-header">Mean / median times</li>
+    <li>
+      <!-- TODO put in view helper -->
+      <%= time_ago_in_words(50.seconds.ago) %>
+      /
+      <%= time_ago_in_words(500.seconds.ago) %>
+    </li>
+    <li class="nav-header">Mean / median reps</li>
+    <li>50 / 500</li>
   </ul>
 </div><!--/.well -->

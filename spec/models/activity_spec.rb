@@ -29,12 +29,12 @@ describe Activity do
       its(:objective) { should == 'Butterlap' }
     end
     
-    describe "#set_mood" do
-      let(:hsh) { { 'mood' => 'engaged' } }
+    describe "#set_experience" do
+      let(:hsh) { { 'experience' => 'Felt engaged' } }
       before(:each) do
-        activity.set_mood(hsh)
+        activity.set_experience(hsh)
       end
-      its(:mood) { should == 'Engaged!' }
+      its(:experience) { should == 'Felt engaged' }
     end
     
     describe "#add_friend" do

@@ -20,7 +20,7 @@ class Activity < ActiveRecord::Base
   COMMANDS = ['set_name',
               'set_category',
               'set_objective',
-              'set_mood',
+              'set_experience',
               'add_friend',
               'add_time']
   
@@ -38,10 +38,11 @@ class Activity < ActiveRecord::Base
     self.objective = normalize_str(hsh[:objective])
   end
   
-  # eg. set_mood({ 'mood' => 'engaged' })
-  def set_mood(hsh)
+  # eg. set_experience({ 'experience' => 'engaged' })
+  def set_experience(hsh)
     hsh = normalize_hsh(hsh)
-    self.mood = "#{normalize_str(hsh[:mood])}!"
+    self.experience = hsh[:experience]
+    # TODO show trailing '!' in view
   end
   
   # eg. add_friend({ name: 'Somebody', fb_id: 'somebody' })
