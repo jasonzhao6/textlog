@@ -52,14 +52,11 @@ Spork.prefork do
   end
   
   # Seed test db with latest rules from production.
-  # Rules are downloadable as seeds.rb at '/seeds.rb' TODO
   load "#{Rails.root}/db/seeds.rb"
-
 end
 
 Spork.each_run do
   # This code will be run each time you run your specs.
-
 end
 
 # --- Instructions ---

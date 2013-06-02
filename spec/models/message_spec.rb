@@ -10,6 +10,10 @@ describe Message do
       its(:class) { should == MatchData }
       its(:names) { should == ['objective'] }
       its(:captures) { should == ['Butterlap'] }
+      
+      context "when pattern is nil" do
+        specify { message.match(nil).should be_nil }
+      end
     end
   end
 end

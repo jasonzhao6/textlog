@@ -8,6 +8,6 @@ class Message < ActiveRecord::Base
   COMMANDS = ['match'] # Used to validate rules
   
   def match(pattern)
-    self.message.match(/#{pattern}/i)
+    self.message.match(/#{pattern}/i) if pattern
   end
 end

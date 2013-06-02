@@ -4,7 +4,6 @@ class RulesEngine
     @activity = Activity.new # ...into structured activity data
     @rules = Rule.all        # ...with user defined rules
     @match_data = nil        # MatchData zipped into a hash
-    execute
   end
   
   def execute
@@ -12,22 +11,23 @@ class RulesEngine
     get_matchers.each do |matcher|
       @match_data = zip_match_data(@message.match(matcher.arg))
       unless @match_data.nil?
-        matcher.bump
+        matcher.cnt += 1
         # 2nd pass: calling custom setters on activity model
         get_setters(matcher).each do |setter|
           @activity.send(setter.command, setter.arg || @match_data)
-          setter.bump
+          setter.cnt +=1
         end
       end
     end
   end
   
-  def preview_activity
+  def preview
     @activity.preview
   end
   
-  def save_activity
+  def save
     @activity.save
+    @rules.each { |rule| rule.save if rule.changed? } # 'cnt' may have changed
   end
   
   private
