@@ -1,11 +1,12 @@
-<% content_for :sidebar do %>
-  <%= render 'shared/sidebar' %>
-<% end %>
+<h3>Messages to be parsed:</h3>
 
 <ol>
   <% @messages.each do |message| %>
     <li>
       <%= message.message %>
+      <a class='parse' href='<%= message_path(message.id) %>'>
+        <i class="icon-eye-open"></i>parse
+      </a>
       <a class='edit' href='<%= edit_message_path(message.id) %>'>
         <i class="icon-edit"></i>edit
       </a>

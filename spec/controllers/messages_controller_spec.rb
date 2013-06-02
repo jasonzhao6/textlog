@@ -22,6 +22,7 @@ describe MessagesController do
                        'FromZip' => 'zip' } }
                      
       before(:each) do
+        controller.set_current_user
         post :create, params
       end
       

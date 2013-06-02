@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   def create
     if params[:password] == ENV['TEXTLOG_PASSWORD']
-      session[:current_user] = Digest::SHA1.hexdigest("#{password} #{salt}")
+      set_current_user
       redirect_to :messages
     else
       redirect_to :login, alert: 'Password was incorrect.'

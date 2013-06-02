@@ -35,6 +35,10 @@ class MessagesController < ApplicationController
     @message = Message.new
   end
   
+  def show
+    @message = Message.find(params[:id])
+  end
+  
   def update
     @message = Message.find(params[:id])
     if @message.update_attributes(message_params)

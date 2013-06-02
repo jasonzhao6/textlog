@@ -1,5 +1,7 @@
 Textlog::Application.routes.draw do
+  root 'application#root'
   
+  resources :activities
   resources :messages
   resources :sessions
   

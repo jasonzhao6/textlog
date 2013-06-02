@@ -6,11 +6,15 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </a>
-      <a class="brand" href="#">Textlog</a>
+      <%= link_to 'Textlog', :activities, class: 'brand' %>
       <div class="container-fluid nav-collapse">
         <ul class="nav">
-          <li><%= link_to "Activities", "/activities"  %></li>
-          <li><%= link_to "Messages", :messages  %></li>
+          <li><%= link_to "Activities
+                           <sup>(#{@activities_total})</sup>".html_safe,
+                          :activities  %></li>
+          <li><%= link_to "Messages
+                           <sup>(#{@unparsed_messages_total})</sup>".html_safe,
+                          :messages  %></li>
           <% unless current_user? %>
             <li><%= link_to "Login", :login  %></li>
           <% end %>
