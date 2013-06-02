@@ -1,8 +1,6 @@
 class MessagesController < ApplicationController
-  http_basic_authenticate_with name: ENV['TEXTLOG_USERNAME'],
-                               password: ENV['TEXTLOG_PASSWORD'],
-                               except: :create
-  skip_before_filter :verify_authenticity_token, only: :create
+  before_filter :must_be_logged_in, only: [:create, :destroy, :update]
+  skip_before_filter :verify_authenticity_token, only: :create # For Twillio
   
   def create
     # Twillio post
@@ -13,7 +11,7 @@ class MessagesController < ApplicationController
     else
       @message = Message.new(message_params)
       if @message.save
-        redirect_to messages_path, notice: 'Message was successfully created.'
+        redirect_to :messages, notice: 'Message was successfully created.'
       else
         render action: :new
       end
@@ -22,7 +20,7 @@ class MessagesController < ApplicationController
   
   def destroy
     Message.find(params[:id]).destroy
-    redirect_to messages_path, notice: 'Message was successfully deleted.'
+    redirect_to :messages, alert: 'Message was successfully deleted.'
   end
   
   def edit
@@ -40,7 +38,7 @@ class MessagesController < ApplicationController
   def update
     @message = Message.find(params[:id])
     if @message.update_attributes(message_params)
-      redirect_to messages_path, notice: 'Message was successfully updated.'
+      redirect_to :messages, notice: 'Message was successfully updated.'
     else
       render action: :edit
     end

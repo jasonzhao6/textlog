@@ -5,8 +5,9 @@
 .messages-controller.index-action {
   .edit,
   .delete {
+    opacity: .7;
     padding-left: 5px;
-    a, i {
+    i {
       text-decoration: none;
     }
   }
@@ -14,23 +15,7 @@
 
 .messages-controller .new_message,
 .messages-controller .edit_message {
-  #message_body {
-    box-sizing: border-box;
+  #message_message {
     height: 72px;
-  }
-  
-  .errors-container {
-    color: #b94a48;
-    h4 {
-      margin: 0 0 6px 1px;
-    }
-  }
-  
-  .btn {
-    display: block;
-    margin-top: 5px;
-  }
-  .cancel {
-    line-height: 38px;
   }
 }

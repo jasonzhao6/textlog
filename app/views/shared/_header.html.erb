@@ -10,7 +10,10 @@
       <div class="container-fluid nav-collapse">
         <ul class="nav">
           <li><%= link_to "Activities", "/activities"  %></li>
-          <li><%= link_to "Messages", "/messages"  %></li>
+          <li><%= link_to "Messages", :messages  %></li>
+          <% unless current_user? %>
+            <li><%= link_to "Login", :login  %></li>
+          <% end %>
         </ul>
       </div><!--/.nav-collapse -->
     </div>

@@ -5,3 +5,22 @@
   To use Glyphicons sprites instead of Font Awesome, replace with "require twitter-bootstrap-static/sprites"
   =require twitter-bootstrap-static/fontawesome
   */
+
+#textlog {
+  form {
+    .errors-container {
+      color: #b94a48;
+      h4 {
+        margin: 0 0 6px 1px;
+      }
+    }
+
+    .btn {
+      display: block;
+      margin-top: 5px;
+    }
+    .cancel {
+      line-height: 38px;
+    }
+  }
+}  
