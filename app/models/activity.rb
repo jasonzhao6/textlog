@@ -1,61 +1,55 @@
 class Activity < ActiveRecord::Base
   has_many :companies
   has_many :friends, through: :companies
-  # has_one :location TODO
   
-  # 
-  # Preview method that serializes activity model and its associations to json
-  # Used for regression testing when adding new rules, tests that already parsed
-  # messages are still parsed the same way
-  # JZ: decided to not use as_json method, save it for future API use
-  # 
+  # JZ: could have overwritten 'as_json', but saving it for API generation
   def preview
     to_json(except: [:id, :message_id, :company_id],
             include: [friends: { except: [:id] }])
   end
   
   # 
-  # Commands that can be executed on activity models by rules engine
+  # Commands that can be sent to activity models
   # 
   COMMANDS = ['set_name',
               'set_category',
               'set_objective',
               'set_experience',
               'add_friend',
-              'add_time']
+              'add_time'] # Used to validate rules
   
   def set_name(str)
-    self.name = normalize_str(str)
+    self.name = titlecase_str(str)
   end
   
   def set_category(str)
-    self.category = normalize_str(str)
+    self.category = titlecase_str(str)
   end
   
-  # eg. set_objective({ 'objective' => 'butterlap' })
+  # e.g. set_objective({ 'objective' => 'butterlap' })
   def set_objective(hsh)
-    hsh = normalize_hsh(hsh)
-    self.objective = normalize_str(hsh[:objective])
+    hsh = indifferent_hsh(hsh)
+    self.objective = titlecase_str(hsh[:objective])
   end
   
-  # eg. set_experience({ 'experience' => 'engaged' })
+  # e.g. set_experience({ 'experience' => 'engaged' })
   def set_experience(hsh)
-    hsh = normalize_hsh(hsh)
+    hsh = indifferent_hsh(hsh)
     self.experience = hsh[:experience]
     # TODO show trailing '!' in view
   end
   
-  # eg. add_friend({ name: 'Somebody', fb_id: 'somebody' })
+  # e.g. add_friend({ name: 'Somebody', fb_id: 'somebody' })
   def add_friend(hsh)
-    hsh = normalize_hsh(hsh)
+    hsh = indifferent_hsh(hsh)
     friend = Friend.where(fb_id: hsh[:fb_id]).first_or_initialize
     friend.name = hsh[:name]
     self.friends << friend unless self.friends.map(&:fb_id).include?(hsh[:fb_id])
   end
   
-  # eg. add_time({ 'num' => '2', 'unit' => 'min' })
+  # e.g. add_time({ 'num' => '2', 'unit' => 'min' })
   def add_time(hsh)
-    hsh = normalize_hsh(hsh)
+    hsh = indifferent_hsh(hsh)
     num = hsh[:num].to_i
     unit = normalize_time_unit(hsh[:unit])
     self.time ||= 0
@@ -64,11 +58,11 @@ class Activity < ActiveRecord::Base
   
   private
     
-    def normalize_str(str)
+    def titlecase_str(str)
       str.is_a?(String) ? str.strip.titlecase : nil
     end
   
-    def normalize_hsh(hsh)
+    def indifferent_hsh(hsh)
       hsh.is_a?(Hash) ? hsh.with_indifferent_access : {}
     end
     

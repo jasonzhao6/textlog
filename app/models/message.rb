@@ -3,10 +3,9 @@ class Message < ActiveRecord::Base
   validates :message, presence: true
   
   # 
-  # Commands that can be executed on message models by rules engine
-  # JZ: decided not to implement .split to avoid dealing with arrays
+  # Commands that can be sent to message models
   # 
-  COMMANDS = ['match']
+  COMMANDS = ['match'] # Used to validate rules
   
   def match(pattern)
     self.message.match(/#{pattern}/i)

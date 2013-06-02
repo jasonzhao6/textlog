@@ -10,7 +10,7 @@ class CreateRules < ActiveRecord::Migration
       # Biked Butterlap with Scott, Alan, Mary Ann. 1 hr 30 min. Felt engaged.
       # Biked Butterlap in 1 hr 30 min. Felt engaged.
       # Biked Butterlap. Felt engaged.
-      # eg.
+      # e.g.
       # command: ".split", { by: "." } return array of trimmed segments
       #   GROUP: name, category, accomplishment
       #   command: ".=~", { pattern: "^Biked" } return [n..-1]
