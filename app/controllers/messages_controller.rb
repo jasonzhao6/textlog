@@ -3,12 +3,10 @@ class MessagesController < ApplicationController
   skip_before_filter :verify_authenticity_token, only: :create # For Twillio
   
   def create
-    # Twillio post
-    if params['Body'].present?
+    if params['Body'].present? # Twillio post
       Message.create(message: params['Body'])
       render nothing: true
-    # Web form post
-    else
+    else # Web form post
       @message = Message.new(message_params)
       if @message.save
         redirect_to :messages, notice: 'Message was successfully created.'

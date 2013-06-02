@@ -1,1 +1,51 @@
-<%= @message.message %>
+<div class='message-container span6'>
+  <div class='bs-docs-example'>
+    
+    <!-- TODO search rules -->
+    <!-- <div class='navbar'>
+      <div class='navbar-inner'>
+        <form class='navbar-search pull-left'>
+          <input type='text' class='search-query' placeholder='Search'>
+        </form>
+      </div>
+    </div> -->
+    
+    <%= @message.message %>
+  </div>
+
+  <%= form_for @message do |f| %>
+    <%= f.submit 'Parse Message', class: 'btn btn-primary btn-block' %>
+    <%= link_to 'Cancel', :messages, class: 'cancel' %>
+  <% end %>
+</div>
+
+<div class='rules-container span6'>
+  <div class='bs-docs-example'>
+    <% 2.times do %>
+      <div class='actionable-list'>
+        <a class='edit' href='<% %>'>
+          <i class='icon-edit'></i>edit
+        </a>
+        <a class='delete' href='<% %>'
+           data-method='delete' data-confirm='Are you sure?' rel='nofollow'>
+           <i class='icon-trash'></i>delete
+        </a>
+      </div>
+      <dl class='rule'>
+        <dt>
+          <span class='label label-info'><%= 'match' %></span>
+          <code><%= 'biked (?<objective>[\w\s]+?)(with|in|\.)' %></code> 
+        </dt>
+        <dd>
+          <span class='label label-success'><%= 'set_name' %></span>
+          <code><%= 'Biking' %></code> 
+        </dd>
+        <dd>
+          <span class='label label-success'><%= 'set_objective '%></span>
+          <code><%= '<objective>' %></code> 
+        </dd>
+      </dl>
+    <% end %>
+    <%= link_to 'Add new', :new_message, class: 'btn btn-small' %>
+  </div>
+</div>

@@ -3,20 +3,19 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .messages-controller.index-action {
-  .parse,
-  .edit,
-  .delete {
-    opacity: .7;
-    padding-left: 5px;
-    i {
-      text-decoration: none;
-    }
-  }
   .btn {
     margin-top: 7px;
   }
 }
 
+.messages-controller.show-action {
+  .btn {
+    margin-bottom: 4px;
+  }
+}
+
+// JZ: '.new-action' and '.edit-action' aren't reliable here
+//     They become '.create-action' and '.update-action' after erroneous submit
 .messages-controller .new_message,
 .messages-controller .edit_message {
   #message_message {

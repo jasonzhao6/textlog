@@ -1,6 +1,6 @@
 class CreateRules < ActiveRecord::Migration
   def change
-    # when parsing, start with top of decision tree, i.e. rule without rule_id
+    # when parsing, start with top of decision tree, ie rule without rule_id
     # then trickle down decision tree depth-first
     create_table :rules do |t|
       t.timestamps
@@ -10,7 +10,7 @@ class CreateRules < ActiveRecord::Migration
       # Biked Butterlap with Scott, Alan, Mary Ann. 1 hr 30 min. Felt engaged.
       # Biked Butterlap in 1 hr 30 min. Felt engaged.
       # Biked Butterlap. Felt engaged.
-      # e.g.
+      # eg
       # command: ".split", { by: "." } return array of trimmed segments
       #   GROUP: name, category, accomplishment
       #   command: ".=~", { pattern: "^Biked" } return [n..-1]

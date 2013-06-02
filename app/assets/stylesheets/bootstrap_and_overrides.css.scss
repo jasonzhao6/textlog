@@ -7,10 +7,41 @@
   */
 
 #textlog {
+  //
+  // h1: User generated heading, primary
+  //     eg Ashton San Francisco
+  // h2: User generated heading, secondary
+  //     eg 301 Executive Park Blvd. San Francisco, CA 94134
+  // h3: App section heading, primary,
+  //     eg Messages to parse:
+  // h4: App section heading, section
+  //     eg Please correct the following error:
+  //
+  h1 {}
+  h2 {}
   h3 {
     margin-top: 0;
   }
+  h4 {}
   
+  //
+  // List actions
+  // 
+  .actionable-list {
+    .parse,
+    .edit,
+    .delete {
+      opacity: .7;
+      padding-left: 5px;
+      i {
+        text-decoration: none;
+      }
+    }
+  }
+  
+  //
+  // Form components
+  // 
   form {
     .errors-container {
       color: #b94a48;
@@ -23,8 +54,31 @@
       display: block;
       margin-top: 5px;
     }
+    
     .cancel {
       line-height: 38px;
+    }
+  }
+  
+  //
+  // Rule components
+  //
+  dl.rule {
+    margin: 0 0 15px;
+    dt,
+    dd {
+      margin-bottom: 3px;
+      span {
+        font-weight: 500;
+      }
+    }
+    dt {
+      code {
+        font-weight: 400;
+      }
+    }
+    dd {
+      margin-left: 14px;
     }
   }
 }  

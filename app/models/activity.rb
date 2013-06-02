@@ -26,20 +26,21 @@ class Activity < ActiveRecord::Base
     self.category = titlecase_str(str)
   end
   
-  # e.g. set_objective({ 'objective' => 'butterlap' })
+  # eg set_objective({ 'objective' => 'butterlap' })
   def set_objective(hsh)
     hsh = indifferent_hsh(hsh)
     self.objective = titlecase_str(hsh[:objective])
   end
   
-  # e.g. set_experience({ 'experience' => 'engaged' })
+  # eg set_experience({ 'experience' => 'engaged' })
   def set_experience(hsh)
     hsh = indifferent_hsh(hsh)
     self.experience = hsh[:experience]
+    
     # TODO show trailing '!' in view
   end
   
-  # e.g. add_friend({ name: 'Somebody', fb_id: 'somebody' })
+  # eg add_friend({ name: 'Somebody', fb_id: 'somebody' })
   def add_friend(hsh)
     hsh = indifferent_hsh(hsh)
     friend = Friend.where(fb_id: hsh[:fb_id]).first_or_initialize
@@ -47,7 +48,7 @@ class Activity < ActiveRecord::Base
     self.friends << friend unless self.friends.map(&:fb_id).include?(hsh[:fb_id])
   end
   
-  # e.g. add_time({ 'num' => '2', 'unit' => 'min' })
+  # eg add_time({ 'num' => '2', 'unit' => 'min' })
   def add_time(hsh)
     hsh = indifferent_hsh(hsh)
     num = hsh[:num].to_i
