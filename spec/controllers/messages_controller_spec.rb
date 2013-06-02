@@ -3,9 +3,9 @@ require 'spec_helper'
 describe MessagesController do
   describe ".create" do
     context "when Twillio forwards a message" do
-      let(:body) { 'Hello' }
+      let(:message) { 'Hello' }
       let(:params) { { 'AccountSid' => 'sid',
-                       'Body' => body,
+                       'Body' => message,
                        'ToZip' => 'zip',
                        'FromState' => 'state',
                        'ToCity' => 'city',
@@ -26,7 +26,7 @@ describe MessagesController do
       end
       
       specify { Message.count.should == 1 }
-      specify { Message.first.body.should == body }
+      specify { Message.first.message.should == message }
     end
   end
 end

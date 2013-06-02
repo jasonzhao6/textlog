@@ -1,0 +1,20 @@
+<%= form_for @message do |f| %>
+  <%= f.text_area :message, class: 'span6' %>
+
+  <% unless @message.errors.empty? %>
+    <div class='errors-container'>
+      <h4>
+        Please correct the following
+        <%= 'error'.pluralize(@message.errors.size) %>:
+      </h4>
+      <ul>
+        <% @message.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.submit class: 'btn btn-primary span6' %>
+  <%= link_to 'Cancel', :messages, class: 'cancel' %>
+<% end %>

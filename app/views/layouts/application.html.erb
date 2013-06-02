@@ -34,7 +34,7 @@
     <!-- Size should be 32 x 32 pixels -->
     <% favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
   </head>
-  <body class='<%= "#{controller_name} #{controller_name}-#{action_name}" %>'>
+  <body class='<%= "#{controller_name}-controller #{action_name}-action" %>'>
 
     <%= render 'shared/header' %>
     

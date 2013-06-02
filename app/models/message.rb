@@ -1,5 +1,6 @@
 class Message < ActiveRecord::Base
-  scope :unparsed, where(parsed: nil)
+  scope :unparsed, -> { where(parsed: nil) }
+  validates :message, :presence => true
   
   # 
   # Commands that can be executed on message models by rules engine
@@ -8,6 +9,6 @@ class Message < ActiveRecord::Base
   COMMANDS = ['match']
   
   def match(pattern)
-    self.body.match(/#{pattern}/i)
+    self.message.match(/#{pattern}/i)
   end
 end

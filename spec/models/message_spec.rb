@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Message do
   describe "COMMANDS" do
-    let(:message) { Message.new(body: 'Biked Butterlap') }
+    let(:message) { Message.new(message: 'Biked Butterlap') }
     
     describe "#match" do
       let(:pattern) { 'biked (?<objective>\w+)' }
