@@ -1,0 +1,11 @@
+.actionable-list {
+  .parse,
+  .edit,
+  .delete {
+    opacity: .7;
+    padding-left: 5px;
+    i {
+      text-decoration: none;
+    }
+  }
+}

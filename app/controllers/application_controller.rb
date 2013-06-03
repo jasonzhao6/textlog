@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  before_filter :count_totals
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
@@ -28,11 +27,6 @@ class ApplicationController < ActionController::Base
     # 
     # Before filters
     # 
-    def count_totals
-      @activities_total = Activity.count
-      @unparsed_messages_total = Message.unparsed.count
-    end
-
     LOGIN_FAILED = 'Sorry, only Jason has write access right now.'
     def must_be_logged_in
       redirect_to :login, alert: LOGIN_FAILED and return unless current_user?

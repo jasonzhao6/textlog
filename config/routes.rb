@@ -3,6 +3,7 @@ Textlog::Application.routes.draw do
   
   resources :activities
   resources :messages
+  resources :rules
   resources :sessions
   
   get '/login' => 'sessions#new'

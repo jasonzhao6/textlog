@@ -10,10 +10,13 @@
       <div class="container-fluid nav-collapse">
         <ul class="nav">
           <li><%= link_to "Activities
-                           <sup>(#{@activities_total})</sup>".html_safe,
+                           <sup>(#{Activity.count})</sup>".html_safe,
                           :activities  %></li>
+          <li><%= link_to "Rules
+                           <sup>(#{Rule.count})</sup>".html_safe,
+                          :rules  %></li>
           <li><%= link_to "Messages
-                           <sup>(#{@unparsed_messages_total})</sup>".html_safe,
+                           <sup>(#{Message.unparsed.count})</sup>".html_safe,
                           :messages  %></li>
           <% unless current_user? %>
             <li><%= link_to "Login", :login  %></li>
