@@ -1,3 +1,25 @@
 // Place all the styles related to the Rules controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.rules-controller.new-action,
+.rules-controller.create-action,
+.rules-controller.edit-action,
+.rules-controller.update-action {
+  .select-row .field_with_errors {
+    display: inline-block;
+    margin-left: 8.547008547008547%;
+    .offset1:first-child {
+      margin-left: 0;
+    }
+  }
+  
+  .actions {
+    line-height: 30px;
+    vertical-align: top;
+  }
+  
+  #fieldset-factory {
+    display: none;
+  }
+}

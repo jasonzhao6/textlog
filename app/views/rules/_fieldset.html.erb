@@ -1,0 +1,22 @@
+<fieldset>
+  <div class='row-fluid select-row'>
+    <%= select_tag 'commands[]',
+                   options_for_select(Activity::COMMANDS),
+                   prompt: 'select ...',
+                   id: nil,
+                   class: 'offset1 input-medium' %>
+    <div class='actions'>
+      <a class='delete' href='#'
+         data-method='delete' data-confirm='Are you sure?' rel='nofollow'>
+         <i class='icon-trash'></i>delete</a>
+    </div>
+  </div>
+
+  <div class='row-fluid'>
+    <%= text_field_tag 'args[]',
+                       '',
+                       id: nil,
+                       class: 'span5 offset1',
+                       placeholder: 'Argument' %>
+  </div>
+</fieldset>

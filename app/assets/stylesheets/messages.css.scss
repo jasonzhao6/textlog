@@ -14,11 +14,11 @@
   }
 }
 
-// JZ: '.new-action' and '.edit-action' aren't reliable here
-//     They become '.create-action' and '.update-action' after erroneous submit
-.messages-controller .new_message,
-.messages-controller .edit_message {
-  #message_message {
+.messages-controller.new-action,
+.messages-controller.create-action,
+.messages-controller.edit-action,
+.messages-controller.update-action {
+  textarea {
     height: 72px;
   }
 }

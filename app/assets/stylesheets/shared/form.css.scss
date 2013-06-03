@@ -1,13 +1,45 @@
 #textlog form {
+  .field_with_errors {
+    .checkbox,
+    .radio,
+    input,
+    select,
+    textarea {
+      color: #b94a48;
+    }
+
+    input,
+    select,
+    textarea {
+      border-color: #b94a48;
+      -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+         -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+              box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #953b39;
+      -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d59392;
+         -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d59392;
+              box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d59392;
+    }
+    
+    ::-webkit-input-placeholder { color: rgba(185, 74, 72, .75); }
+    ::-moz-placeholder { color: rgba(185, 74, 72, .75); } /* firefox 19+ */
+    :-ms-input-placeholder { color: rgba(185, 74, 72, .75); } /* ie */
+    input:-moz-placeholder { color: rgba(185, 74, 72, .75); }
+  }
+  
   .errors-container {
     color: #b94a48;
     h4 {
-      margin-bottom: 6px;
+      margin: 2px 0 6px;
     }
   }
 
-  .btn {
-    display: block;
+  .btn-primary {
     margin-top: 5px;
   }
   

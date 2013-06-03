@@ -1,11 +1,14 @@
-.actionable-list {
+.actions {
+  display: inline-block;
   .parse,
   .edit,
   .delete {
     opacity: .7;
     padding-left: 5px;
     i {
+      text-align: center;
       text-decoration: none;
+      width: 1.25em;
     }
   }
 }

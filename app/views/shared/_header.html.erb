@@ -1,25 +1,28 @@
-<div class="navbar navbar-fluid-top">
-  <div class="navbar-inner">
-    <div class="container-fluid">
-      <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
+<div class='navbar navbar-fluid-top'>
+  <div class='navbar-inner'>
+    <div class='container-fluid'>
+      <a class='btn btn-navbar' data-target='.nav-collapse' data-toggle='collapse'>
+        <span class='icon-bar'></span>
+        <span class='icon-bar'></span>
+        <span class='icon-bar'></span>
       </a>
       <%= link_to 'Textlog', :activities, class: 'brand' %>
-      <div class="container-fluid nav-collapse">
-        <ul class="nav">
-          <li><%= link_to "Activities
-                           <sup>(#{Activity.count})</sup>".html_safe,
-                          :activities  %></li>
-          <li><%= link_to "Rules
-                           <sup>(#{Rule.count})</sup>".html_safe,
-                          :rules  %></li>
-          <li><%= link_to "Messages
-                           <sup>(#{Message.unparsed.count})</sup>".html_safe,
-                          :messages  %></li>
+      <div class='container-fluid nav-collapse'>
+        <ul class='nav'>
+          <li class='<%= 'active' if controller_name == 'activities' %>'>
+            <%= link_to "Activities <sup>(#{Activity.count})</sup>".html_safe,
+                        :activities %>
+          </li>
+          <li class='<%= 'active' if controller_name == 'rules' %>'>
+            <%= link_to "Rules <sup>(#{Rule.count})</sup>".html_safe,
+                        :rules %>
+          </li>
+          <li class='<%= 'active' if controller_name == 'messages' %>'>
+            <%= link_to "Unparsed Messages <sup>(#{Message.unparsed.count})</sup>".html_safe,
+                        :messages %>
+          </li>
           <% unless current_user? %>
-            <li><%= link_to "Login", :login  %></li>
+            <li><%= link_to 'Login', :login  %></li>
           <% end %>
         </ul>
       </div><!--/.nav-collapse -->

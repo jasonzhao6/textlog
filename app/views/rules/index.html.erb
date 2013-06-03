@@ -2,34 +2,36 @@
   <%= render 'sidebar' %>
 <% end %>
 
-<div class='rule'>
-  <div class='rule-before'>
-    <h4><%= 'Last used 5 days ago' %></h4>
-    <div class='actionable-list'>
-      <a class='edit' href='<% %>'>
-        <i class='icon-edit'></i>edit
-      </a>
-      <a class='delete' href='<% %>'
-         data-method='delete' data-confirm='Are you sure?' rel='nofollow'>
-         <i class='icon-trash'></i>delete
-      </a>
+<% @rules.each do |rule| %>
+  <div class='docs'>
+    <div class='docs-header'>
+      <h4>
+        <%= "Active #{time_ago_in_words(rule.updated_at)} ago | #{rule.cnt}x" %>
+      </h4>
+      <div class='actions'>
+        <a class='edit' href='<%= edit_rule_path(rule.id) %>'>
+          <i class='icon-edit'></i>edit</a>
+        <a class='delete' href='<%= rule_path(rule.id) %>'
+           data-method='delete' data-confirm='Are you sure?' rel='nofollow'>
+           <i class='icon-trash'></i>delete</a>
+      </div>
     </div>
-  </div>
   
-  <dl>
-    <dt>
-      <span class='label label-info'><%= 'match' %></span>
-      <code><%= 'biked (?<objective>[\w\s]+?)(with|in|\.)' %></code> 
-    </dt>
-    <dd>
-      <span class='label label-success'><%= 'set_name' %></span>
-      <code><%= 'Biking' %></code> 
-    </dd>
-    <dd>
-      <span class='label label-success'><%= 'set_objective '%></span>
-      <code><%= '<objective>' %></code> 
-    </dd>
-  </dl>
-</div>
+    <dl class='rule'>
+      <dt>
+        <span class='label label-info'><%= 'match' %></span>
+        <code><%= 'biked (?<objective>[\w\s]+?)(with|in|\.)' %></code> 
+      </dt>
+      <dd>
+        <span class='label label-success'><%= 'set_name' %></span>
+        <code><%= 'Biking' %></code> 
+      </dd>
+      <dd>
+        <span class='label label-success'><%= 'set_objective '%></span>
+        <code><%= '<objective>' %></code> 
+      </dd>
+    </dl>
+  </div>
+<% end %>
 
-<% link_to 'Add new', :new_message, class: 'btn btn-small' %>
+<%= link_to 'Add new', :new_rule, class: 'btn' %>

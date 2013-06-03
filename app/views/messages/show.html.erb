@@ -1,5 +1,6 @@
 <div class='message-container span6'>
   <div class='docs'>
+    <div class='docs-header'><h4><%= 'Message to parse' %></h4></div>
     
     <!-- TODO search rules -->
     <!-- <div class='navbar'>
@@ -22,15 +23,7 @@
 <div class='rules-container span6'>
   <div class='docs'>
     <% 2.times do %>
-      <div class='actionable-list'>
-        <a class='edit' href='<% %>'>
-          <i class='icon-edit'></i>edit
-        </a>
-        <a class='delete' href='<% %>'
-           data-method='delete' data-confirm='Are you sure?' rel='nofollow'>
-           <i class='icon-trash'></i>delete
-        </a>
-      </div>
+      <div class='docs-header'><h4><%= 'Rules' %></h4></div>
       <dl class='rule'>
         <dt>
           <span class='label label-info'><%= 'match' %></span>

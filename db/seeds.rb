@@ -18,4 +18,4 @@ r6 = Rule.create(parent_id: nil, command: 'match', arg: '(?<num>\d+) ?(?<unit>mi
   r61 = Rule.create(parent_id: r6.id, command: 'add_time', arg: nil)
 r7 = Rule.create(parent_id: nil, command: 'match', arg: '(?<experience>felt [\w\s]+)\.')
   r71 = Rule.create(parent_id: r7.id, command: 'set_experience', arg: nil)
-r_ = Rule.create
+r_ = Rule.create(parent_id: nil, command: 'match', arg: '_')

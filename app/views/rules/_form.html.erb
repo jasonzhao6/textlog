@@ -1,0 +1,40 @@
+<%= form_for @rule do |f| %>
+  <div class='row-fluid'>
+    <%= f.select :command,
+                 Message::COMMANDS,
+                 {},
+                 { class: 'input-medium' } %>
+  </div>
+
+  <div class='row-fluid'>
+    <%= f.text_field :arg, class: 'span6', placeholder: 'Argument' %>
+  </div>
+  
+  <%= render 'fieldset' %>
+  
+  <div id='fieldset-factory'>
+    <%= render 'fieldset' %>
+  </div>
+  
+  <% unless @rule.errors.empty? %>
+    <div class='errors-container'>
+      <h4>
+        Please correct the following
+        <%= 'error'.pluralize(@rule.errors.size) %>:
+      </h4>
+      <ul>
+        <% @rule.errors.full_messages.each do |rule| %>
+          <li><%= rule %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class='row-fluid'>
+    <%= f.submit class: 'btn btn-primary span6' %>
+  </div>
+  
+  <div class='row-fluid'>
+    <%= link_to 'Cancel', :rules, class: 'cancel' %>
+  </div>
+<% end %>
