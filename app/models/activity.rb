@@ -2,10 +2,12 @@ class Activity < ActiveRecord::Base
   has_many :companies
   has_many :friends, through: :companies
   
-  # JZ: could have overwritten 'as_json', but saving it for API generation
-  def preview
-    to_json(except: [:id, :message_id, :company_id],
-            include: [friends: { except: [:id] }])
+  # 
+  # Rspec helpers
+  # 
+  def as_json(options = {})
+    super(except: [:id, :message_id, :company_id],
+          include: [friends: { except: [:id] }])
   end
   
   # 
@@ -59,6 +61,9 @@ class Activity < ActiveRecord::Base
   
   private
     
+    # 
+    # Commands helpers
+    # 
     def titlecase_str(str)
       str.is_a?(String) ? str.strip.titlecase : nil
     end

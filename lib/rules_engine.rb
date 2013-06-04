@@ -21,10 +21,6 @@ class RulesEngine
     end
   end
   
-  def preview
-    @activity.preview
-  end
-  
   def save
     @activity.save
     @rules.each { |rule| rule.save if rule.changed? } # 'cnt' may have changed

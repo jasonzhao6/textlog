@@ -4,22 +4,22 @@ describe MessagesController do
   describe ".create" do
     context "when Twillio forwards a message" do
       let(:message) { 'Hello' }
-      let(:params) { { 'AccountSid' => 'sid',
-                       'Body' => message,
-                       'ToZip' => 'zip',
-                       'FromState' => 'state',
-                       'ToCity' => 'city',
-                       'SmsSid' => 'sid',
-                       'ToState' => 'state',
-                       'To' => '+number',
-                       'ToCountry' => 'country',
-                       'FromCountry' => 'country',
+      let(:params) { { 'AccountSid'    => 'sid',
+                       'Body'          => message,
+                       'ToZip'         => 'zip',
+                       'FromState'     => 'state',
+                       'ToCity'        => 'city',
+                       'SmsSid'        => 'sid',
+                       'ToState'       => 'state',
+                       'To'            => '+number',
+                       'ToCountry'     => 'country',
+                       'FromCountry'   => 'country',
                        'SmsMessageSid' => 'sid',
-                       'ApiVersion' => 'version',
-                       'FromCity' => 'city',
-                       'SmsStatus' => 'status',
-                       'From' => '+number',
-                       'FromZip' => 'zip' } }
+                       'ApiVersion'    => 'version',
+                       'FromCity'      => 'city',
+                       'SmsStatus'     => 'status',
+                       'From'          => '+number',
+                       'FromZip'       => 'zip' } }
                      
       before(:each) do
         controller.set_current_user
