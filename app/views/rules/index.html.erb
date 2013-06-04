@@ -2,16 +2,16 @@
   <%= render 'sidebar' %>
 <% end %>
 
-<% @rules.each do |rule| %>
+<% Rule.get_matchers(@rules).each do |matcher| %>
   <div class='docs'>
     <div class='docs-header'>
       <h4>
-        <%= "Active #{time_ago_in_words(rule.updated_at)} ago | #{rule.cnt}x" %>
+        <%= "Active #{time_ago_in_words(matcher.updated_at)} ago | #{matcher.cnt}x" %>
       </h4>
       <div class='actions'>
-        <a class='edit' href='<%= edit_rule_path(rule.id) %>'>
+        <a class='edit' href='<%= edit_rule_path(matcher.id) %>'>
           <i class='icon-edit'></i>edit</a>
-        <a class='delete' href='<%= rule_path(rule.id) %>'
+        <a class='delete' href='<%= rule_path(matcher.id) %>'
            data-method='delete' data-confirm='Are you sure?' rel='nofollow'>
            <i class='icon-trash'></i>delete</a>
       </div>
@@ -19,17 +19,15 @@
   
     <dl class='rule'>
       <dt>
-        <span class='label label-info'><%= 'match' %></span>
-        <code><%= 'biked (?<objective>[\w\s]+?)(with|in|\.)' %></code> 
+        <span class='label label-info'><%= matcher.command %></span>
+        <code><%= matcher.arg %></code> 
       </dt>
-      <dd>
-        <span class='label label-success'><%= 'set_name' %></span>
-        <code><%= 'Biking' %></code> 
-      </dd>
-      <dd>
-        <span class='label label-success'><%= 'set_objective '%></span>
-        <code><%= '<objective>' %></code> 
-      </dd>
+      <% Rule.get_setters(@rules, matcher).each do |setter| %>
+        <dd>
+          <span class='label label-success'><%= setter.command %></span>
+          <code><%= setter.arg %></code> 
+        </dd>
+      <% end %>
     </dl>
   </div>
 <% end %>
