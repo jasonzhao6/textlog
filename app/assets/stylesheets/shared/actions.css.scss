@@ -1,4 +1,4 @@
-.actions {
+#textlog .actions {
   display: inline-block;
   .parse,
   .edit,
@@ -10,6 +10,17 @@
       text-align: center;
       text-decoration: none;
       width: 1.25em;
+    }
+  }
+}
+
+/* Portrait phones and down */
+@media (max-width: 320px) {
+  #textlog .actions {
+    // Hide icons or else actions won't fit in docs-header
+    // http://s23.postimg.org/f8j1bqryj/Screen_Shot_2013_06_03_at_8_16_25_PM.png
+    i {
+      display: none;
     }
   }
 }
