@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   
   # 
-  # Actions
+  # Controller actions
   # 
   def root
     redirect_to :activities
@@ -13,22 +13,31 @@ class ApplicationController < ActionController::Base
   # 
   # Session helpers
   # 
-  def set_current_user
-    session[:current_user] = ENV['TEXTLOG_PASSWORD']
-  end
-  
   helper_method :current_user?
   def current_user?
     session[:current_user] == ENV['TEXTLOG_PASSWORD']
   end
+  
+  def set_current_user
+    session[:current_user] = ENV['TEXTLOG_PASSWORD']
+  end
+
+  # 
+  # About this request
+  # 
+  def twillio_request?
+    params['Body'].present?
+  end
     
-  private
+  protected
   
     # 
     # Before filters
     # 
     LOGIN_FAILED = 'Sorry, only Jason has write access right now.'
     def must_be_logged_in
-      redirect_to :login, alert: LOGIN_FAILED and return unless current_user?
+      unless current_user? || twillio_request?
+        redirect_to :login, alert: LOGIN_FAILED and return
+      end
     end
 end
