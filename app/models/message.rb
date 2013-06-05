@@ -1,5 +1,5 @@
 class Message < ActiveRecord::Base
-  scope :unparsed, -> { where(parsed: nil) }
+  scope :unparsed, -> { where(parsed: nil).order('created_at DESC') }
   validates :message, presence: true
   
   # 

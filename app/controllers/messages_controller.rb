@@ -26,7 +26,7 @@ class MessagesController < ApplicationController
   end
   
   def index
-    @messages = Message.unparsed.order(:created_at)
+    @messages = Message.unparsed
   end
   
   def new

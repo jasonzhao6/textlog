@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe MessagesController do
-  describe ".create" do
+  describe "#create" do
     context "when Twillio forwards a message" do
       let(:message) { 'Hello' }
       let(:params) { { 'AccountSid'    => 'sid',

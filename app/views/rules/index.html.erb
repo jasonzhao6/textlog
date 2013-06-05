@@ -2,7 +2,7 @@
   <%= render 'sidebar' %>
 <% end %>
 
-<% Rule.get_matchers(@rules).each do |matcher| %>
+<% @rules.each do |matcher| %>
   <div class='docs'>
     <div class='docs-header'>
       <h4>
@@ -22,7 +22,7 @@
         <span class='label label-info'><%= matcher.command %></span>
         <code><%= matcher.arg %></code> 
       </dt>
-      <% Rule.get_setters(@rules, matcher).each do |setter| %>
+      <% matcher.setters.each do |setter| %>
         <dd>
           <span class='label label-success'><%= setter.command %></span>
           <code><%= setter.arg %></code> 

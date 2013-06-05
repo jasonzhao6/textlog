@@ -14,7 +14,7 @@
                         :activities %>
           </li>
           <li class='<%= 'active' if controller_name == 'rules' %>'>
-            <%= link_to "Rules <sup>(#{Rule.count})</sup>".html_safe,
+            <%= link_to "Rules <sup>(#{Rule.matchers.count})</sup>".html_safe,
                         :rules %>
           </li>
           <li class='<%= 'active' if controller_name == 'messages' %>'>

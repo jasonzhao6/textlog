@@ -1,12 +1,14 @@
 <fieldset>
   <div class='row-fluid select-row'>
     <%= select_tag 'commands[]',
-                   options_for_select(Activity::COMMANDS),
+                   options_for_select(Activity::COMMANDS, setter.command),
                    prompt: 'set ...',
                    id: nil,
                    class: 'offset1 input-medium' %>
     <div class='actions'>
-      <a class='delete' href='#'><i class='icon-trash'></i>delete</a>
+      <a class='delete' href='#' tabindex='99'>
+        <i class='icon-trash'></i>delete
+      </a>
     </div>
   </div>
 
@@ -15,6 +17,7 @@
                        '',
                        id: nil,
                        class: 'span5 offset1',
-                       placeholder: 'Argument' %>
+                       value: setter.arg,
+                       placeholder: 'String, or blank for regex match data' %>
   </div>
 </fieldset>

@@ -7,16 +7,24 @@
   </div>
 
   <div class='row-fluid'>
-    <%= f.text_field :arg, class: 'span6', placeholder: 'Argument' %>
+    <%= f.text_field :arg, class: 'span6', placeholder: 'Regex' %>
   </div>
   
   <div id='fieldsets'>
-    <%= render 'fieldset' %>
+    <% if @rule.new_record? %>
+      <%= render 'fieldset', setter: @rule %>
+    <% else %>
+      <% @rule.setters.each do |setter| %>
+        <%= render 'fieldset', setter: setter %>
+      <% end %>
+    <% end %>
   </div>
   
   <div class='row-fluid new-row'>
     <div class='actions offset1'>
-      <a class='new' href='#'><i class='icon-plus'></i>new setter</a>
+      <a class='new' href='#' tabindex='99'>
+        <i class='icon-plus'></i>new setter
+      </a>
     </div>
   </div>
   
@@ -44,5 +52,5 @@
 <% end %>
   
 <div id='fieldset-factory'>
-  <%= render 'fieldset' %>
+  <%= render 'fieldset', setter: Rule.new %>
 </div>

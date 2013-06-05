@@ -50,9 +50,6 @@ Spork.prefork do
     #     --seed 1234
     config.order = "random"
   end
-  
-  # Seed test db with latest rules from production.
-  load "#{Rails.root}/db/seeds.rb"
 end
 
 Spork.each_run do
