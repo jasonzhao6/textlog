@@ -13,31 +13,38 @@ class Activity < ActiveRecord::Base
   # 
   # Commands that can be sent to activity models
   # 
+  
+  # Used to validate rules
   COMMANDS = ['set_name',
               'set_category',
               'set_objective',
               'set_experience',
               'add_friend',
-              'add_time'] # Used to validate rules
+              'add_time',
+              'add_reps']
   
-  def set_name(str)
-    self.name = titlecase_str(str)
+  # eg set_name('biking')
+  def set_name(arg)
+    self.name = titlecase_str(arg)
   end
   
-  def set_category(str)
-    self.category = titlecase_str(str)
+  # eg set_category('fitness')
+  def set_category(arg)
+    self.category = titlecase_str(arg)
   end
   
-  # eg set_objective({ 'objective' => 'butterlap' })
-  def set_objective(hsh)
-    hsh = indifferent_hsh(hsh)
-    self.objective = titlecase_str(hsh[:objective])
+  # eg set_objective('marin headlands')
+  # eg set_objective({ 'objective' => 'marin headlands' })
+  def set_objective(arg)
+    arg = indifferent_hsh(arg)[:objective] if arg.is_a?(Hash)
+    self.objective = titlecase_str(arg)
   end
   
-  # eg set_experience({ 'experience' => 'engaged' })
-  def set_experience(hsh)
-    hsh = indifferent_hsh(hsh)
-    self.experience = hsh[:experience]
+  # eg set_experience('felt engaged')
+  # eg set_experience({ 'experience' => 'felt engaged' })
+  def set_experience(arg)
+    arg = indifferent_hsh(arg)[:experience] if arg.is_a?(Hash)
+    self.experience = capitalize_str(arg)
   end
   
   # eg add_friend({ name: 'Somebody', fb_id: 'somebody' })
@@ -57,11 +64,26 @@ class Activity < ActiveRecord::Base
     self.time += num.send(unit)
   end
   
+  # eg add_reps('10')
+  # eg add_reps({ 'reps' => '10' })
+  def add_reps(arg)
+    arg = indifferent_hsh(arg)[:reps] if arg.is_a?(Hash)
+    self.reps = convert_to_i(arg)
+  end
+  
   private
     
     # 
     # Commands helpers
     # 
+    def convert_to_i(str)
+      str.present? ? str.to_i : nil
+    end
+    
+    def capitalize_str(str)
+      str.is_a?(String) ? str.strip.capitalize : nil
+    end
+  
     def titlecase_str(str)
       str.is_a?(String) ? str.strip.titlecase : nil
     end

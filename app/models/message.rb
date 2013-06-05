@@ -5,7 +5,9 @@ class Message < ActiveRecord::Base
   # 
   # Commands that can be sent to message models
   # 
-  COMMANDS = ['match'] # Used to validate rules
+  
+  # Used to validate rules
+  COMMANDS = ['match']
   
   def match(pattern)
     self.message.match(/#{pattern}/i) if pattern

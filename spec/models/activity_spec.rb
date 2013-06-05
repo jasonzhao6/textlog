@@ -14,27 +14,45 @@ describe Activity do
     end
     
     describe "#set_category" do
-      let(:str) { 'Workout' }
+      let(:str) { 'fitness' }
       before(:each) do
         activity.set_category(str)
       end
-      its(:category) { should == 'Workout' }
+      its(:category) { should == 'Fitness' }
     end
     
     describe "#set_objective" do
-      let(:hsh) { { 'objective' => 'Butterlap ' } }
-      before(:each) do
-        activity.set_objective(hsh)
+      context "when arg is a hash" do
+        let(:hsh) { { 'objective' => 'marin headlands ' } }
+        before(:each) do
+          activity.set_objective(hsh)
+        end
+        its(:objective) { should == 'Marin Headlands' }
       end
-      its(:objective) { should == 'Butterlap' }
+      context "when arg is a string" do
+        let(:str) { 'marin headlands ' }
+        before(:each) do
+          activity.set_objective(str)
+        end
+        its(:objective) { should == 'Marin Headlands' }
+      end
     end
     
     describe "#set_experience" do
-      let(:hsh) { { 'experience' => 'Felt engaged' } }
-      before(:each) do
-        activity.set_experience(hsh)
+      context "when arg is a hash" do
+        let(:hsh) { { 'experience' => 'felt engaged' } }
+        before(:each) do
+          activity.set_experience(hsh)
+        end
+        its(:experience) { should == 'Felt engaged' }
       end
-      its(:experience) { should == 'Felt engaged' }
+      context "when arg is a string" do
+        let(:str) { 'felt engaged' }
+        before(:each) do
+          activity.set_experience(str)
+        end
+        its(:experience) { should == 'Felt engaged' }
+      end
     end
     
     describe "#add_friend" do
@@ -90,6 +108,30 @@ describe Activity do
           activity.add_time(hsh2)
         end
         its(:time) { should == 7260 }
+      end
+    end
+    
+    describe "#add_reps" do
+      context "when arg is a hash" do
+        let(:hsh) { { 'reps' => '10' } }
+        before(:each) do
+          activity.add_reps(hsh)
+        end
+        its(:reps) { should == 10 }
+      end
+      context "when arg is a string" do
+        let(:str) { '10' }
+        before(:each) do
+          activity.add_reps(str)
+        end
+        its(:reps) { should == 10 }
+      end
+      context "when arg is empty string" do
+        let(:str) { '' }
+        before(:each) do
+          activity.add_reps(str)
+        end
+        its(:reps) { should == nil }
       end
     end
   end
