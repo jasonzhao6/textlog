@@ -1,11 +1,15 @@
 dl.rule {
   margin: 0;
+  white-space: nowrap;
   dt,
   dd {
     margin: 6px 0;
   }
   dt {
     font-weight: normal;
+    code {
+      white-space: normal;
+    }
   }
   dd {
     padding-left: 16px;

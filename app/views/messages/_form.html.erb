@@ -1,17 +1,17 @@
-<%= form_for @message do |f| %>
+<%= form_for message do |f| %>
   <div class='row-fluid'>
     <%= f.text_area :message, class: 'span6', placeholder: 'Message' %>
   </div>
   
-  <% unless @message.errors.empty? %>
+  <% unless message.errors.empty? %>
     <div class='errors-container'>
       <h4>
         Please correct the following
-        <%= 'error'.pluralize(@message.errors.size) %>:
+        <%= 'error'.pluralize(message.errors.size) %>:
       </h4>
       <ul>
-        <% @message.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+        <% message.errors.full_messages.each do |full_message| %>
+          <li><%= full_message %></li>
         <% end %>
       </ul>
     </div>

@@ -1,8 +1,8 @@
 <div class='message-container span6'>
   <div class='docs'>
-    <div class='docs-header'><h4>Activity preview</h4></div>
+    <div class='docs-header'><h4>Parse preview</h4></div>
     <p class='well well-small'><%= @message.message %></p>
-    <%= render 'activities/preview' %>
+    <%= render 'activities/activity', activity: @activity %>
   </div>
 
   <%= form_for @message do |f| %>
@@ -11,12 +11,8 @@
   <% end %>
 </div>
 
-<div class='rules-container span6'>
-  <div class='docs'>
-    <% @applicable_matchers.each do |matcher| %>
-      <div class='docs-header'><h4>Applicable rules</h4></div>
-      <%= render 'rules/preview', matcher: matcher %>
-    <% end %>
-    <%= link_to 'Add new', :new_message, class: 'btn btn-small' %>
-  </div>
+<div class='rules-container span6 well'>
+  <h4>Applicable rules</h4>
+  <%= render partial: 'rules/docs', collection: @applicable_matchers, as: :matcher %>
+  <%= link_to 'Add new', :new_rule, class: 'btn' %>
 </div>

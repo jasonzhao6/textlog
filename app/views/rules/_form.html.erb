@@ -1,4 +1,4 @@
-<%= form_for @rule do |f| %>
+<%= form_for rule do |f| %>
   <div class='row-fluid'>
     <%= f.select :command,
                  Message::COMMANDS,
@@ -11,10 +11,10 @@
   </div>
   
   <div id='fieldsets'>
-    <% if @rule.new_record? %>
-      <%= render 'fieldset', setter: @rule %>
+    <% if rule.new_record? %>
+      <%= render 'fieldset', setter: rule %>
     <% else %>
-      <% @rule.setters.each do |setter| %>
+      <% rule.setters.each do |setter| %>
         <%= render 'fieldset', setter: setter %>
       <% end %>
     <% end %>
@@ -28,14 +28,14 @@
     </div>
   </div>
   
-  <% unless @rule.errors.empty? %>
+  <% unless rule.errors.empty? %>
     <div class='errors-container'>
       <h4>
         Please correct the following
-        <%= 'error'.pluralize(@rule.errors.size) %>:
+        <%= 'error'.pluralize(rule.errors.size) %>:
       </h4>
       <ul>
-        <% @rule.errors.full_messages.each do |rule| %>
+        <% rule.errors.full_messages.each do |rule| %>
           <li><%= rule %></li>
         <% end %>
       </ul>
