@@ -10,3 +10,7 @@
  *
  *= require_tree .
  */
+
+.page-bottom {
+  margin-bottom: 30px;
+}

@@ -1,7 +1,7 @@
 <ol>
   <% @messages.each do |message| %>
     <li>
-      <%= message.message %>
+      <p><%= message.message %></p>
       <div class='actions'>
         <a class='parse' href='<%= message_path(message.id) %>'>
           <i class="icon-eye-open"></i>parse</a>
@@ -15,4 +15,4 @@
   <% end %>
 </ol>
 
-<%= link_to 'Add new', :new_message, class: 'btn' %>
+<%= link_to 'Add new', :new_message, class: 'btn page-bottom' %>

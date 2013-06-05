@@ -1,16 +1,16 @@
 <dl class='dl-horizontal activity'>
-  <dt>Name</dt>
+  <dt>Name:</dt>
     <dd><%= activity_attr(activity.name) %></dd>
-  <dt>Category</dt>
+  <dt>Category:</dt>
     <dd><%= activity_attr(activity.category) %></dd>
-  <dt>Objective</dt>
+  <dt>Objective:</dt>
     <dd><%= activity_attr(activity.objective) %></dd>
-  <dt>Experience</dt>
+  <dt>Experience:</dt>
     <dd><%= activity_attr(activity.experience) %></dd>
-  <dt>Friends</dt>
+  <dt>Friends:</dt>
     <dd><%= activity_attr(activity.friends.map(&:name).join(', ')) %></dd>
-  <dt>Time</dt>
+  <dt>Time:</dt>
     <dd><%= activity_attr(activity.time) %></dd>
-  <dt>Reps</dt>
+  <dt>Reps:</dt>
     <dd><%= activity_attr(activity.reps) %></dd>
 </dl>

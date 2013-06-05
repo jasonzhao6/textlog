@@ -11,7 +11,7 @@
   <% end %>
 </div>
 
-<div class='rules-container span6 well'>
+<div class='rules-container span6 well hidden-phone'>
   <h4>Applicable rules</h4>
   <%= render partial: 'rules/docs', collection: @applicable_matchers, as: :matcher %>
   <%= link_to 'Add new', :new_rule, class: 'btn' %>

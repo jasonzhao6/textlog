@@ -14,3 +14,4 @@ $ ->
     $html.on 'click', '.new', (e) ->
       e.preventDefault()
       $('#fieldsets').append($('#fieldset-factory').html())
+# TODO animation for delete / new
