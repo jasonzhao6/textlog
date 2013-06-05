@@ -1,0 +1,16 @@
+<dl class='dl-horizontal activity-preview'>
+  <dt>Name</dt>
+    <dd><%= activity_attr(@activity.name) %></dd>
+  <dt>Category</dt>
+    <dd><%= activity_attr(@activity.category) %></dd>
+  <dt>Objective</dt>
+    <dd><%= activity_attr(@activity.objective) %></dd>
+  <dt>Friends</dt>
+    <dd><%= activity_attr(@activity.friends.map(&:name).join(', ')) %></dd>
+  <dt>Time</dt>
+    <dd><%= activity_attr(@activity.time) %></dd>
+  <dt>Reps</dt>
+    <dd><%= activity_attr(@activity.reps) %></dd>
+  <dt>Experience</dt>
+    <dd><%= activity_attr(@activity.experience) %></dd>
+</dl>

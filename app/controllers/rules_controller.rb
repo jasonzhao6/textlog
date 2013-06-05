@@ -4,14 +4,7 @@ class RulesController < ApplicationController
   def create
     @rule = matcher = Rule.new(matcher_params)
     if matcher.save
-      # Create setters for matcher
-      if params[:commands].present? &&
-         params[:commands].length == params[:args].length
-      
-        params[:commands].zip(params[:args]).map do |command, arg|
-          Rule.create(command: command, arg: arg, matcher_id: matcher.id)
-        end
-      end
+      create_setters(matcher.id)
       
       redirect_to :rules, notice: 'Rule was successfully created.'
     else
@@ -39,17 +32,8 @@ class RulesController < ApplicationController
   def update
     @rule = matcher = Rule.find(params[:id])
     if matcher.update_attributes(matcher_params)
-      # Destroy old setters
       matcher.setters.destroy_all
-      
-      # Create new setters for matcher
-      if params[:commands].present? &&
-         params[:commands].length == params[:args].length
-      
-        params[:commands].zip(params[:args]).map do |command, arg|
-          Rule.create(command: command, arg: arg, matcher_id: matcher.id)
-        end
-      end
+      create_setters(matcher.id)
       
       redirect_to :rules, notice: 'Rule was successfully updated.'
     else
@@ -58,7 +42,23 @@ class RulesController < ApplicationController
   end
   
   private
-  
+    
+    # 
+    # Helpers
+    # 
+    def create_setters(matcher_id)
+      if params[:commands].present? &&
+         params[:commands].length == params[:args].length
+      
+        params[:commands].zip(params[:args]).map do |command, arg|
+          Rule.create(command: command, arg: arg, matcher_id: matcher_id)
+        end
+      end
+    end
+    
+    # 
+    # Strong parameters
+    # 
     def matcher_params
       params.require(:rule).permit(:command, :arg)
     end

@@ -6,6 +6,7 @@ class RulesEngine
     @match_data = nil         # MatchData zipped into a hash
   end
   
+  # returns [@activity, @rules (matched only)]
   def execute
     # 1st pass: calling regex matchers on message model
     @rules.each do |matcher|
@@ -14,11 +15,13 @@ class RulesEngine
         matcher.cnt += 1
         # 2nd pass: calling custom setters on activity model
         matcher.setters.each do |setter|
-          @activity.send(setter.command, setter.arg || @match_data)
+          @activity.send(setter.command,
+                         setter.arg.present? ? setter.arg : @match_data)
           setter.cnt +=1
         end
       end
     end
+    [@activity, Array(@rules.select { |rule| rule.changed? })]
   end
   
   def save
@@ -31,7 +34,7 @@ class RulesEngine
   end
   
   private
-  
+    
     def zip_match_data(data)
       data.nil? ? nil : Hash[data.names.zip(data.captures)]
     end

@@ -38,8 +38,6 @@ class Activity < ActiveRecord::Base
   def set_experience(hsh)
     hsh = indifferent_hsh(hsh)
     self.experience = hsh[:experience]
-    
-    # TODO show trailing '!' in view
   end
   
   # eg add_friend({ name: 'Somebody', fb_id: 'somebody' })

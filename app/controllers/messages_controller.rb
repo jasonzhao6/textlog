@@ -1,3 +1,5 @@
+require 'rules_engine'
+
 class MessagesController < ApplicationController
   before_filter :must_be_logged_in, only: [:create, :destroy, :update]
   skip_before_filter :verify_authenticity_token, only: :create # For Twillio
@@ -35,6 +37,7 @@ class MessagesController < ApplicationController
   
   def show
     @message = Message.find(params[:id])
+    @activity, @applicable_matchers = RulesEngine.new(@message).execute
   end
   
   def update

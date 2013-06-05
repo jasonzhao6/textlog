@@ -1,0 +1,12 @@
+<dl class='rule'>
+  <dt>
+    <span class='label label-info'><%= matcher.command %></span>
+    <code><%= matcher.arg %></code> 
+  </dt>
+  <% matcher.setters.each do |setter| %>
+    <dd>
+      <span class='label label-success'><%= setter.command %></span>
+      <code><%= setter.arg %></code> 
+    </dd>
+  <% end %>
+</dl>
