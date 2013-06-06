@@ -5,54 +5,20 @@ describe Activity do
     let(:activity) { Activity.new }
     subject { activity }
     
-    describe "#set_name" do
+    describe "#set_primary_type" do
       let(:str) { 'biking' }
       before(:each) do
-        activity.set_name(str)
+        activity.set_primary_type(str)
       end
-      its(:name) { should == 'Biking' }
+      its(:primary_type) { should == 'Biking' }
     end
     
-    describe "#set_category" do
-      let(:str) { 'fitness' }
+    describe "#set_secondary_type" do
+      let(:str) { 'marin headlands ' }
       before(:each) do
-        activity.set_category(str)
+        activity.set_secondary_type(str)
       end
-      its(:category) { should == 'Fitness' }
-    end
-    
-    describe "#set_objective" do
-      context "when arg is a hash" do
-        let(:hsh) { { 'objective' => 'marin headlands ' } }
-        before(:each) do
-          activity.set_objective(hsh)
-        end
-        its(:objective) { should == 'Marin Headlands' }
-      end
-      context "when arg is a string" do
-        let(:str) { 'marin headlands ' }
-        before(:each) do
-          activity.set_objective(str)
-        end
-        its(:objective) { should == 'Marin Headlands' }
-      end
-    end
-    
-    describe "#set_experience" do
-      context "when arg is a hash" do
-        let(:hsh) { { 'experience' => 'felt engaged' } }
-        before(:each) do
-          activity.set_experience(hsh)
-        end
-        its(:experience) { should == 'Felt engaged' }
-      end
-      context "when arg is a string" do
-        let(:str) { 'felt engaged' }
-        before(:each) do
-          activity.set_experience(str)
-        end
-        its(:experience) { should == 'Felt engaged' }
-      end
+      its(:secondary_type) { should == 'Marin Headlands' }
     end
     
     describe "#add_friend" do
@@ -65,6 +31,8 @@ describe Activity do
       its('friends.length') { should == 1 }
       its('friends.first.name') { should == name }
       its('friends.first.fb_id') { should == fb_id }
+      specify { Company.count.should == 0 }
+      specify { Friend.count.should == 0 }
       
       context "when adding the same friend again" do
         let(:name2) { 'James Bond' }
@@ -76,6 +44,16 @@ describe Activity do
         its('friends.length') { should == 1 }
         its('friends.first.name') { should == name }
         its('friends.first.fb_id') { should == fb_id }
+        specify { Company.count.should == 0 }
+        specify { Friend.count.should == 0 }
+        
+        context "after save" do
+          before(:each) do
+            activity.save
+          end
+          specify { Company.count.should == 1 }
+          specify { Friend.count.should == 1 }
+        end
       end
       
       context "when adding a different friend" do
@@ -88,51 +66,74 @@ describe Activity do
         its('friends.length') { should == 2 }
         its('friends.last.name') { should == name3 }
         its('friends.last.fb_id') { should == fb_id3 }
+        specify { Company.count.should == 0 }
+        specify { Friend.count.should == 0 }
+        
+        context "after save" do
+          before(:each) do
+            activity.save
+          end
+          specify { Company.count.should == 2 }
+          specify { Friend.count.should == 2 }
+        end
       end
     end
     
-    describe "#add_time" do
+    describe "#add_duration" do
       let(:num) { '1' }
       let(:unit) { 'min' }
       let(:hsh) { { 'num' => num, 'unit' => unit } }
       before(:each) do
-        activity.add_time(hsh)
+        activity.add_duration(hsh)
       end
-      its(:time) { should == 60 }
+      its(:duration) { should == 60 }
       
-      context "when adding additional time" do
+      context "when adding additional duration" do
         let(:num2) { '2' }
         let(:unit2) { 'hr' }
         let(:hsh2) { { 'num' => num2, 'unit' => unit2 } }
         before(:each) do
-          activity.add_time(hsh2)
+          activity.add_duration(hsh2)
         end
-        its(:time) { should == 7260 }
+        its(:duration) { should == 7260 }
       end
     end
     
-    describe "#add_reps" do
-      context "when arg is a hash" do
-        let(:hsh) { { 'reps' => '10' } }
+    describe "#set_distance" do
+      context "when adding 5k" do
+        let(:num) { '5' }
+        let(:unit) { 'k' }
+        let(:hsh) { { 'num' => num, 'unit' => unit } }
         before(:each) do
-          activity.add_reps(hsh)
+          activity.set_distance(hsh)
         end
-        its(:reps) { should == 10 }
+        its(:distance) { should == 3.106855 }
       end
-      context "when arg is a string" do
-        let(:str) { '10' }
+      context "when adding 17.4 mi" do
+        let(:num) { '17.4' }
+        let(:unit) { 'mi' }
+        let(:hsh) { { 'num' => num, 'unit' => unit } }
         before(:each) do
-          activity.add_reps(str)
+          activity.set_distance(hsh)
         end
-        its(:reps) { should == 10 }
+        its(:distance) { should == 17.4 }
       end
-      context "when arg is empty string" do
-        let(:str) { '' }
-        before(:each) do
-          activity.add_reps(str)
-        end
-        its(:reps) { should == nil }
+    end
+    
+    describe "#set_reps" do
+      let(:hsh) { { 'reps' => '10' } }
+      before(:each) do
+        activity.set_reps(hsh)
       end
+      its(:reps) { should == 10 }
+    end
+    
+    describe "#set_note" do
+      let(:hsh) { { 'note' => 'felt engaged' } }
+      before(:each) do
+        activity.set_note(hsh)
+      end
+      its(:note) { should == 'Felt engaged' }
     end
   end
 end

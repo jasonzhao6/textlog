@@ -5,7 +5,7 @@ describe RulesEngine do
   let(:text) { 'Biked Butterlap with Scott, Alan, Mary Ann. 1 hr 30 min. Felt engaged.' }
   let(:message) { Message.create(message: text) }
   let(:rules_engine) { RulesEngine.new(message) }
-  let(:activity_to_json) { '{"name":"Biking","category":"Fitness","objective":"Butterlap","time":5400,"experience":"Felt engaged","reps":null,"friends":[{"name":"Mary Ann Jawili","fb_id":"mjawili"},{"name":"Alan Fineberg","fb_id":"fineberg"},{"name":"Scott Levy","fb_id":"ScottBLevy"}]}' }
+  let(:activity_to_json) { '{"primary_type":"Biking","secondary_type":"Butter Lap","duration":5400,"note":"Felt engaged","reps":null,"distance":17.4,"friends":[{"name":"Mary Ann Jawili","fb_id":"mjawili"},{"name":"Alan Fineberg","fb_id":"fineberg"},{"name":"Scott Levy","fb_id":"ScottBLevy"}]}' }
   let(:rules) { Rule.all }
   let(:matchers) { Rule.matchers }
   

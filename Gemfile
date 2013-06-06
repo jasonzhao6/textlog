@@ -59,6 +59,9 @@ gem 'jbuilder', '~> 1.0.1'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
+# Convert empty string to nil before save
+# gem 'nilify_blanks'
+
 # Use postgresql as the database for Active Record
 gem 'pg'
 
