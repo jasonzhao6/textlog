@@ -8,6 +8,11 @@ class ApplicationController < ActionController::Base
   # 
   def root
     redirect_to :activities
+    # TODO landing page with messages via text + rules = activities
+    #      how to write rules with/out regex
+    #      explain structure of activities
+    # maybe recommend typing 'bik' instead of 'biking|biked'
+    #             and typing 'butter' insead of 'butterlap|butter lap'
   end
 
   # 

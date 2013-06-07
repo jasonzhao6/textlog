@@ -3,7 +3,7 @@
 
 Rule.delete_all
 r1 = Rule.create(matcher_id: nil, command: 'match', arg: 'bik')
-  r11 = Rule.create(matcher_id: r1.id, command: 'set_primary_type', arg: 'Biking')
+  r11 = Rule.create(matcher_id: r1.id, command: 'set_primary_type', arg: { primary_type: 'Biking' })
 r2 = Rule.create(matcher_id: nil, command: 'match', arg: '(scott)[,\.]')
   r21 = Rule.create(matcher_id: r2.id, command: 'add_friend', arg: { name: 'Scott Levy', fb_id: 'ScottBLevy' })
 r3 = Rule.create(matcher_id: nil, command: 'match', arg: '(alan)[,\.]')
@@ -17,6 +17,6 @@ r6 = Rule.create(matcher_id: nil, command: 'match', arg: '(?<num>\d+) ?(?<unit>m
 r7 = Rule.create(matcher_id: nil, command: 'match', arg: '(?<note>felt.*)\.')
   r71 = Rule.create(matcher_id: r7.id, command: 'set_note', arg: nil)
 r8 = Rule.create(matcher_id: nil, command: 'match', arg: 'butterlap')
-  r81 = Rule.create(matcher_id: r1.id, command: 'set_secondary_type', arg: 'Butter Lap')
+  r81 = Rule.create(matcher_id: r1.id, command: 'set_secondary_type', arg: { secondary_type: 'Butter Lap' })
   r81 = Rule.create(matcher_id: r1.id, command: 'set_distance', arg: { num: '17.4', unit: 'mi' })
 r_ = Rule.create(matcher_id: nil, command: 'match', arg: '_')
