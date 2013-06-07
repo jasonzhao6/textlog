@@ -1,12 +1,13 @@
 class RulesController < ApplicationController
   before_filter :must_be_logged_in, only: [:create, :destroy, :update]
+  before_filter :which_redirect_path, only: [:create, :destroy, :edit, :new, :update]
   
   def create
     @rule = matcher = Rule.new(matcher_params)
     if matcher.save
       create_setters(matcher.id)
       
-      redirect_to :rules, notice: 'Rule was successfully created.'
+      redirect_to @redirect_path, notice: 'Rule was successfully created.'
     else
       render action: :new
     end
@@ -14,7 +15,7 @@ class RulesController < ApplicationController
   
   def destroy
     Rule.find(params[:id]).destroy
-    redirect_to :rules, alert: 'Rule was successfully deleted.'
+    redirect_to @redirect_path, alert: 'Rule was successfully deleted.'
   end
   
   def edit
@@ -35,13 +36,20 @@ class RulesController < ApplicationController
       matcher.setters.destroy_all
       create_setters(matcher.id)
       
-      redirect_to :rules, notice: 'Rule was successfully updated.'
+      redirect_to @redirect_path, notice: 'Rule was successfully updated.'
     else
       render action: :edit
     end
   end
   
   private
+    
+    # 
+    # Before filters
+    # 
+    def which_redirect_path
+      @redirect_path = params[:redirect_path] || :rules
+    end
     
     # 
     # Helpers

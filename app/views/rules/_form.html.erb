@@ -1,15 +1,20 @@
 <%= form_for rule, html: { class: 'docs docs-small span6' } do |f| %>
+  <% if params[:redirect_path] %>
+    <input type='hidden' name='redirect_path' value='<%= params[:redirect_path] %>' />
+  <% end %>
+
+  <!-- Matcher fieldset -->
   <div class='row-fluid'>
     <%= f.select :command,
                  Message::COMMANDS,
                  {},
                  { class: 'input-medium' } %>
   </div>
-
   <div class='row-fluid'>
     <%= f.text_field :arg, class: 'span12', placeholder: 'Case-insensitive regex' %>
   </div>
   
+  <!-- Setter fieldsets -->
   <div id='fieldsets'>
     <% if rule.new_record? %>
       <%= render 'fieldset', setter: rule %>
@@ -47,7 +52,7 @@
   </div>
   
   <div class='row-fluid'>
-    <%= link_to 'Cancel', :rules, class: 'cancel' %>
+    <%= link_to 'Cancel', @redirect_path, class: 'cancel' %>
   </div>
 <% end %>
   

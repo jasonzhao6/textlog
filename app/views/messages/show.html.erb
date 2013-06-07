@@ -1,18 +1,22 @@
-<div class='message-container span6'>
-  <div class='docs'>
-    <div class='docs-header'><h4>Parse preview</h4></div>
-    <p class='well well-small'><%= @message.message %></p>
-    <%= render 'activities/activity', activity: @activity %>
+<div><!-- Without this div, 'bootstrap_flash' will break the layout -->
+  <div class='message-container span6'>
+    <div class='docs'>
+      <div class='docs-header'><h4>Parse preview</h4></div>
+      <p class='well well-small'><%= @message.message %></p>
+      <%= render 'activities/activity', activity: @activity %>
+    </div>
+
+    <%= form_for @message do |f| %>
+      <%= f.submit 'Parse Message', class: 'btn btn-primary btn-block' %>
+      <%= link_to 'Cancel', :messages, class: 'cancel' %>
+    <% end %>
   </div>
 
-  <%= form_for @message do |f| %>
-    <%= f.submit 'Parse Message', class: 'btn btn-primary btn-block' %>
-    <%= link_to 'Cancel', :messages, class: 'cancel' %>
-  <% end %>
-</div>
-
-<div class='rules-container span6 well hidden-phone'>
-  <h4>Applicable rules</h4>
-  <%= render partial: 'rules/docs', collection: @applicable_matchers, as: :matcher %>
-  <%= link_to 'Add new', :new_rule, class: 'btn' %>
+  <div class='rules-container span6 well hidden-phone'>
+    <h4>Applicable rules</h4>
+    <%= render partial: 'rules/rule',
+               collection: @applicable_matchers,
+               as: :matcher %>
+    <%= link_to 'Add new', new_rule_path(redirect_path: @redirect_path), class: 'btn' %>
+  </div>
 </div>

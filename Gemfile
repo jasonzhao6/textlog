@@ -12,6 +12,9 @@ group :development do
   # Better Errors replaces the standard Rails error page with a much better and more useful error page
   gem 'better_errors'
 
+  # Enable the REPL and local/instance variable inspection in Better Errors
+  gem 'binding_of_caller'
+  
   # Bullet will watch your queries while you develop your application and notify you when you should add eager loading (N+1 queries), when you’re using eager loading that isn’t necessary and when you should use counter cache
   gem 'bullet'
 

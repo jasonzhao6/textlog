@@ -1,3 +1,8 @@
+# A rule can be a matcher or a setter.
+# A matcher matches a regex pattern on a message.
+# A setter calls a custome setter on an activity.
+# A matcher can have many setters, and a setter can belong to a matcher.
+# The difference between a matcher and a setter is whether it has matcher_id.
 class Rule < ActiveRecord::Base
   belongs_to :matcher, class_name: 'Rule'
   has_many :setters, class_name: 'Rule', foreign_key: 'matcher_id'
