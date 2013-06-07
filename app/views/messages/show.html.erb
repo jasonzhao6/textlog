@@ -6,7 +6,9 @@
       <%= render 'activities/activity', activity: @activity %>
     </div>
 
-    <%= form_for @message do |f| %>
+    <%= form_for @activity do |f| %>
+      <input type='hidden' name='message_id' value='<%= @message.id %>' />
+      <%= f.hidden_field nil, value: @message.id %>
       <%= f.submit 'Parse Message', class: 'btn btn-primary btn-block' %>
       <%= link_to 'Cancel', :messages, class: 'cancel' %>
     <% end %>
