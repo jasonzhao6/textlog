@@ -1,6 +1,8 @@
 class Activity < ActiveRecord::Base
+  belongs_to :message
   has_many :companies
   has_many :friends, through: :companies
+  validates :message, presence: true
   
   # 
   # Rspec helpers

@@ -1,5 +1,9 @@
 class Message < ActiveRecord::Base
-  scope :unparsed, -> { where(parsed: nil).order('created_at DESC') }
+  has_one :activity
+  # JZ: `where('id not in (?)', [])` yields no match.
+  #     Defaulting '[]' to '[0]' prevents that since db id is never 0.
+  scope :unparsed, -> { where('id not in (?)', Activity.pluck(:message_id) + [0])
+                       .order('created_at DESC') }
   validates :message, presence: true
   
   # 

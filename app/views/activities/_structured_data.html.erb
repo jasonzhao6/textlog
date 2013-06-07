@@ -1,0 +1,30 @@
+<dl class='dl-horizontal activity'>
+  <% if controller_name == 'messages' || activity.primary_type.present? %>
+    <dt>Primary Type:</dt>
+      <dd><%= activity_attr(activity.primary_type) %></dd>
+  <% end %>
+  <% if controller_name == 'messages' || activity.secondary_type.present? %>
+    <dt>Secondary Type:</dt>
+      <dd><%= activity_attr(activity.secondary_type) %></dd>
+  <% end %>
+  <% if controller_name == 'messages' || activity.friends.present? %>
+  <dt>Friends:</dt>
+    <dd><%= activity_attr(activity.friends.map(&:name).join(', ')) %></dd>
+  <% end %>
+  <% if controller_name == 'messages' || activity.duration.present? %>
+  <dt>Duration:</dt>
+    <dd><%= activity_attr(activity.duration) %></dd>
+  <% end %>
+  <% if controller_name == 'messages' || activity.distance.present? %>
+  <dt>Distance:</dt>
+    <dd><%= activity_attr(activity.distance) %></dd>
+  <% end %>
+  <% if controller_name == 'messages' || activity.reps.present? %>
+  <dt>Reps:</dt>
+    <dd><%= activity_attr(activity.reps) %></dd>
+  <% end %>
+  <% if controller_name == 'messages' || activity.note.present? %>
+  <dt>Note:</dt>
+    <dd><%= activity_attr(activity.note) %></dd>
+  <% end %>
+</dl>

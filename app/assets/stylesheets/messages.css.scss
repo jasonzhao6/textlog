@@ -17,16 +17,10 @@
 }
 
 .messages-controller.show-action {
-  p {
-    margin: 10px 0 7px;
-  }
-  .activity {
-    margin-bottom: 10px;
-  }
-  .btn {
+  .message-container .btn {
     margin-bottom: 4px;
   }
-  h4 {
+  .rules-container h4 {
     margin-bottom: 20px;
   }
 }

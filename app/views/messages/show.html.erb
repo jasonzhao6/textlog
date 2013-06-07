@@ -2,8 +2,8 @@
   <div class='message-container span6'>
     <div class='docs'>
       <div class='docs-header'><h4>Parse preview</h4></div>
-      <p class='well well-small'><%= @message.message %></p>
-      <%= render 'activities/activity', activity: @activity %>
+      <%= render 'message', message: @message %>
+      <%= render 'activities/structured_data', activity: @activity %>
     </div>
 
     <%= form_for @activity do |f| %>

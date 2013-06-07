@@ -8,7 +8,9 @@ class Rule < ActiveRecord::Base
   has_many :setters, class_name: 'Rule', foreign_key: 'matcher_id'
   scope :matchers, -> { where(matcher_id: nil)
                        .includes(:setters)
-                       .order('updated_at DESC') }
+                       .order('rules.updated_at DESC') }
+  scope :setters_withought_matchers, -> { # These should never exist
+    where('matcher_id not in (?)', Rule.matchers.pluck(:id)) }
   serialize :arg
   validates :command, inclusion: { in: (Message::COMMANDS + Activity::COMMANDS) }
   

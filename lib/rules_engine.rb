@@ -1,9 +1,14 @@
 class RulesEngine
   def initialize(message)
-    @message = message        # Parse a raw message
-    @activity = Activity.new  # ...into structured activity data
-    @rules = Rule.matchers    # ...with user defined rules
-    @match_data = nil         # MatchData zipped into a hash
+    # Parse a raw message
+    @message = message        
+    # into structured activity data
+    @activity = Activity.new(message_id: message.id)
+    # with user defined rules
+    @rules = Rule.matchers
+    
+    # MatchData zipped into a hash
+    @match_data = nil         
   end
   
   # returns [@activity, @rules (matched only)]

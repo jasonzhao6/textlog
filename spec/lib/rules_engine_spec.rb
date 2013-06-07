@@ -33,6 +33,9 @@ describe RulesEngine do
             rules_engine.execute
             rules_engine.save
           end
+          specify { Message.unparsed.count.should == 0 }
+          specify { Activity.count.should == 1 }
+          specify { activity.message.should == message }
           specify { Rule.where(cnt: 0).count.should == 1 }
           specify { Rule.where('updated_at = created_at').count.should == 1 }
           specify { Rule.where(cnt: 1).count.should == rules.length - 1 }

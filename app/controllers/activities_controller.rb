@@ -8,6 +8,6 @@ class ActivitiesController < ApplicationController
   end
   
   def index
-    
+    @activities = Activity.includes(:message, :friends).all
   end
 end

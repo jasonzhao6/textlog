@@ -6,33 +6,25 @@
 .rules-controller.create-action,
 .rules-controller.edit-action,
 .rules-controller.update-action {
-  .select-row .field_with_errors {
-    display: inline-block;
-    margin-left: 8.547008547008547%;
-    .offset1:first-child {
-      margin-left: 0;
-    }
-  }
-  
   .actions {
     line-height: 30px;
     vertical-align: top;
   }
   
-  #fieldset-factory {
-    display: none;
-  }
-  
   .new-row {
     margin-top: -6px;
+  }
+  
+  #fieldset-factory {
+    display: none;
   }
 }
 
 /* Portrait phones and down */
 @media (max-width: 320px) {
   .rules-controller.index-action .actions {
-    // Hide icons or else actions won't fit in docs-header
-    // http://s23.postimg.org/f8j1bqryj/Screen_Shot_2013_06_03_at_8_16_25_PM.png
+    /* JZ: Hide icons or else actions won't fit in docs-header */
+    /* http://s23.postimg.org/f8j1bqryj/Screen_Shot_2013_06_03_at_8_16_25_PM.png */
     i {
       display: none;
     }
