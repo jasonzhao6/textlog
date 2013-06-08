@@ -2,6 +2,7 @@ class Activity < ActiveRecord::Base
   belongs_to :message
   has_many :companies
   has_many :friends, through: :companies
+  validates :primary_type, presence: true
   validates :message, presence: true
   
   # 
@@ -14,9 +15,6 @@ class Activity < ActiveRecord::Base
   
   # 
   # Commands that can be called on activity models
-  # Params for these commands can be either strings or hashes
-  # They are strings if user entered them
-  # They default to hashes zipped from match data if left blank
   # 
   COMMANDS = ['set_primary_type',
               'set_secondary_type',
@@ -79,8 +77,10 @@ class Activity < ActiveRecord::Base
     # Commands helpers
     # 
     def indifferent_hsh(arg)
+      # 'arg' should be either a user entered string that can be evaled into a
+      #       hash or a hash zipped from MatchData
       begin
-        hsh = eval(arg) # TODO refactor this if other people write rules
+        hsh = eval(arg) # TODO refactor this when other people can write rules
       rescue
         hsh = arg
       end

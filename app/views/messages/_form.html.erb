@@ -3,19 +3,7 @@
     <%= f.text_area :message, class: 'span6', placeholder: 'Message' %>
   </div>
   
-  <% unless message.errors.empty? %>
-    <div class='errors-container'>
-      <h4>
-        Please correct the following
-        <%= 'error'.pluralize(message.errors.size) %>:
-      </h4>
-      <ul>
-        <% message.errors.full_messages.each do |full_message| %>
-          <li><%= full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render 'shared/form_errors', model: message %>
   
   <div class='row-fluid'>
     <%= f.submit class: 'btn btn-primary span6' %>

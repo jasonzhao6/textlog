@@ -38,6 +38,7 @@ class MessagesController < ApplicationController
   def show
     @message = Message.find(params[:id])
     @activity, @applicable_matchers = RulesEngine.new(@message).execute
+    @activity.valid? # Trigger validations for rendering errors
     @redirect_path = message_path(@message)
   end
   

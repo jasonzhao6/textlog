@@ -17,8 +17,13 @@
 }
 
 .messages-controller.show-action {
-  .message-container .btn {
-    margin-bottom: 4px;
+  .message-container {
+    .errors-container {
+      margin: -5px 0 15px;
+    }
+    .btn {
+      margin-bottom: 4px;
+    }
   }
   .rules-container h4 {
     margin-bottom: 20px;

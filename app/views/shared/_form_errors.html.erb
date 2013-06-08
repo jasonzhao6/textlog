@@ -1,0 +1,13 @@
+<% unless model.errors.empty? %>
+  <div class='errors-container'>
+    <h4>
+      Please correct the following
+      <%= 'error'.pluralize(model.errors.size) %>:
+    </h4>
+    <ul>
+      <% model.errors.full_messages.each do |full_message| %>
+        <li><%= full_message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

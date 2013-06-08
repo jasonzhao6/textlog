@@ -38,7 +38,7 @@ group :test do
   # gem 'capybara'
 
   # Fixture replacement
-  # gem 'fabrication'
+  gem 'fabrication'
 
   # Dummy data
   gem 'ffaker'

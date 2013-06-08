@@ -2,14 +2,16 @@
   <div class='message-container span6'>
     <div class='docs'>
       <div class='docs-header'><h4>Parse preview</h4></div>
-      <%= render 'message', message: @message %>
+      <%= render 'messages/message', message: @message %>
       <%= render 'activities/structured_data', activity: @activity %>
     </div>
 
     <%= form_for @activity do |f| %>
       <input type='hidden' name='message_id' value='<%= @message.id %>' />
+      <%= render 'shared/form_errors', model: @activity %>
       <%= f.hidden_field nil, value: @message.id %>
-      <%= f.submit 'Parse Message', class: 'btn btn-primary btn-block' %>
+      <%= f.submit 'Parse Message', class: 'btn btn-primary btn-block',
+                                    disabled: !@activity.errors.empty? %>
       <%= link_to 'Cancel', :messages, class: 'cancel' %>
     <% end %>
   </div>

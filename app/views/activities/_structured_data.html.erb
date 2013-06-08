@@ -1,5 +1,6 @@
 <dl class='dl-horizontal activity'>
   <% if controller_name == 'messages' || activity.primary_type.present? %>
+    <!-- TODO whether this is new, a hint of maybe calling it by different names -->
     <dt>Primary Type:</dt>
       <dd><%= activity_attr(activity.primary_type) %></dd>
   <% end %>

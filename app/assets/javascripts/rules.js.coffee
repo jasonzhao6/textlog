@@ -5,13 +5,12 @@
 $ ->
   $html = $('html')
   
-  if $('.rules-controller').length
+  $html.on 'click', '.rules-controller .delete', (e) ->
+    e.preventDefault()
+    console.log $(this).closest('fieldset').remove()
     
-    $html.on 'click', '.delete', (e) ->
-      e.preventDefault()
-      console.log $(this).closest('fieldset').remove()
-      
-    $html.on 'click', '.new', (e) ->
-      e.preventDefault()
-      $('#fieldsets').append($('#fieldset-factory').html())
+  $html.on 'click', '.rules-controller .new', (e) ->
+    e.preventDefault()
+    $('#fieldsets').append($('#fieldset-factory').html())
 # TODO animation for delete / new
+# TODO placeholder hints for each setter

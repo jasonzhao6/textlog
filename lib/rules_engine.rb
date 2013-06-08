@@ -2,19 +2,19 @@ class RulesEngine
   def initialize(message)
     # Parse a raw message
     @message = message        
-    # into structured activity data
+    # ...into structured activity data
     @activity = Activity.new(message_id: message.id)
-    # with user defined rules
-    @rules = Rule.matchers
+    # ...with user defined rules
+    @matchers = Rule.matchers
     
     # MatchData zipped into a hash
     @match_data = nil         
   end
   
-  # returns [@activity, @rules (matched only)]
+  # Returns [activity, applicable matchers]
   def execute
     # 1st pass: calling regex matchers on message model
-    @rules.each do |matcher|
+    @matchers.each do |matcher|
       @match_data = zip_match_data(@message.match(matcher.arg))
       unless @match_data.nil?
         matcher.cnt += 1
@@ -26,15 +26,17 @@ class RulesEngine
         end
       end
     end
-    [@activity, Array(@rules.select { |rule| rule.changed? })]
+    [@activity, Array(@matchers.select { |rule| rule.changed? })]
   end
   
+  # Returns true or false
   def save
-    @activity.save
-    @rules.each do |matcher|
-      # 'cnt' may have changed
-      matcher.save if matcher.changed?
-      matcher.setters.each { |setter| setter.save if setter.changed? }
+    if @activity.save
+      @matchers.each do |matcher| # 'cnt' may have changed
+        matcher.save if matcher.changed?
+        matcher.setters.each { |setter| setter.save if setter.changed? }
+      end
+      true
     end
   end
   
