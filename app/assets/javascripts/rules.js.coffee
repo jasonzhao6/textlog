@@ -10,8 +10,6 @@ $ ->
   $html.on 'click', '.rules-controller .delete', deleteSetter
   $html.on 'submit', '.rules-controller form', validateForm
   
-# TODO animation for delete / new
-
 # 
 # new/edit forms
 # 
@@ -44,6 +42,7 @@ deleteSetter = (e) ->
 
 validateForm = (e) ->
   if $('#rule_arg').val().trim().length == 0
+    #  TODO show bootstrap_flash and active record like errors thru js
     alert("Regex can't be blank")
   else
     return true

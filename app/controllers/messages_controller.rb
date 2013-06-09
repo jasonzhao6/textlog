@@ -5,10 +5,12 @@ class MessagesController < ApplicationController
   skip_before_filter :verify_authenticity_token, only: :create # For Twillio
   
   def create
-    if params['Body'].present? # Twillio post
+    # When request comes from Twillio
+    if params['Body'].present?
       Message.create(message: params['Body'])
       render nothing: true
-    else # Web form post
+    # When request comes locally
+    else
       @message = Message.new(message_params)
       if @message.save
         redirect_to :messages, notice: 'Message was successfully created.'
@@ -38,7 +40,17 @@ class MessagesController < ApplicationController
   def show
     @message = Message.find(params[:id])
     @activity, @applicable_matchers = RulesEngine.new(@message).execute
-    @activity.valid? # Trigger validations for rendering errors
+    
+    # Normally we don't want to see an activity field (eg distance) if it's
+    # blank, but when we are parsing, it's nice to see everything.
+    @we_are_parsing = true
+    
+    # Validate activity such that if there is any validation error, we can show
+    # them now and have user correct them by editing rules.
+    @activity.valid?
+
+    # When a user clicks off to edit or add new rules, instruct rules controller
+    # to return user back to this page.
     @redirect_path = message_path(@message)
   end
   
