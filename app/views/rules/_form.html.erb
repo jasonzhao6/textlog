@@ -3,7 +3,7 @@
     <input type='hidden' name='redirect_path' value='<%= params[:redirect_path] %>' />
   <% end %>
 
-  <!-- Matcher fieldset -->
+  <!-- Matcher -->
   <div class='row-fluid'>
     <%= f.select :command,
                  Message::COMMANDS,
@@ -14,8 +14,8 @@
     <%= f.text_field :arg, class: 'span12', placeholder: 'case-insensitive regex' %>
   </div>
   
-  <!-- Setter fieldsets -->
-  <div id='fieldsets'>
+  <!-- Setters -->
+  <div id='setters'>
     <% if rule.new_record? %>
       <%= render 'fieldset', setter: rule %>
     <% else %>
