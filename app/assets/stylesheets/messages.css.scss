@@ -18,6 +18,9 @@
 
 .messages-controller.show-action {
   .message-container {
+    sup {
+      color: #d14;
+    }
     .errors-container {
       margin: -5px 0 15px;
     }

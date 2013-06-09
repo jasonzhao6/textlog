@@ -42,14 +42,14 @@ class MessagesController < ApplicationController
     @activity, @applicable_matchers = RulesEngine.new(@message).execute
     
     # Normally we don't want to see an activity field (eg distance) if it's
-    # blank, but when we are parsing, it's nice to see everything.
+    # blank, but while we are parsing, it's helpful to see everything.
     @we_are_parsing = true
     
     # Validate activity such that if there is any validation error, we can show
     # them now and have user correct them by editing rules.
     @activity.valid?
 
-    # When a user clicks off to edit or add new rules, instruct rules controller
+    # When a user clicks off to edit or add rules, instruct the rules controller
     # to return user back to this page.
     @redirect_path = message_path(@message)
   end

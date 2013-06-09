@@ -6,6 +6,19 @@ class Activity < ActiveRecord::Base
   validates :message, presence: true
   
   # 
+  # Presenters
+  # 
+  def primary_type_is_new?
+    self.primary_type.present? &&
+      Activity.find_by_primary_type(self.primary_type).nil?
+  end
+  
+  def secondary_type_is_new?
+    self.secondary_type.present? &&
+      Activity.find_by_secondary_type(self.secondary_type).nil?
+  end
+  
+  # 
   # Rspec helpers
   # 
   def as_json(options = {})

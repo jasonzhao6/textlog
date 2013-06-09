@@ -1,5 +1,5 @@
 module ActivitiesHelper
-  def activity_attr(attr)
-    attr.present? ? attr : '-'
+  def dash_if_blank(attr)
+    attr.blank? ? '-' : attr
   end
 end
