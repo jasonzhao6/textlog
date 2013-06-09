@@ -48,15 +48,19 @@ class Activity < ActiveRecord::Base
   # eg add_duration({ 'num' => '44', 'unit' => 'min' })
   def add_duration(arg)
     hsh = indifferent_hsh(arg)
-    self.duration ||= 0
-    self.duration += normalize_duration(hsh[:num], hsh[:unit])
+    duration = normalize_duration(hsh[:num], hsh[:unit])
+    if duration
+      self.duration ||= 0
+      self.duration += duration
+    end
   end
   
   # eg set_distance({ 'num' => '5', 'unit' => 'k' })
   # eg set_distance({ 'num' => '17.4', 'unit' => 'mi' })
   def set_distance(arg)
     hsh = indifferent_hsh(arg)
-    self.distance = normalize_distance(hsh[:num], hsh[:unit])
+    distance = normalize_distance(hsh[:num], hsh[:unit])
+    self.distance = distance if distance
   end
   
   # eg set_reps({ 'reps' => '10' })
@@ -84,15 +88,15 @@ class Activity < ActiveRecord::Base
       rescue
         hsh = arg
       end
-      hsh.with_indifferent_access
+      hsh.with_indifferent_access rescue {}
     end
     
     def capitalize_str(str)
-      str.strip.capitalize
+      str.strip.capitalize if str.present?
     end
   
     def titlecase_str(str)
-      str.strip.titlecase
+      str.strip.titlecase if str.present?
     end
   
     def normalize_duration(num, unit)
