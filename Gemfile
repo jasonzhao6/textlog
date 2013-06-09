@@ -62,6 +62,9 @@ gem 'jbuilder', '~> 1.0.1'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
+# App monitoring
+gem 'newrelic_rpm'
+
 # Convert empty string to nil before save
 # gem 'nilify_blanks'
 
