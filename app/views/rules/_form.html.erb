@@ -19,9 +19,7 @@
     <% if rule.new_record? %>
       <%= render 'fieldset', setter: rule %>
     <% else %>
-      <% rule.setters.each do |setter| %>
-        <%= render 'fieldset', setter: setter %>
-      <% end %>
+      <%= render partial: 'fieldset', collection: rule.setters, as: :setter %>
     <% end %>
   </div>
   
