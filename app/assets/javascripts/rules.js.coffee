@@ -4,9 +4,12 @@
 
 $ ->
   $html = $('html')
+
   $html.on 'click', '.rules-controller .new', addSetter
   $html.on 'change', '.rules-controller #setters select', changeSetterCommand
   $html.on 'click', '.rules-controller .delete', deleteSetter
+  $html.on 'submit', '.rules-controller form', validateForm
+  
 # TODO animation for delete / new
 
 # 
@@ -38,3 +41,10 @@ changeSetterCommand = (e) ->
 deleteSetter = (e) ->
   e.preventDefault()
   $(this).closest('fieldset').remove()
+
+validateForm = (e) ->
+  if $('#rule_arg').val().trim().length == 0
+    alert("Regex can't be blank")
+  else
+    return true
+  return false
