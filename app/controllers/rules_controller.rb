@@ -1,12 +1,12 @@
 class RulesController < ApplicationController
+  before_filter :custom_redirect_path, only: [:create, :destroy, :edit, :new, :update]
   before_filter :must_be_logged_in, only: [:create, :destroy, :update]
-  before_filter :which_redirect_path, only: [:create, :destroy, :edit, :new, :update]
   
   def create
     @rule = matcher = Rule.new(matcher_params)
-    if matcher.save
-      create_setters(matcher.id)
-      
+    custom_validator
+    if matcher.errors.empty? && matcher.save
+      create_setters
       redirect_to @redirect_path, notice: 'Rule was successfully created.'
     else
       render action: :new
@@ -32,10 +32,10 @@ class RulesController < ApplicationController
   
   def update
     @rule = matcher = Rule.find(params[:id])
-    if matcher.update_attributes(matcher_params)
+    custom_validator
+    if matcher.errors.empty? && matcher.update_attributes(matcher_params)
       matcher.setters.destroy_all
-      create_setters(matcher.id)
-      
+      create_setters
       redirect_to @redirect_path, notice: 'Rule was successfully updated.'
     else
       render action: :edit
@@ -47,20 +47,24 @@ class RulesController < ApplicationController
     # 
     # Before filters
     # 
-    def which_redirect_path
+    def custom_redirect_path
       @redirect_path = params[:redirect_path] || :rules
     end
     
     # 
     # Helpers
     # 
-    def create_setters(matcher_id)
-      if params[:commands].present? &&
-         params[:commands].length == params[:args].length
-      
+    def create_setters
+      if params[:commands].present? && params[:commands].length == params[:args].length
         params[:commands].zip(params[:args]).map do |command, arg|
-          Rule.create(command: command, arg: arg, matcher_id: matcher_id)
+          Rule.create(command: command, arg: arg, matcher_id: @rule.id)
         end
+      end
+    end
+
+    def custom_validator
+      if Message::COMMANDS.include?(params[:rule][:command]) && params[:rule][:arg].blank?
+        @rule.errors.add(:arg, "can't be blank")
       end
     end
     
