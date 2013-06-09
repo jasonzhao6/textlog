@@ -3,7 +3,9 @@
     <dt>Primary Type:</dt>
     <dd>
       <%= dash_if_blank(activity.primary_type) %>
-      <% if activity.primary_type_is_new? %><sup>new</sup><% end %>
+      <% if @we_are_parsing && activity.primary_type_is_new? %>
+        <sup>new</sup>
+      <% end %>
     </dd>
   <% end %>
   
@@ -11,7 +13,9 @@
     <dt>Secondary Type:</dt>
     <dd>
       <%= dash_if_blank(activity.secondary_type) %>
-      <% if activity.secondary_type_is_new? %><sup>new</sup><% end %>
+      <% if @we_are_parsing && activity.secondary_type_is_new? %>
+        <sup>new</sup>
+      <% end %>
     </dd>
   <% end %>
   
@@ -23,7 +27,9 @@
       <% else %>
         <% activity.friends.each do |friend| %>
           <span><%= friend.name %></span>
-          <% if friend.new_record? %><sup>new</sup><% end %>
+          <% if @we_are_parsing && friend.new_record? %>
+            <sup>new</sup>
+          <% end %>
           <% unless friend == activity.friends.last %>,<% end %>
         <% end %>
       <% end %>
