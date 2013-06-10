@@ -14,11 +14,11 @@ module ActivitiesHelper
   end
   
   def top_friend_href(id, name, count)
-    activities_path(friend_id: id)
+    activities_path(friend: name)
   end
   
-  def primary_type_href(activity)
-    activities_path(primary_type: activity.primary_type)
+  def primary_type_href(primary_type)
+    activities_path(primary_type: primary_type)
   end
   
   def secondary_type_href(activity)
@@ -26,8 +26,8 @@ module ActivitiesHelper
                     secondary_type: activity.secondary_type)
   end
   
-  def friend_href(friend)
-    activities_path(friend_id: friend.id)
+  def friend_href(name)
+    activities_path(friend: name)
   end
   
 end

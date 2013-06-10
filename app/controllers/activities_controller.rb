@@ -19,8 +19,8 @@ class ActivitiesController < ApplicationController
                                          secondary_type: params[:secondary_type])
                   elsif params[:primary_type].present?
                     Activity.index.where(primary_type: params[:primary_type])
-                  elsif params[:friend_id].present?
-                    Friend.find(params[:friend_id]).activities.index
+                  elsif params[:friend].present?
+                    Friend.find_by_name(params[:friend]).activities.index
                   else
                     Activity.index
                   end

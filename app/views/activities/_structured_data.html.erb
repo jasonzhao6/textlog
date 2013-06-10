@@ -2,7 +2,7 @@
   <% if activity.primary_type.present? %>
     <dt>Primary Type:</dt>
     <dd>
-      <%= link_to activity.primary_type, primary_type_href(activity) %>
+      <%= link_to activity.primary_type, primary_type_href(activity.primary_type) %>
     </dd>
   <% end %>
   
@@ -17,7 +17,7 @@
     <dt>Friends:</dt>
     <dd>
       <% activity.friends.each do |friend| %>
-        <%= link_to friend.name, friend_href(friend) %>
+        <%= link_to friend.name, friend_href(friend.name) %>
         <% unless friend == activity.friends.last %>,<% end %>
       <% end %>
     </dd>
