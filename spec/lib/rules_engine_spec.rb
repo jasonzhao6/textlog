@@ -13,12 +13,12 @@ describe RulesEngine do
   describe "#execute" do
     let(:retval) { rules_engine.execute }
     
-    let(:activity) { retval.first }
+    let(:activity) { retval[0] }
     let(:activity_to_json) { '{"primary_type":"Biking","secondary_type":"Butter Lap","duration":5400,"note":"Felt engaged","reps":null,"distance":17.4,"friends":[{"name":"Mary Ann Jawili","fb_id":"mjawili"},{"name":"Alan Fineberg","fb_id":"fineberg"},{"name":"Scott Levy","fb_id":"ScottBLevy"}]}' }
     specify { activity.to_json.should == activity_to_json }
 
     context "when all but one rule applies" do
-      let(:applicable_matchers) { retval.last }
+      let(:applicable_matchers) { retval[1] }
       let(:matcher_count) { Rule.matchers.count }
       specify { applicable_matchers.length.should == matcher_count - 1 }
     end

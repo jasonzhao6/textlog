@@ -2,17 +2,21 @@
 
 <div class='well sidebar-nav'>
   <ul class='nav nav-list'>
-    <% if @top_activities_as_hash.present? %>
+    <% if @top_activities.present? %>
       <li class='nav-header'>Top activities</li>
-      <% @top_activities_as_hash.each do |k, v| %>
-        <li><%= link_to top_activity_text(k, v), top_activity_href(k)  %></li>
+      <% @top_activities.each do |activity| %>
+        <li>
+          <%= link_to top_activity_text(*activity), top_activity_href(*activity) %>
+        </li>
       <% end %>
     <% end %>
 
-    <% if @top_friends_as_hash.present? %>
+    <% if @top_friends.present? %>
       <li class='nav-header'>Top activity partners</li>
-      <% @top_friends_as_hash.each do |k, v| %>
-        <li><%= link_to top_friend_text(k, v), top_friend_href(k)  %></li>
+      <% @top_friends.each do |friend| %>
+        <li>
+          <%= link_to top_friend_text(*friend), top_friend_href(*friend) %>
+        </li>
       <% end %>
     <% end %>
   </ul>

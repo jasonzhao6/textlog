@@ -1,19 +1,33 @@
 module ActivitiesHelper
-  def top_activity_text(k, v)
-    "#{k.compact.join(' - ')} <sup>(#{v})</sup>".html_safe
+  def top_activity_text(primary_type, secondary_type, count)
+    type_text = [primary_type, secondary_type].compact.join(' - ')
+    "#{type_text} <sup>(#{count})</sup>".html_safe
   end
   
-  def top_activity_href(k)
-    hsh = { primary_type: k[0] }
-    hsh[:secondary_type] = k[1] if k[1].present?
-    activities_path(hsh)
+  def top_activity_href(primary_type, secondary_type, count)
+    activities_path(primary_type: primary_type,
+                    secondary_type: secondary_type)
   end
   
-  def top_friend_text(k, v)
-    "#{k.last} <sup>(#{v})</sup>".html_safe
+  def top_friend_text(id, name, count)
+    "#{name} <sup>(#{count})</sup>".html_safe
   end
   
-  def top_friend_href(k)
-    activities_path(friend_id: k[0])
+  def top_friend_href(id, name, count)
+    activities_path(friend_id: id)
   end
+  
+  def primary_type_href(activity)
+    activities_path(primary_type: activity.primary_type)
+  end
+  
+  def secondary_type_href(activity)
+    activities_path(primary_type: activity.primary_type,
+                    secondary_type: activity.secondary_type)
+  end
+  
+  def friend_href(friend)
+    activities_path(friend_id: friend.id)
+  end
+  
 end

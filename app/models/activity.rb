@@ -20,20 +20,30 @@ class Activity < ActiveRecord::Base
       Activity.find_by_secondary_type(self.secondary_type).nil?
   end
 
-  # eg {["Biking", "Butterlap"]=>"3", ["Biking", "Marin Headland"]=>"1"}
-  def self.top_activities_as_hash
-    self.group(:primary_type, :secondary_type)
-        .order('SUM(1) DESC LIMIT 5')
-        .sum(1)
+  # Returns array of [primary_type, secondary_type, count]
+  # eg [["Biking", "Butterlap", "3"], ["Biking", "Marin Headland", "1"]]
+  def self.top_activities
+    top_activities = self.group(:primary_type)
+                         .order('SUM(1) DESC LIMIT 5')
+                         .sum(1)
+                         .map { |primary_type, count| [primary_type, nil, count] }
+    top_activities += self.where('secondary_type IS NOT NULL')
+                          .group(:primary_type, :secondary_type)
+                          .order('SUM(1) DESC LIMIT 5')
+                          .sum(1)
+                          .map { |result| result.flatten }
+    top_activities.uniq.sort_by(&:last).reverse.first(5)
   end
 
-  # eg {[1, "Mary Ann Jawili"]=>"3", [5, "Takashi Mizohata"]=>"2"}
-  def self.top_friends_as_hash
+  # Returns array of [id, name, count]
+  # eg [[1, "Mary Ann Jawili", "3"], [5, "Takashi Mizohata", "2"]]
+  def self.top_friends
     self.includes(:friends)
         .group(:friend_id, 'friends.name')
         .references(:friends)
         .order('SUM(1) DESC LIMIT 5')
         .sum(1)
+        .map { |result| result.flatten }
   end
  
   # 

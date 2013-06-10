@@ -1,6 +1,19 @@
 require 'spec_helper'
 
 describe Activity do
+  describe "presenters" do
+    describe ".top_activities" do
+      let(:retval) { [["Biking", nil, "9"], ["Biking", "Butterlap", "3"], ["Biking", "Marin Headlands", "2"], ["Crossfit", nil, "1"]] }
+      before(:each) do
+        4.times { Fabricate(:activity, primary_type: 'Biking') }
+        3.times { Fabricate(:activity, primary_type: 'Biking', secondary_type: 'Butterlap') }
+        2.times { Fabricate(:activity, primary_type: 'Biking', secondary_type: 'Marin Headlands') }
+        1.times { Fabricate(:activity, primary_type: 'Crossfit') }
+      end
+      specify { Activity.top_activities.should == retval }
+    end
+  end
+  
   describe "COMMANDS" do
     subject { Fabricate.build(:activity) }
     
