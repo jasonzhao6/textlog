@@ -23,7 +23,13 @@ class RulesController < ApplicationController
   end
   
   def index
-    @rules = Rule.matchers
+    @command_counts = Activity::COMMANDS.map { |command| Rule.matchers_for(command).count }
+    
+    @rules = if params[:command].present?
+               Rule.matchers_for(params[:command])
+             else
+               Rule.matchers
+             end
   end
   
   def new

@@ -1,4 +1,7 @@
 module ActivitiesHelper
+  # 
+  # Link helpers
+  # 
   def top_activity_text(primary_type, secondary_type, count)
     type_text = [primary_type, secondary_type].compact.join(' - ')
     "#{type_text} <sup>(#{count})</sup>".html_safe
@@ -29,5 +32,4 @@ module ActivitiesHelper
   def friend_href(name)
     activities_path(friend: name)
   end
-  
 end

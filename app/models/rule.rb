@@ -9,8 +9,12 @@ class Rule < ActiveRecord::Base
   scope :matchers, -> { where(matcher_id: nil)
                        .includes(:setters)
                        .order('rules.updated_at DESC') }
-  scope :setters_withought_matchers, -> { # These should never exist
-    where('matcher_id not in (?)', Rule.matchers.pluck(:id)) }
+  scope :matchers_for, lambda { |command| matchers
+                                         .where('setters_rules.command = ?', command)
+                                         .references(:setters) }
+  # These should never exist
+  scope :setters_without_matchers, -> { where('matcher_id not in (?)',
+                                               Rule.matchers.pluck(:id)) }
   serialize :arg
   validates :command, inclusion: { in: (Message::COMMANDS + Activity::COMMANDS) }
   
