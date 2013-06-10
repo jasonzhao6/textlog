@@ -25,9 +25,4 @@ class Rule < ActiveRecord::Base
     super(except: [:created_at, :updated_at, :id, :matcher_id],
           include: [matcher: { except: [:created_at, :updated_at, :id] }])
   end
-  
-  # bump updated_at, which is used to resolve competing rules
-  def bump!
-    save
-  end
 end

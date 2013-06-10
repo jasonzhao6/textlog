@@ -11,6 +11,7 @@ class ActivitiesController < ApplicationController
   end
   
   def index
+    # Sidebar
     @top_activities = Activity.top_activities
     @top_friends = Activity.top_friends
     
