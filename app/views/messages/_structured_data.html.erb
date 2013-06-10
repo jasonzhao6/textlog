@@ -1,0 +1,38 @@
+<dl class='dl-horizontal activity'>
+  <dt>Primary Type:</dt>
+  <dd>
+    <%= dash_if_blank(activity.primary_type) %>
+    <% if activity.primary_type_is_new? %><sup>new</sup><% end %>
+  </dd>
+
+  <dt>Secondary Type:</dt>
+  <dd>
+    <%= dash_if_blank(activity.secondary_type) %>
+    <% if activity.secondary_type_is_new? %><sup>new</sup><% end %>
+  </dd>
+
+  <dt>Friends:</dt>
+  <dd>
+    <% if activity.friends.blank? %>
+      <%= dash_if_blank(@friends) %>
+    <% else %>
+      <% activity.friends.each do |friend| %>
+        <span><%= friend.name %></span>
+        <% if friend.new_record? %><sup>new</sup><% end %>
+        <% unless friend == activity.friends.last %>,<% end %>
+      <% end %>
+    <% end %>
+  </dd>
+
+  <dt>Duration:</dt>
+  <dd><%= dash_if_blank(activity.duration) %></dd>
+
+  <dt>Distance:</dt>
+  <dd><%= dash_if_blank(activity.distance) %></dd>
+
+  <dt>Reps:</dt>
+  <dd><%= dash_if_blank(activity.reps) %></dd>
+
+  <dt>Note:</dt>
+  <dd><%= dash_if_blank(activity.note) %></dd>
+</dl>

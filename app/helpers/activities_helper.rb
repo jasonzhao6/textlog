@@ -1,8 +1,4 @@
 module ActivitiesHelper
-  def dash_if_blank(attr)
-    attr.blank? ? '-' : attr
-  end
-  
   def top_activity_text(k, v)
     "#{k.compact.join(' - ')} <sup>(#{v})</sup>".html_safe
   end
