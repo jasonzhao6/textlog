@@ -11,7 +11,18 @@ class ActivitiesController < ApplicationController
   end
   
   def index
-    @activities = Activity.includes(:message, :friends)
-                          .order('messages.created_at DESC')
+    @top_activities_as_hash = Activity.top_activities_as_hash
+    @top_friends_as_hash = Activity.top_friends_as_hash
+    
+    @activities = if params[:primary_type].present? && params[:secondary_type].present?
+                    Activity.index.where(primary_type: params[:primary_type],
+                                         secondary_type: params[:secondary_type])
+                  elsif params[:primary_type].present?
+                    Activity.index.where(primary_type: params[:primary_type])
+                  elsif params[:friend_id].present?
+                    Friend.find(params[:friend_id]).activities.index
+                  else
+                    Activity.index
+                  end
   end
 end

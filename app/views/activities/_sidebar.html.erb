@@ -2,24 +2,18 @@
 
 <div class='well sidebar-nav'>
   <ul class='nav nav-list'>
-    <li class='nav-header'>Top friends</li>
-    <li><%= link_to 'Link1', '/path1'  %></li>
-    <li><%= link_to 'Link2', '/path2'  %></li>
-    <li><%= link_to 'Link3', '/path3'  %></li>
-    <li class='nav-header'>Top activities</li>
-    <li><%= link_to 'Link1', '/path1'  %></li>
-    <li><%= link_to 'Link2', '/path2'  %></li>
-    <li><%= link_to 'Link3', '/path3'  %></li>
-    
-    <!-- TODO capture time and reps in top activities -->
-    <!-- <li class='nav-header'>Mean / median time</li>
-    <li>
-      <%= time_ago(50.seconds.ago) %>
-      /
-      <%= time_ago(500.seconds.ago) %>
-    </li>
-    <li class='nav-header'>Mean / median reps</li>
-    <li>50 / 500</li> -->
-    
+    <% if @top_activities_as_hash.present? %>
+      <li class='nav-header'>Top activities</li>
+      <% @top_activities_as_hash.each do |k, v| %>
+        <li><%= link_to top_activity_text(k, v), top_activity_href(k)  %></li>
+      <% end %>
+    <% end %>
+
+    <% if @top_friends_as_hash.present? %>
+      <li class='nav-header'>Top activity partners</li>
+      <% @top_friends_as_hash.each do |k, v| %>
+        <li><%= link_to top_friend_text(k, v), top_friend_href(k)  %></li>
+      <% end %>
+    <% end %>
   </ul>
 </div><!--/.well -->
