@@ -3,18 +3,16 @@
     <% if @top_activities.present? %>
       <li class='nav-header'>Top activities</li>
       <% @top_activities.each do |activity| %>
-        <li>
-          <%= link_to top_activity_text(*activity), top_activity_href(*activity) %>
-        </li>
+        <li><%= link_to top_activity_text(*activity),
+                        top_activity_href(*activity) %></li>
       <% end %>
     <% end %>
 
     <% if @top_friends.present? %>
       <li class='nav-header'>Top activity partners</li>
       <% @top_friends.each do |friend| %>
-        <li>
-          <%= link_to top_friend_text(*friend), top_friend_href(*friend) %>
-        </li>
+        <li><%= link_to top_friend_text(*friend),
+                        top_friend_href(*friend) %></li>
       <% end %>
     <% end %>
   </ul>

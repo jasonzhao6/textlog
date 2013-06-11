@@ -3,7 +3,7 @@
     <%= select_tag 'commands[]',
                    options_for_select(Activity::COMMANDS, setter.command),
                    prompt: 'set ...',
-                   id: nil,
+                   id: nil, # This partial is rendered multiple times on the page
                    class: 'offset1 input-medium' %>
     <div class='actions'>
       <a class='delete' href='#' tabindex='99'>
@@ -15,7 +15,7 @@
   <div class='row-fluid'>
     <%= text_field_tag 'args[]',
                        '',
-                       id: nil,
+                       id: nil, # This partial is rendered multiple times on the page
                        class: 'span11 offset1',
                        value: setter.arg,
                        placeholder: SETTER_PLACEHOLDERS[setter.command] %>

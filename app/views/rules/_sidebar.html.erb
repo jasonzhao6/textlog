@@ -1,9 +1,13 @@
 <div class='well sidebar-nav'>
   <ul class='nav nav-list'>
-    <li class='nav-header'>Top rules</li>
-    <li><%= link_to 'Link1', '/path1'  %></li>
-    <li><%= link_to 'Link2', '/path2'  %></li>
-    <li><%= link_to 'Link3', '/path3'  %></li>
+    <li class='nav-header'>Sort by</li>
+    <li>
+      <form action='<%= rules_path %>' method='get'>
+        <%= hidden_field_tag :command, params[:command] %>
+        <%= select_tag 'sort-by',
+                       options_for_select(sort_by_options, params['sort-by']) %>
+      </form>
+    </li>
     <li class='nav-header'>Filter by type</li>
     <% Activity::COMMANDS.each_with_index do |command, i| %>
       <li><%= link_to command_text(command, i), command_href(command) %></li>

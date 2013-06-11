@@ -4,10 +4,7 @@
 
 <% if params[:command].present? %>
   <ul class='breadcrumb'>
-    <li>
-      <%= link_to 'All', :rules %>
-      <span class='divider'>/</span>
-    </li>
+    <li><%= link_to 'All', :rules %> <span class='divider'>/</span></li>
     <li class='active'><%= params[:command] %></li>
   </ul>
 <% end %>

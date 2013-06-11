@@ -24,13 +24,20 @@ class RulesController < ApplicationController
   
   def index
     # Sidebar
-    @command_counts = Activity::COMMANDS.map { |command| Rule.matchers_for(command).count }
+    @command_counts = Activity::COMMANDS.map do |command|
+                        Rule.matchers_for(command).count
+                      end
     
+    # Main
     @rules = if params[:command].present?
                Rule.matchers_for(params[:command])
              else
                Rule.matchers
              end
+             
+    if params['sort-by'] == 'most-frequently-used'
+      @rules = @rules.order('rules.cnt DESC')
+    end
   end
   
   def new
@@ -62,7 +69,7 @@ class RulesController < ApplicationController
     # Helpers
     # 
     def create_setters
-      if params[:commands].present? && params[:commands].length == params[:args].length
+      if params[:commands].present?
         params[:commands].zip(params[:args]).map do |command, arg|
           Rule.create(command: command, arg: arg, matcher_id: @rule.id)
         end
@@ -70,7 +77,8 @@ class RulesController < ApplicationController
     end
 
     def custom_validator
-      if Message::COMMANDS.include?(params[:rule][:command]) && params[:rule][:arg].blank?
+      if Message::COMMANDS.include?(params[:rule][:command]) && 
+         params[:rule][:arg].blank?
         @rule.errors.add(:arg, "can't be blank")
       end
     end

@@ -10,7 +10,19 @@ module RulesHelper
            else
              'Modified'
            end
-    "#{verb} #{time_ago(matcher.updated_at)} ago | #{matcher.cnt}x"
+    if params['sort-by'] == 'most-frequently-used'
+      "#{matcher.cnt}x | #{verb} #{time_ago(matcher.updated_at)} ago"
+    else
+      "#{verb} #{time_ago(matcher.updated_at)} ago | #{matcher.cnt}x"
+    end
+  end
+  
+  # 
+  # Select helpers
+  # 
+  def sort_by_options
+    [['Most recently used', nil],
+     ['Most frequently used', 'most-frequently-used']]
   end
   
   # 
@@ -21,6 +33,6 @@ module RulesHelper
   end
 
   def command_href(command)
-    rules_path(command: command)
+    rules_path(command: command, 'sort-by' => params['sort-by'])
   end
 end

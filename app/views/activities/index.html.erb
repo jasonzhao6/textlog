@@ -6,10 +6,7 @@
       params[:primary_type].present? ||
       params[:friend].present? %>
   <ul class='breadcrumb'>
-    <li>
-      <%= link_to 'All', :activities %>
-      <span class='divider'>/</span>
-    </li>
+    <li><%= link_to 'All', :activities %> <span class='divider'>/</span></li>
     <% if (params[:primary_type].present? && params[:secondary_type].present?) %>
       <li>
         <%= link_to params[:primary_type], primary_type_href(params[:primary_type]) %>

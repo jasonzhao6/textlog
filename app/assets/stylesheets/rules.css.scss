@@ -20,6 +20,15 @@
   }
 }
 
+.rules-controller.index-action {
+  form {
+    margin: 0;
+    #sort-by {
+      width: 100%
+    }
+  }
+}
+
 /* Portrait phones and down */
 @media (max-width: 320px) {
   .rules-controller.index-action .actions {
