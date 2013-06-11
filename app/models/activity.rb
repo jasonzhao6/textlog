@@ -39,6 +39,7 @@ class Activity < ActiveRecord::Base
   # eg [[1, "Mary Ann Jawili", "3"], [5, "Takashi Mizohata", "2"]]
   def self.top_friends
     self.includes(:friends)
+        .where('friend_id IS NOT NULL')
         .group(:friend_id, 'friends.name')
         .references(:friends)
         .order('SUM(1) DESC LIMIT 5')
