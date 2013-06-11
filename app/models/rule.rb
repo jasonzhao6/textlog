@@ -4,6 +4,7 @@
 # A matcher can have many setters, and a setter can belong to a matcher.
 # The tell between a matcher and a setter is whether it has matcher_id.
 class Rule < ActiveRecord::Base
+  before_save :set_cnt_was_last_updated
   belongs_to :matcher, class_name: 'Rule'
   has_many :setters, class_name: 'Rule', foreign_key: 'matcher_id'
   scope :matchers, -> { where(matcher_id: nil)
@@ -25,4 +26,14 @@ class Rule < ActiveRecord::Base
     super(except: [:created_at, :updated_at, :id, :matcher_id],
           include: [matcher: { except: [:created_at, :updated_at, :id] }])
   end
+  
+  private
+  
+    # 
+    # Before filters
+    # 
+    def set_cnt_was_last_updated
+      self.cnt_was_last_updated = self.cnt_changed?
+      return # Rails is not happy when a before filter returns false
+    end
 end

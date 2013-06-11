@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130607062508) do
+ActiveRecord::Schema.define(version: 20130610164422) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,7 +49,8 @@ ActiveRecord::Schema.define(version: 20130607062508) do
     t.integer  "matcher_id"
     t.string   "command"
     t.string   "arg"
-    t.integer  "cnt",        default: 0
+    t.integer  "cnt",                  default: 0
+    t.boolean  "cnt_was_last_updated"
   end
 
 end

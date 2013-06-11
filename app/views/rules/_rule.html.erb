@@ -1,8 +1,6 @@
 <div class='docs'>
   <div class='docs-header'>
-    <h4>
-      <%= "Applied #{time_ago(matcher.updated_at)} ago | #{matcher.cnt}x" %>
-    </h4>
+    <h4><%= rule_heading(matcher) %></h4>
     <div class='actions'>
       <a class='edit'
          href='<%= edit_rule_path(matcher.id, redirect_path: @redirect_path) %>'>

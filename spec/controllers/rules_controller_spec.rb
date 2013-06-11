@@ -15,7 +15,7 @@ describe RulesController do
                                    setter2_command ],
                        args:     [ setter_arg,
                                    setter2_arg ] } }
-      let(:rule_to_json) { '[{"command":"match","arg":"[regex]","cnt":0},{"command":"set_primary_type","arg":"biking","cnt":0,"matcher":{"matcher_id":null,"command":"match","arg":"[regex]","cnt":0}},{"command":"set_secondary_type","arg":"marin headlands","cnt":0,"matcher":{"matcher_id":null,"command":"match","arg":"[regex]","cnt":0}}]' }
+      let(:rule_to_json) { '[{"command":"match","arg":"[regex]","cnt":0,"cnt_was_last_updated":false},{"command":"set_primary_type","arg":"biking","cnt":0,"cnt_was_last_updated":false,"matcher":{"matcher_id":null,"command":"match","arg":"[regex]","cnt":0,"cnt_was_last_updated":false}},{"command":"set_secondary_type","arg":"marin headlands","cnt":0,"cnt_was_last_updated":false,"matcher":{"matcher_id":null,"command":"match","arg":"[regex]","cnt":0,"cnt_was_last_updated":false}}]' }
                        
       before(:each) do
         Rule.delete_all
@@ -36,7 +36,7 @@ describe RulesController do
                                           arg:      matcher_arg2 },
                                   commands: [ setter_command ],
                                   args:     [ setter_arg ] } }
-          let(:rule_to_json_updated) { '[{"command":"match","arg":"[regex2]","cnt":0},{"command":"set_primary_type","arg":"biking","cnt":0,"matcher":{"matcher_id":null,"command":"match","arg":"[regex2]","cnt":0}}]' }
+          let(:rule_to_json_updated) { '[{"command":"match","arg":"[regex2]","cnt":0,"cnt_was_last_updated":false},{"command":"set_primary_type","arg":"biking","cnt":0,"cnt_was_last_updated":false,"matcher":{"matcher_id":null,"command":"match","arg":"[regex2]","cnt":0,"cnt_was_last_updated":false}}]' }
          
          before(:each) do
            put :update, update_params
