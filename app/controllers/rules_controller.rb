@@ -4,8 +4,7 @@ class RulesController < ApplicationController
   
   def create
     @rule = matcher = Rule.new(matcher_params)
-    custom_validator
-    if matcher.errors.empty? && matcher.save
+    if matcher.save
       create_setters
       redirect_to @redirect_path, notice: 'Rule was successfully created.'
     else
@@ -46,8 +45,7 @@ class RulesController < ApplicationController
   
   def update
     @rule = matcher = Rule.find(params[:id])
-    custom_validator
-    if matcher.errors.empty? && matcher.update_attributes(matcher_params)
+    if matcher.update_attributes(matcher_params)
       matcher.setters.destroy_all
       create_setters
       redirect_to @redirect_path, notice: 'Rule was successfully updated.'
@@ -73,13 +71,6 @@ class RulesController < ApplicationController
         params[:commands].zip(params[:args]).map do |command, arg|
           Rule.create(command: command, arg: arg, matcher_id: @rule.id)
         end
-      end
-    end
-
-    def custom_validator
-      if Message::COMMANDS.include?(params[:rule][:command]) && 
-         params[:rule][:arg].blank?
-        @rule.errors.add(:arg, "can't be blank")
       end
     end
     

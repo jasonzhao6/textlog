@@ -18,6 +18,7 @@ class Rule < ActiveRecord::Base
                                                Rule.matchers.pluck(:id)) }
   serialize :arg
   validates :command, inclusion: { in: (Message::COMMANDS + Activity::COMMANDS) }
+  validates :arg, presence: true, if: :is_matcher?
   
   # 
   # Rspec helpers
@@ -35,5 +36,9 @@ class Rule < ActiveRecord::Base
     def set_cnt_was_last_updated
       self.cnt_was_last_updated = self.cnt_changed?
       return # Rails is not happy when a before filter returns false
+    end
+    
+    def is_matcher?
+      self.matcher_id.nil?
     end
 end
