@@ -35,4 +35,23 @@ module RulesHelper
   def command_href(command)
     rules_path(command: command, 'sort-by' => params['sort-by'])
   end
+  
+  # 
+  # Attribute helpers
+  # 
+  NAMED_VARIABLE = /\?<([a-z]+)>/
+  def matcher_arg(arg)
+    arg.gsub(NAMED_VARIABLE, '?<<em>\1</em>>').html_safe
+  end
+  
+  def setter_arg(arg, matcher_arg)
+    if arg.blank?
+      key_values = matcher_arg.scan(NAMED_VARIABLE).flatten
+                              .map { |name| "#{name}: <<em>#{name}</em>>" }
+                              .join(', ')
+      "{ #{key_values} }".html_safe
+    else
+      arg
+    end
+  end
 end
