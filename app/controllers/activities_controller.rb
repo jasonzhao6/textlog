@@ -4,7 +4,7 @@ class ActivitiesController < ApplicationController
     rules_engine = RulesEngine.new(message)
     rules_engine.execute
     if rules_engine.save
-      redirect_to :activities
+      redirect_to :messages
     else
       redirect_to message_path(message)
     end
