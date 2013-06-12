@@ -66,21 +66,30 @@ class Activity < ActiveRecord::Base
               'set_reps',
               'set_note']
   
+  # eg set_primary_type('biking')
   # eg set_primary_type({ primary_type: 'biking' })
   def set_primary_type(arg)
     hsh = indifferent_hash(arg)
-    self.primary_type = titlecase_str(hsh[:primary_type])
+    self.primary_type = titlecase_str(hsh[:primary_type] || arg)
   end
   
+  # eg set_secondary_type('marin headlands')
   # eg set_secondary_type({ secondary_type: 'marin headlands' })
   def set_secondary_type(arg)
     hsh = indifferent_hash(arg)
-    self.secondary_type = titlecase_str(hsh[:secondary_type])
+    self.secondary_type = titlecase_str(hsh[:secondary_type] || arg)
   end
   
-  # eg add_friend({ name: 'Somebody', fb_id: 'somebody' })
+  # eg add_friend('Lance Armstrong, lancearmstrong')
+  # eg add_friend({ name: 'Lance Armstrong', fb_id: 'lancearmstrong' })
+  HASH_SYNTAX = /[{:=>}]/
   def add_friend(arg)
     hsh = indifferent_hash(arg)
+    if hsh.blank? && arg.is_a?(String) && arg !=~ HASH_SYNTAX
+      name, fb_id = arg.split(',').map(&:strip)
+      hsh[:fb_id] ||= fb_id
+      hsh[:name] ||= name
+    end
     friend = Friend.where(fb_id: hsh[:fb_id]).first_or_initialize
     friend.name = hsh[:name] # in case friend's name has been updated
     self.friends << friend unless self.friends.map(&:fb_id).include?(hsh[:fb_id])

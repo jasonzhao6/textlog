@@ -17,7 +17,44 @@ describe Activity do
   describe "COMMANDS" do
     subject { Fabricate.build(:activity) }
     
-    context "when arg is a hash string" do # Testing just one command
+    # ['set_primary_type', 'set_secondary_type', 'add_friend'] should support
+    # this, testing all
+    context "when arg is a string" do
+      describe "#set_primary_type" do
+        let(:str) { 'biking' }
+        before(:each) do
+          subject.set_primary_type(str)
+        end
+        its(:primary_type) { should == 'Biking' }
+      end
+
+      describe "#set_secondary_type" do
+        let(:str) { 'marin headlands' }
+        before(:each) do
+          subject.set_secondary_type(str)
+        end
+        its(:secondary_type) { should == 'Marin Headlands' }
+      end
+      
+      describe "#add_friend" do
+        let(:friend) { Fabricate.build(:friend) }
+        let(:friend_str) { "#{friend.name},#{friend.fb_id}" }
+        let(:friend2) { Fabricate.build(:friend) }
+        let(:friend2_str) { "#{friend2.name}, #{friend2.fb_id}" }
+        before(:each) do
+          subject.add_friend(friend_str)
+          subject.add_friend(friend2_str)
+        end
+        its('friends.length') { should == 2 }
+        its('friends.first.name') { should == friend.name }
+        its('friends.first.fb_id') { should == friend.fb_id }
+        its('friends.last.name') { should == friend2.name }
+        its('friends.last.fb_id') { should == friend2.fb_id }
+      end
+    end
+    
+    # All commands should support this, testing one
+    context "when arg is a hash string" do
       describe "#set_primary_type" do
         let(:str) { "{ primary_type: 'biking' }" }
         before(:each) do
@@ -27,7 +64,8 @@ describe Activity do
       end
     end
     
-    context "when arg is a hash" do # Testing all commands
+    # All commands should support this, testing all
+    context "when arg is a hash" do
       describe "#set_primary_type" do
         let(:hsh) { { primary_type: 'biking' } }
         before(:each) do

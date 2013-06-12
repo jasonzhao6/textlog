@@ -4,8 +4,8 @@ describe RulesHelper do
   describe "Attribute helpers" do
     describe "#matcher_arg" do
       context "when matcher arg has no named variable" do
-        let(:arg_before) { '...' }
-        let(:arg_after) { '...' }
+        let(:arg_before) { 'ignore' }
+        let(:arg_after) { 'ignore' }
         let(:matcher) { Rule.create(command: 'match', arg: arg_before) }
         specify { helper.matcher_arg(matcher.arg).should == arg_after }
       end
@@ -27,8 +27,8 @@ describe RulesHelper do
 
     describe "#setter_arg" do
       context "when setter arg is present" do
-        let(:arg_before) { '...' }
-        let(:arg_after) { '...' }
+        let(:arg_before) { 'ignore' }
+        let(:arg_after) { 'ignore' }
         let(:matcher) { Rule.create(command: 'match') }
         let(:setter) { Rule.new(command: 'set_reps',
                                 arg: arg_before,

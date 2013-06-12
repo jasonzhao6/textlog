@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Rule do
   describe "before_filters" do
     describe "#set_cnt_was_last_updated" do
-      subject { Rule.create(command: 'add_duration', arg: '...') }
+      subject { Rule.create(command: 'add_duration', arg: 'ignore') }
       context "cnt was last updated" do
         before(:each) do
           subject.update_attributes(command: 'add_friend')
@@ -23,7 +23,7 @@ describe Rule do
     describe "#arg" do
       context "when rule is a matcher" do
         context "when arg is set" do
-          subject { Rule.new(command: 'match', arg: '...') }
+          subject { Rule.new(command: 'match', arg: 'ignore') }
           before(:each) do
             subject.valid?
           end
