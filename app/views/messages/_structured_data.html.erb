@@ -25,10 +25,10 @@
   </dd>
 
   <dt>Duration:</dt>
-  <dd><%= dash_if_blank(activity.duration) %></dd>
+  <dd><%= dash_if_blank(time_formatter(activity.duration)) %></dd>
 
   <dt>Distance:</dt>
-  <dd><%= dash_if_blank(activity.distance) %></dd>
+  <dd><%= dash_if_blank(distance_formatter(activity.distance)) %></dd>
 
   <dt>Reps:</dt>
   <dd><%= dash_if_blank(activity.reps) %></dd>
