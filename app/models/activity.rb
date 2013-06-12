@@ -66,19 +66,19 @@ class Activity < ActiveRecord::Base
               'set_reps',
               'set_note']
   
-  # eg set_primary_type({ 'primary_type' => 'biking' })
+  # eg set_primary_type({ primary_type: 'biking' })
   def set_primary_type(arg)
     hsh = indifferent_hash(arg)
     self.primary_type = titlecase_str(hsh[:primary_type])
   end
   
-  # eg set_secondary_type({ 'secondary_type' => 'marin headlands' })
+  # eg set_secondary_type({ secondary_type: 'marin headlands' })
   def set_secondary_type(arg)
     hsh = indifferent_hash(arg)
     self.secondary_type = titlecase_str(hsh[:secondary_type])
   end
   
-  # eg add_friend({ 'name' => 'Somebody', 'fb_id' => 'somebody' })
+  # eg add_friend({ name: 'Somebody', fb_id: 'somebody' })
   def add_friend(arg)
     hsh = indifferent_hash(arg)
     friend = Friend.where(fb_id: hsh[:fb_id]).first_or_initialize
@@ -86,8 +86,8 @@ class Activity < ActiveRecord::Base
     self.friends << friend unless self.friends.map(&:fb_id).include?(hsh[:fb_id])
   end
   
-  # eg add_duration({ 'num' => '1', 'unit' => 'hr' })
-  # eg add_duration({ 'num' => '44', 'unit' => 'min' })
+  # eg add_duration({ num: '1', unit: 'hr' })
+  # eg add_duration({ num: '44', unit: 'min' })
   def add_duration(arg)
     hsh = indifferent_hash(arg)
     duration = normalize_duration(hsh[:num], hsh[:unit])
@@ -97,21 +97,21 @@ class Activity < ActiveRecord::Base
     end
   end
   
-  # eg set_distance({ 'num' => '5', 'unit' => 'k' })
-  # eg set_distance({ 'num' => '17.4', 'unit' => 'mi' })
+  # eg set_distance({ num: '5', unit: 'k' })
+  # eg set_distance({ num: '17.4', unit: 'mi' })
   def set_distance(arg)
     hsh = indifferent_hash(arg)
     distance = normalize_distance(hsh[:num], hsh[:unit])
     self.distance = distance if distance
   end
   
-  # eg set_reps({ 'reps' => '10' })
+  # eg set_reps({ reps: '10' })
   def set_reps(arg)
     hsh = indifferent_hash(arg)
     self.reps = hsh[:reps].to_i
   end
   
-  # eg set_note({ 'note' => 'felt engaged' })
+  # eg set_note({ note: 'felt engaged' })
   def set_note(arg)
     hsh = indifferent_hash(arg)
     self.note = capitalize_str(hsh[:note])

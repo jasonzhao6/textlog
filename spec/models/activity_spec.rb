@@ -19,7 +19,7 @@ describe Activity do
     
     context "when arg is a hash string" do # Testing just one command
       describe "#set_primary_type" do
-        let(:str) { "{ 'primary_type' => 'biking' }" }
+        let(:str) { "{ primary_type: 'biking' }" }
         before(:each) do
           subject.set_primary_type(str)
         end
@@ -29,7 +29,7 @@ describe Activity do
     
     context "when arg is a hash" do # Testing all commands
       describe "#set_primary_type" do
-        let(:hsh) { { 'primary_type' => 'biking' } }
+        let(:hsh) { { primary_type: 'biking' } }
         before(:each) do
           subject.set_primary_type(hsh)
         end
@@ -37,7 +37,7 @@ describe Activity do
       end
 
       describe "#set_secondary_type" do
-        let(:hsh) { { 'secondary_type' => 'marin headlands' } }
+        let(:hsh) { { secondary_type: 'marin headlands' } }
         before(:each) do
           subject.set_secondary_type(hsh)
         end
@@ -100,7 +100,7 @@ describe Activity do
       describe "#add_duration" do
         let(:num) { '1' }
         let(:unit) { 'min' }
-        let(:hsh) { { 'num' => num, 'unit' => unit } }
+        let(:hsh) { { num: num, unit: unit } }
         before(:each) do
           subject.add_duration(hsh)
         end
@@ -109,7 +109,7 @@ describe Activity do
         context "when adding additional duration" do
           let(:num2) { '2' }
           let(:unit2) { 'hr' }
-          let(:hsh2) { { 'num' => num2, 'unit' => unit2 } }
+          let(:hsh2) { { num: num2, unit: unit2 } }
           before(:each) do
             subject.add_duration(hsh2)
           end
@@ -121,7 +121,7 @@ describe Activity do
         context "when adding 5k" do
           let(:num) { '5' }
           let(:unit) { 'k' }
-          let(:hsh) { { 'num' => num, 'unit' => unit } }
+          let(:hsh) { { num: num, unit: unit } }
           before(:each) do
             subject.set_distance(hsh)
           end
@@ -130,7 +130,7 @@ describe Activity do
         context "when adding 17.4 mi" do
           let(:num) { '17.4' }
           let(:unit) { 'mi' }
-          let(:hsh) { { 'num' => num, 'unit' => unit } }
+          let(:hsh) { { num: num, unit: unit } }
           before(:each) do
             subject.set_distance(hsh)
           end
@@ -139,7 +139,7 @@ describe Activity do
       end
 
       describe "#set_reps" do
-        let(:hsh) { { 'reps' => '10' } }
+        let(:hsh) { { reps: '10' } }
         before(:each) do
           subject.set_reps(hsh)
         end
@@ -147,7 +147,7 @@ describe Activity do
       end
 
       describe "#set_note" do
-        let(:hsh) { { 'note' => 'felt engaged' } }
+        let(:hsh) { { note: 'felt engaged' } }
         before(:each) do
           subject.set_note(hsh)
         end
