@@ -153,8 +153,8 @@ class Activity < ActiveRecord::Base
     def normalize_duration(num, unit)
       num = num.to_i
       case unit
-      when 'hr' then num.send(:hour)
-      when 'min' then num.send(:minute)
+      when 'hr', 'hrs', 'hour', 'hours' then num.send(:hour)
+      when 'min', 'minute', 'minutes' then num.send(:minute)
       end
     end
     
@@ -162,7 +162,7 @@ class Activity < ActiveRecord::Base
       num = num.to_f
       case unit
       when 'k' then 0.621371 * num # 1 k = 0.621371 mi
-      when 'mi' then num
+      when 'mi', 'mile', 'miles' then num
       end
     end
 end
