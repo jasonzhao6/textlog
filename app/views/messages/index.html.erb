@@ -1,18 +1,22 @@
-<ol>
-  <% @messages.each do |message| %>
-    <li>
-      <p><%= message.message %></p>
-      <div class='actions'>
-        <a class='parse' href='<%= message_path(message.id) %>'>
-          <i class="icon-eye-open"></i>parse</a>
-        <a class='edit' href='<%= edit_message_path(message.id) %>'>
-          <i class="icon-edit"></i>edit</a>
-        <a class='delete' href='<%= message_path(message.id) %>'
-           data-method='delete' data-confirm='Are you sure?' rel='nofollow'>
-           <i class="icon-trash"></i>delete</a>
-      </div>
-    </li>
-  <% end %>
-</ol>
+<% if @messages.present? %>
+  <ol>
+    <% @messages.each do |message| %>
+      <li>
+        <p><%= message.message %></p>
+        <div class='actions'>
+          <a class='parse' href='<%= message_path(message.id) %>'>
+            <i class="icon-eye-open"></i>parse</a>
+          <a class='edit' href='<%= edit_message_path(message.id) %>'>
+            <i class="icon-edit"></i>edit</a>
+          <a class='delete' href='<%= message_path(message.id) %>'
+             data-method='delete' data-confirm='Are you sure?' rel='nofollow'>
+             <i class="icon-trash"></i>delete</a>
+        </div>
+      </li>
+    <% end %>
+  </ol>
+<% else %>
+  <h4>No new message!</h4>
+<% end %>
 
 <%= link_to 'Add new', :new_message, class: 'btn page-bottom' %>

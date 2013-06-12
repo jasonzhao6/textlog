@@ -6,19 +6,8 @@
   =require twitter-bootstrap-static/fontawesome
   */
 
-//
-// h1: User generated heading, primary
-//     eg Ashton San Francisco
-// h2: User generated heading, secondary
-//     eg 301 Executive Park Blvd. San Francisco, CA 94134
-// h3: App section heading, primary,
-//     eg Messages to parse:
-// h4: App section heading, section
-//     eg Please correct the following error:
-//
-h1 {}
-h2 {}
-h3,
+// h1, h2, h3 reserved for user generated content
+// h4 intended for app headings
 h4 {
   margin-top: 0;
 }
