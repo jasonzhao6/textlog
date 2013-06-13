@@ -3,12 +3,10 @@ require 'spec_helper'
 describe Activity do
   describe "presenters" do
     describe ".top_activities" do
-      let(:retval) { [["Biking", nil, "9"], ["Biking", "Butterlap", "3"], ["Biking", "Marin Headlands", "2"], ["Crossfit", nil, "1"]] }
+      let(:retval) { [["Biking", "4"], ["Crossfit", "1"]] }
       before(:each) do
-        4.times { Fabricate(:activity, primary_type: 'Biking') }
-        3.times { Fabricate(:activity, primary_type: 'Biking', secondary_type: 'Butterlap') }
-        2.times { Fabricate(:activity, primary_type: 'Biking', secondary_type: 'Marin Headlands') }
-        1.times { Fabricate(:activity, primary_type: 'Crossfit') }
+        4.times { Fabricate(:activity, activity: 'Biking') }
+        1.times { Fabricate(:activity, activity: 'Crossfit') }
       end
       specify { Activity.top_activities.should == retval }
     end
@@ -17,25 +15,16 @@ describe Activity do
   describe "COMMANDS" do
     subject { Fabricate.build(:activity) }
     
-    # ['set_primary_type', 'set_secondary_type', 'add_friend'] should support
-    # this, testing all
+    # ['set_activity', 'add_friend'] should support this, testing all
     context "when arg is a string" do
-      describe "#set_primary_type" do
+      describe "#set_activity" do
         let(:str) { 'biking' }
         before(:each) do
-          subject.set_primary_type(str)
+          subject.set_activity(str)
         end
-        its(:primary_type) { should == 'Biking' }
+        its(:activity) { should == 'Biking' }
       end
 
-      describe "#set_secondary_type" do
-        let(:str) { 'marin headlands' }
-        before(:each) do
-          subject.set_secondary_type(str)
-        end
-        its(:secondary_type) { should == 'Marin Headlands' }
-      end
-      
       describe "#add_friend" do
         let(:friend) { Fabricate.build(:friend) }
         let(:friend_str) { "#{friend.name},#{friend.fb_id}" }
@@ -55,31 +44,23 @@ describe Activity do
     
     # All commands should support this, testing one
     context "when arg is a hash string" do
-      describe "#set_primary_type" do
-        let(:str) { "{ primary_type: 'biking' }" }
+      describe "#set_activity" do
+        let(:str) { "{ activity: 'biking' }" }
         before(:each) do
-          subject.set_primary_type(str)
+          subject.set_activity(str)
         end
-        its(:primary_type) { should == 'Biking' }
+        its(:activity) { should == 'Biking' }
       end
     end
     
     # All commands should support this, testing all
     context "when arg is a hash" do
-      describe "#set_primary_type" do
-        let(:hsh) { { primary_type: 'biking' } }
+      describe "#set_activity" do
+        let(:hsh) { { activity: 'biking' } }
         before(:each) do
-          subject.set_primary_type(hsh)
+          subject.set_activity(hsh)
         end
-        its(:primary_type) { should == 'Biking' }
-      end
-
-      describe "#set_secondary_type" do
-        let(:hsh) { { secondary_type: 'marin headlands' } }
-        before(:each) do
-          subject.set_secondary_type(hsh)
-        end
-        its(:secondary_type) { should == 'Marin Headlands' }
+        its(:activity) { should == 'Biking' }
       end
 
       describe "#add_friend" do
@@ -185,11 +166,20 @@ describe Activity do
       end
 
       describe "#set_note" do
-        let(:hsh) { { note: 'felt engaged' } }
-        before(:each) do
-          subject.set_note(hsh)
+        context "when note is all lower case" do
+          let(:hsh) { { note: 'felt engaged' } }
+          before(:each) do
+            subject.set_note(hsh)
+          end
+          its(:note) { should == 'Felt engaged' }
         end
-        its(:note) { should == 'Felt engaged' }
+        context "when note is all caps" do
+          let(:hsh) { { note: 'SCCA' } }
+          before(:each) do
+            subject.set_note(hsh)
+          end
+          its(:note) { should == 'SCCA' }
+        end
       end
     end
   end

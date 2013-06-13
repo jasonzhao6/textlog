@@ -14,7 +14,7 @@ describe RulesEngine do
     let(:retval) { rules_engine.execute }
     
     let(:activity) { retval[0] }
-    let(:activity_to_json) { '{"primary_type":"Biking","secondary_type":"Butter Lap","duration":5400,"note":"Felt engaged","reps":null,"distance":17.4,"friends":[{"name":"Mary Ann Jawili","fb_id":"mjawili"},{"name":"Alan Fineberg","fb_id":"fineberg"},{"name":"Scott Levy","fb_id":"ScottBLevy"}]}' }
+    let(:activity_to_json) { '{"activity":"Butterlap","duration":5400,"note":"Felt engaged","reps":null,"distance":17.4,"friends":[{"name":"Mary Ann Jawili","fb_id":"mjawili"},{"name":"Alan Fineberg","fb_id":"fineberg"},{"name":"Scott Levy","fb_id":"ScottBLevy"}]}' }
     specify { activity.to_json.should == activity_to_json }
 
     context "when all but one rule applies" do

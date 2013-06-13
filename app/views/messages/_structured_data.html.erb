@@ -1,14 +1,8 @@
 <dl class='dl-horizontal activity'>
-  <dt>Primary Type:</dt>
+  <dt>Activity:</dt>
   <dd>
-    <%= dash_if_blank(activity.primary_type) %>
-    <% if activity.primary_type_is_new? %><sup>new</sup><% end %>
-  </dd>
-
-  <dt>Secondary Type:</dt>
-  <dd>
-    <%= dash_if_blank(activity.secondary_type) %>
-    <% if activity.secondary_type_is_new? %><sup>new</sup><% end %>
+    <%= dash_if_blank(activity.activity) %>
+    <% if activity.activity_is_new? %><sup>new</sup><% end %>
   </dd>
 
   <dt>Friends:</dt>

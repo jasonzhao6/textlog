@@ -6,20 +6,20 @@
         <span class='icon-bar'></span>
         <span class='icon-bar'></span>
       </a>
-      <%= link_to 'Textlog', :activities, class: 'brand' %>
+      <%= link_to 'Textlog', :root, class: 'brand' %>
       <div class='container-fluid nav-collapse'>
         <ul class='nav'>
-          <li class='<%= 'active' if controller_name == 'activities' %>'>
-            <%= link_to "Activities <sup>(#{Activity.count})</sup>".html_safe,
-                        :activities %>
+          <li class='<%= 'active' if controller_name == 'messages' %>'>
+            <%= link_to "Unparsed Messages <sup>(#{Message.unparsed.count})</sup>".html_safe,
+                        :messages %>
           </li>
           <li class='<%= 'active' if controller_name == 'rules' %>'>
             <%= link_to "Rules <sup>(#{Rule.matchers.count})</sup>".html_safe,
                         :rules %>
           </li>
-          <li class='<%= 'active' if controller_name == 'messages' %>'>
-            <%= link_to "Unparsed Messages <sup>(#{Message.unparsed.count})</sup>".html_safe,
-                        :messages %>
+          <li class='<%= 'active' if controller_name == 'activities' %>'>
+            <%= link_to "Activities <sup>(#{Activity.count})</sup>".html_safe,
+                        :activities %>
           </li>
           <% unless current_user? %>
             <li><%= link_to 'Login', :login %></li>

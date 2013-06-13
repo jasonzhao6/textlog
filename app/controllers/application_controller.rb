@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   # Controller actions
   # 
   def root
-    redirect_to :activities
+    redirect_to :messages
     # TODO landing page with messages via text + rules = activities
     #      how to write rules with/out regex
     #      explain structure of activities

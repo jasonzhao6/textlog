@@ -4,7 +4,7 @@ end
 
 Fabricator(:activity) do
   message
-  primary_type { Faker::Lorem.word }
+  activity { Faker::Lorem.word }
 end
 
 Fabricator(:friend) do

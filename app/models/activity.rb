@@ -4,35 +4,24 @@ class Activity < ActiveRecord::Base
   has_many :friends, through: :companies
   scope :index, -> { includes(:message, :friends)
                     .order('messages.created_at DESC') }
-  validates :primary_type, presence: true
+  validates :activity, presence: true
   validates :message, presence: true
   
   # 
   # Presenters
   # 
-  def primary_type_is_new?
-    self.primary_type.present? &&
-      Activity.find_by_primary_type(self.primary_type).nil?
+  def activity_is_new?
+    self.activity.present? &&
+      Activity.find_by_activity(self.activity).nil?
   end
   
-  def secondary_type_is_new?
-    self.secondary_type.present? &&
-      Activity.find_by_secondary_type(self.secondary_type).nil?
-  end
-
-  # Returns array of [primary_type, secondary_type, count]
-  # eg [["Biking", "Butterlap", "3"], ["Biking", "Marin Headland", "1"]]
+  # Returns array of [activity, count]
+  # eg [["Biking", "3"], ["Climbing", "1"]]
   def self.top_activities
-    top_activities = self.group(:primary_type)
-                         .order('SUM(1) DESC LIMIT 5')
-                         .sum(1)
-                         .map { |primary_type, count| [primary_type, nil, count] }
-    top_activities += self.where('secondary_type IS NOT NULL')
-                          .group(:primary_type, :secondary_type)
-                          .order('SUM(1) DESC LIMIT 5')
-                          .sum(1)
-                          .map { |result| result.flatten }
-    top_activities.uniq.sort_by(&:last).reverse.first(5)
+    self.group(:activity)
+        .order('SUM(1) DESC LIMIT 5')
+        .sum(1)
+        .map { |result| result.flatten }
   end
 
   # Returns array of [id, name, count]
@@ -58,26 +47,18 @@ class Activity < ActiveRecord::Base
   # 
   # Commands that can be called on activity models
   # 
-  COMMANDS = ['set_primary_type',
-              'set_secondary_type',
+  COMMANDS = ['set_activity',
               'add_friend',
               'add_duration',
               'set_distance',
               'set_reps',
               'set_note']
   
-  # eg set_primary_type('biking')
-  # eg set_primary_type({ primary_type: 'biking' })
-  def set_primary_type(arg)
+  # eg set_activity('biking')
+  # eg set_activity({ activity: 'biking' })
+  def set_activity(arg)
     hsh = indifferent_hash(arg)
-    self.primary_type = titlecase_str(hsh[:primary_type] || arg)
-  end
-  
-  # eg set_secondary_type('marin headlands')
-  # eg set_secondary_type({ secondary_type: 'marin headlands' })
-  def set_secondary_type(arg)
-    hsh = indifferent_hash(arg)
-    self.secondary_type = titlecase_str(hsh[:secondary_type] || arg)
+    self.activity = titlecase_str(hsh[:activity] || arg)
   end
   
   # eg add_friend('Lance Armstrong, lancearmstrong')
@@ -143,7 +124,11 @@ class Activity < ActiveRecord::Base
     end
     
     def capitalize_str(str)
-      str.strip.capitalize if str.present?
+      if str.present?
+        str.strip!
+        str[0] = str[0].capitalize
+        str
+      end
     end
   
     def titlecase_str(str)

@@ -1,15 +1,8 @@
 <dl class='dl-horizontal activity'>
-  <% if activity.primary_type.present? %>
-    <dt>Primary Type:</dt>
+  <% if activity.activity.present? %>
+    <dt>Activity:</dt>
     <dd>
-      <%= link_to activity.primary_type, primary_type_href(activity.primary_type) %>
-    </dd>
-  <% end %>
-  
-  <% if activity.secondary_type.present? %>
-    <dt>Secondary Type:</dt>
-    <dd>
-      <%= link_to activity.secondary_type, secondary_type_href(activity) %>
+      <%= link_to activity.activity, activity_href(activity.activity) %>
     </dd>
   <% end %>
   

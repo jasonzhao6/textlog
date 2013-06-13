@@ -16,11 +16,8 @@ class ActivitiesController < ApplicationController
     @top_friends = Activity.top_friends
     
     # Main
-    @activities = if params[:primary_type].present? && params[:secondary_type].present?
-                    Activity.index.where(primary_type: params[:primary_type],
-                                         secondary_type: params[:secondary_type])
-                  elsif params[:primary_type].present?
-                    Activity.index.where(primary_type: params[:primary_type])
+    @activities = if params[:activity].present?
+                    Activity.index.where(activity: params[:activity])
                   elsif params[:friend].present?
                     Friend.find_by_name(params[:friend]).activities.index
                   else
