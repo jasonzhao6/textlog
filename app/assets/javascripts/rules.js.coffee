@@ -3,10 +3,11 @@
 $ ->
   $html.on('change', '.rules-controller #sort-by', changeSortBy)
   
+  $html.on('keyup', '.rules-controller #rule_arg', detectSetter)
   $html.on('click', '.rules-controller .new', appendFieldset)
   $html.on('click', '.rules-controller .delete', removeFieldset)
   $html.on('change', '.rules-controller #setters select', updatePlaceholder)
-  $html.on('submit', '.rules-controller form#rule', validateRuleForm)
+  $html.on('submit', '.rules-controller form#rule', validateForm)
   
 # 
 # Sidebar
@@ -20,6 +21,26 @@ changeSortBy = (e) ->
 # 
 # New/edit forms
 # 
+activityRegex = /\?<activity>/
+durationRegex = /\?<duration>.*\?<unit>/
+distanceRegex = /\?<distance>.*\?<unit>/
+repsRegex = /\?<reps>/
+noteRegex = /\?<note>/
+detectSetter = ->
+  $firstSetter = $('#setters select').first()
+  if $firstSetter.val() == ''
+    matcher = $(this).val()
+    if activityRegex.test(matcher)
+      $firstSetter.val('set_activity')
+    else if durationRegex.test(matcher)
+      $firstSetter.val('add_duration')
+    else if distanceRegex.test(matcher)
+      $firstSetter.val('set_distance')
+    else if repsRegex.test(matcher)
+      $firstSetter.val('set_reps')
+    else if noteRegex.test(matcher)
+      $firstSetter.val('set_note')
+
 appendFieldset = (e) ->
   e.preventDefault()
   $('#setters').append($('#fieldset-factory').html())
@@ -33,7 +54,7 @@ updatePlaceholder = ->
   $input = $select.closest('fieldset').find('input')
   $input.attr('placeholder', SETTER_PLACEHOLDERS[$select.val()])
 
-validateRuleForm = ->
+validateForm = ->
   if $('#rule_arg').val().trim().length == 0
     #  TODO show bootstrap_flash and active record like errors thru js
     alert("Regex can't be blank")

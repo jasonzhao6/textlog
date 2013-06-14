@@ -117,18 +117,18 @@ describe Activity do
       end
 
       describe "#add_duration" do
-        let(:num) { '1' }
+        let(:duration) { '1' }
         let(:unit) { 'min' }
-        let(:hsh) { { num: num, unit: unit } }
+        let(:hsh) { { duration: duration, unit: unit } }
         before(:each) do
           subject.add_duration(hsh)
         end
         its(:duration) { should == 60 }
 
         context "when adding additional duration" do
-          let(:num2) { '2' }
+          let(:duration2) { '2' }
           let(:unit2) { 'hr' }
-          let(:hsh2) { { num: num2, unit: unit2 } }
+          let(:hsh2) { { duration: duration2, unit: unit2 } }
           before(:each) do
             subject.add_duration(hsh2)
           end
@@ -138,18 +138,18 @@ describe Activity do
 
       describe "#set_distance" do
         context "when adding 5k" do
-          let(:num) { '5' }
+          let(:distance) { '5' }
           let(:unit) { 'k' }
-          let(:hsh) { { num: num, unit: unit } }
+          let(:hsh) { { distance: distance, unit: unit } }
           before(:each) do
             subject.set_distance(hsh)
           end
           its(:distance) { should == 3.106855 }
         end
         context "when adding 17.4 mi" do
-          let(:num) { '17.4' }
+          let(:distance) { '17.4' }
           let(:unit) { 'mi' }
-          let(:hsh) { { num: num, unit: unit } }
+          let(:hsh) { { distance: distance, unit: unit } }
           before(:each) do
             subject.set_distance(hsh)
           end

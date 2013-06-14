@@ -76,22 +76,22 @@ class Activity < ActiveRecord::Base
     self.friends << friend unless self.friends.map(&:fb_id).include?(hsh[:fb_id])
   end
   
-  # eg add_duration({ num: '1', unit: 'hr' })
-  # eg add_duration({ num: '44', unit: 'min' })
+  # eg add_duration({ duration: '1', unit: 'hr' })
+  # eg add_duration({ duration: '44', unit: 'min' })
   def add_duration(arg)
     hsh = indifferent_hash(arg)
-    duration = normalize_duration(hsh[:num], hsh[:unit])
+    duration = normalize_duration(hsh[:duration], hsh[:unit])
     if duration
       self.duration ||= 0
       self.duration += duration
     end
   end
   
-  # eg set_distance({ num: '5', unit: 'k' })
-  # eg set_distance({ num: '17.4', unit: 'mi' })
+  # eg set_distance({ distance: '5', unit: 'k' })
+  # eg set_distance({ distance: '17.4', unit: 'mi' })
   def set_distance(arg)
     hsh = indifferent_hash(arg)
-    distance = normalize_distance(hsh[:num], hsh[:unit])
+    distance = normalize_distance(hsh[:distance], hsh[:unit])
     self.distance = distance if distance
   end
   
@@ -135,19 +135,19 @@ class Activity < ActiveRecord::Base
       str.strip.titlecase if str.present?
     end
   
-    def normalize_duration(num, unit)
-      num = num.to_i
+    def normalize_duration(duration, unit)
+      duration = duration.to_i
       case unit
-      when 'hr', 'hrs', 'hour', 'hours' then num.send(:hour)
-      when 'min', 'minute', 'minutes' then num.send(:minute)
+      when 'hr', 'hrs', 'hour', 'hours' then duration.send(:hour)
+      when 'min', 'minute', 'minutes' then duration.send(:minute)
       end
     end
     
-    def normalize_distance(num, unit)
-      num = num.to_f
+    def normalize_distance(distance, unit)
+      distance = distance.to_f
       case unit
-      when 'k' then 0.621371 * num # 1 k = 0.621371 mi
-      when 'mi', 'mile', 'miles' then num
+      when 'k' then 0.621371 * distance # 1 k = 0.621371 mi
+      when 'mi', 'mile', 'miles' then distance
       end
     end
 end
