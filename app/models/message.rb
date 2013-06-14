@@ -14,6 +14,8 @@ class Message < ActiveRecord::Base
   COMMANDS = ['match']
   
   def match(pattern)
-    self.message.match(/#{pattern}/i) if pattern
+    # This line raises an error when 'pattern' is not valid regex. When that
+    # happens, rescue nil and act as if there was no match.
+    self.message.match(/#{pattern}/i) if pattern rescue nil
   end
 end
