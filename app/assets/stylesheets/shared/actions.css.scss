@@ -3,7 +3,8 @@
   .parse,
   .edit,
   .delete,
-  .new {
+  .new,
+  .clickoff {
     opacity: .7;
     padding-left: 5px;
     i {
@@ -11,5 +12,10 @@
       text-decoration: none;
       width: 1.25em;
     }
+  }
+
+  .clickoff {
+    font-size: 12px;
+    font-style: italic;
   }
 }

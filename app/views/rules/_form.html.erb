@@ -9,6 +9,11 @@
                  Message::COMMANDS,
                  {},
                  { class: 'input-medium' } %>
+    <div class='actions pull-right'>
+      <a class='clickoff muted' href='http://rubular.com/' target='_blank'>
+        <i class='icon-share-alt'></i>Regex help
+      </a>
+    </div>
   </div>
   <div class='row-fluid'>
     <%= f.text_field :arg, class: 'span12', placeholder: 'case-insensitive regex' %>
@@ -23,7 +28,7 @@
     <% end %>
   </div>
   
-  <div class='row-fluid new-row'>
+  <div class='row-fluid'>
     <div class='actions offset1'>
       <a class='new' href='#'>
         <i class='icon-plus'></i>new setter

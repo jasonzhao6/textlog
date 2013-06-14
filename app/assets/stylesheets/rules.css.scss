@@ -4,13 +4,14 @@
 .rules-controller.create-action,
 .rules-controller.edit-action,
 .rules-controller.update-action {
-  .actions {
-    line-height: 30px;
-    vertical-align: top;
-  }
-  
-  .new-row {
-    margin-top: -6px;
+  #setters {
+    .actions {
+      line-height: 30px;
+      vertical-align: top;
+    }
+    + div {
+      margin: -1px 0 5px;
+    }
   }
   
   #fieldset-factory {

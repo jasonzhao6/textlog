@@ -16,3 +16,7 @@
 .page-bottom {
   margin-bottom: 30px;
 }
+
+.position-relative {
+  position: relative;
+}
