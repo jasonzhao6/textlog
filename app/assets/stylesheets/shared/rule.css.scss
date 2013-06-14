@@ -11,6 +11,17 @@ dl.rule {
   dd {
     padding-left: 16px;
   }
+  .label,
+  .matcher-icon,
+  .setter-icon {
+    opacity: .9;
+  }
+  .matcher-icon {
+    color: #3a87ad;
+  }
+  .setter-icon {
+    color: #468847;
+  }
   code {
     white-space: normal;
     em {
