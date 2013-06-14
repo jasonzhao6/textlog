@@ -1,11 +1,11 @@
 SETTER_PLACEHOLDERS = { 
-  set_activity: "{ activity: 'Biking' }",
-  add_friend: "{ name: 'Lance Armstrong', fb_id: 'lancearmstrong' }",
-  add_duration: "{ duration: '54', unit: 'min' }",
-  set_distance: "{ distance: '17.4', 'unit: 'mi' }",
-  set_reps: "{ reps: '12' }",
-  set_note: "{ note: 'Felt engaged' }",
-  nil => "string, hash, or leave blank for regex match data",
+  set_activity: '{ activity: <activity> }',
+  add_friend: '{ name: <name>, fb_id: <fb_id> }',
+  add_duration: '{ duration: <duration>, unit: <unit> }',
+  set_distance: '{ distance: <distance>, unit: <unit> }',
+  set_reps: '{ reps: <reps> }',
+  set_note: '{ note: <note> }',
+  nil => 'string, hash, or leave blank for regex match data',
 }.with_indifferent_access
 
 SETTER_ICONS = {
