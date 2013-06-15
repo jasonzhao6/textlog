@@ -11,8 +11,13 @@
     <% if @top_friends.present? %>
       <li class='nav-header'>Top activity partners</li>
       <% @top_friends.each do |friend| %>
-        <li><%= link_to top_friend_text(*friend),
-                        top_friend_href(*friend) %></li>
+        <li>
+          <a href='<%= top_friend_href(*friend) %>'>
+            <%= image_tag profile_pic(*friend), alt: top_friend_name(*friend),
+                                                class: 'profile-pic' %>
+            <%= top_friend_text(*friend) %>
+          </a>
+        </li>
       <% end %>
     <% end %>
   </ul>

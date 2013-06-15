@@ -8,9 +8,13 @@
   
   <% if activity.friends.present? %>
     <dt>Friends:</dt>
-    <dd>
+    <dd class='friends'>
       <% activity.friends.each do |friend| %>
-        <%= link_to friend.name, friend_href(friend.name) %>
+        <a href='<%= friend_href(friend.name) %>'>
+          <%= image_tag profile_pic(friend.fb_id), alt: friend.name,
+                                                   class: 'profile-pic' %>
+          <span><%= friend.name %></span>
+        </a>
         <% unless friend == activity.friends.last %>,<% end %>
       <% end %>
     </dd>
