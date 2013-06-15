@@ -1,15 +1,4 @@
 /* Elements are ordered as they appear on web page */
 
 .activities-controller.index-action {
-  .activity .friend {
-    // Both profile pic and name are wrapped in <a> tag, which causes whitespace
-    // between profile pic and name to be underlined on hover. We want just the
-    // name underlined on hover.
-    a:hover {
-      text-decoration: none;
-      span {
-        text-decoration: underline;
-      }
-    }
-  }
 }

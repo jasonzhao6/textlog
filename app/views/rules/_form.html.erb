@@ -1,52 +1,68 @@
-<%= form_for rule, html: { id: 'rule', class: 'docs docs-small span6' } do |f| %>
-  <% if params[:redirect_path] %>
-    <input type='hidden' name='redirect_path' value='<%= params[:redirect_path] %>' />
-  <% end %>
-
-  <!-- Matcher -->
+<!-- Message to write rule against if it exists -->
+<% if @message %>
   <div class='row-fluid'>
-    <%= f.select :command,
-                 Message::COMMANDS,
-                 {},
-                 { class: 'input-medium' } %>
-    <div class='actions pull-right'>
-      <a class='clickoff muted' href='http://rubular.com/' target='_blank'>
-        <i class='icon-share-alt'></i>Regex help
-      </a>
+    <div class='span6'>
+      <%= render 'messages/message_well', message: @message %>
     </div>
-  </div>
-  <div class='row-fluid'>
-    <%= f.text_field :arg, class: 'span12', placeholder: 'case-insensitive regex' %>
-  </div>
-  
-  <!-- Setters -->
-  <div id='setters'>
-    <% if rule.new_record? %>
-      <%= render 'fieldset', setter: rule %>
-    <% else %>
-      <%= render partial: 'fieldset', collection: rule.setters, as: :setter %>
-    <% end %>
-  </div>
-  
-  <div class='row-fluid'>
-    <div class='actions offset1'>
-      <a class='new' href='#'>
-        <i class='icon-plus'></i>new setter
-      </a>
-    </div>
-  </div>
-  
-  <%= render 'shared/form_errors', model: rule %>
-  
-  <div class='row-fluid'>
-    <%= f.submit class: 'btn btn-primary span12' %>
-  </div>
-  
-  <div class='row-fluid'>
-    <%= link_to 'Cancel', @redirect_path, class: 'cancel' %>
   </div>
 <% end %>
+
+<div class='row-fluid'>
+  <%= form_for rule, html: { id: 'rule', class: 'docs docs-small span6' } do |f| %>
+    <!-- Hidden redirect_path -->
+    <% if params[:redirect_path] %>
+      <input type='hidden' name='redirect_path' value='<%= params[:redirect_path] %>' />
+    <% end %>
+
+    <!-- Matcher -->
+    <div class='row-fluid'>
+      <%= f.select :command,
+                   Message::COMMANDS,
+                   {},
+                   { class: 'input-medium' } %>
+      <div class='glyphicon-plus-action pull-right'>
+        <a class='clickoff muted' href='http://rubular.com/' target='_blank'>
+          <i class='icon-share-alt'></i>regex help</a>
+      </div>
+    </div>
+    <div class='row-fluid'>
+      <%= f.text_field :arg, class: 'span12', placeholder: 'case-insensitive regex' %>
+    </div>
   
-<div id='fieldset-factory'>
-  <%= render 'fieldset', setter: Rule.new %>
+    <!-- Setters -->
+    <div id='setters'>
+      <% if rule.new_record? %>
+        <%= render 'fieldset', setter: rule %>
+      <% else %>
+        <%= render partial: 'fieldset', collection: rule.setters, as: :setter %>
+      <% end %>
+    </div>
+  
+    <!-- New setter link -->
+    <div class='row-fluid'>
+      <div class='glyphicon-plus-action offset1'>
+        <a class='new' href='#'>
+          <i class='icon-plus'></i>new setter
+        </a>
+      </div>
+    </div>
+  
+    <!-- Form errors -->
+    <%= render 'shared/form_errors', model: rule %>
+  
+    <!-- Submit button -->
+    <div class='row-fluid'>
+      <%= f.submit class: 'btn btn-primary span12' %>
+    </div>
+  
+    <!-- Cancel link -->
+    <div class='row-fluid'>
+      <%= link_to 'Cancel', @redirect_path, class: 'cancel' %>
+    </div>
+  <% end %>
+
+  <!-- Hidden fieldset factory   -->
+  <div id='fieldset-factory'>
+    <%= render 'fieldset', setter: Rule.new %>
+  </div>
 </div>

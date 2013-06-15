@@ -14,8 +14,9 @@ class ApplicationController < ActionController::Base
     # TODO landing page with messages via text + rules = activities
     #      how to write rules with/out regex
     #      explain structure of activities
-    # maybe recommend typing 'bik' instead of 'biking|biked'
-    #             and typing 'butter' insead of 'butterlap|butter lap'
+    #        maybe recommend typing 'bik' instead of 'biking|biked'
+    #        and typing 'butter' insead of 'butterlap|butter lap'
+    #      collect email of interest
   end
 
   # 

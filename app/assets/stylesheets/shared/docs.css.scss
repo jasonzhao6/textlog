@@ -4,11 +4,11 @@
           border-radius: 4px;
   background-color: #fff;
   border: 1px solid #ddd;
-  margin-bottom: 20px;
-  padding: 32px 20px 8px;
+  margin-bottom: 19px;
+  padding: 32px 20px 7px;
   position: relative;
   
-  .docs-header {
+  header {
     left: -1px;
     position: absolute;
     top: -1px;
@@ -26,21 +26,13 @@
       padding: 3px 7px;
     }
     
-    .actions {
+    .glyphicon-plus-action {
       line-height: 29px;
       vertical-align: top;
     }
   }
-  
-  .well {
-    margin: 15px 0;
-  }
-  
-  .activity {
-    margin-bottom: 10px;
-  }
 }
 
 .docs-small {
-  padding: 14px 10px 2px;
+  padding: 15px 10px 2px;
 }

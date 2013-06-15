@@ -5,7 +5,7 @@
 .rules-controller.edit-action,
 .rules-controller.update-action {
   #setters {
-    .actions {
+    .glyphicon-plus-action {
       line-height: 30px;
       vertical-align: top;
     }
@@ -41,8 +41,8 @@
 /* Portrait phones and down */
 @media (max-width: 320px) {
   .rules-controller.index-action {
-    .actions {
-      /* Hide icons or else actions won't fit in docs-header */
+    .glyphicon-plus-action {
+      /* Hide icons or else actions won't fit in docs header */
       /* http://s23.postimg.org/f8j1bqryj/Screen_Shot_2013_06_03_at_8_16_25_PM.png */
       i {
         display: none;

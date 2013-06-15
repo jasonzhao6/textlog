@@ -15,11 +15,11 @@
   <% end %>
 
   <% @activities.each do |activity| %>
-    <div class='docs'>
-      <div class='docs-header'>
+    <div class='docs docs-activity'>
+      <header>
         <h4><%= "Logged #{time_ago(activity.message.updated_at)} ago" %></h4>
-      </div>
-      <%= render 'messages/message', message: activity.message %>
+      </header>
+      <%= render 'messages/message_well', message: activity.message %>
       <%= render 'structured_data', activity: activity %>
     </div>
   <% end %>

@@ -1,6 +1,8 @@
-dl.rule {
-  margin: 0;
-  white-space: nowrap;
+.docs.docs-rule {
+  dl {
+    margin: 0;
+    white-space: nowrap;
+  }
   dt,
   dd {
     margin: 6px 0;
@@ -11,6 +13,7 @@ dl.rule {
   dd {
     padding-left: 16px;
   }
+  
   .label,
   .matcher-icon,
   .setter-icon {
@@ -22,6 +25,7 @@ dl.rule {
   .setter-icon {
     color: #468847;
   }
+  
   code {
     white-space: normal;
     em {

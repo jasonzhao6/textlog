@@ -1,7 +1,7 @@
-<div class='docs'>
-  <div class='docs-header'>
+<div class='docs docs-rule'>
+  <header>
     <h4><%= rule_heading(matcher) %></h4>
-    <div class='actions'>
+    <div class='glyphicon-plus-action'>
       <a class='edit'
          href='<%= edit_rule_path(matcher.id, redirect_path: @redirect_path) %>'>
         <i class='icon-edit'></i>edit</a>
@@ -10,9 +10,9 @@
          data-method='delete' data-confirm='Are you sure?' rel='nofollow'>
          <i class='icon-trash'></i>delete</a>
     </div>
-  </div>
+  </header>
   
-  <dl class='rule'>
+  <dl>
     <dt>
       <span class='label label-info hidden-phone'><%= matcher.command %></span>
       <span><i class='matcher-icon icon-filter visible-phone'></i></span>
@@ -21,9 +21,8 @@
     <% matcher.setters.each do |setter| %>
       <dd>
         <span class='label label-success hidden-phone'><%= setter.command %></span>
-        <span>
-          <i class='setter-icon icon-<%= SETTER_ICONS[setter.command] %> visible-phone'></i>
-        </span>
+        <span><i class='setter-icon icon-<%= SETTER_ICONS[setter.command] %>
+                        visible-phone'></i></span>
         <code class='alert-success'><%= setter_arg(setter.arg, matcher.arg) %></code> 
       </dd>
     <% end %>

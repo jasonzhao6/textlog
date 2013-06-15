@@ -1,4 +1,4 @@
-<dl class='dl-horizontal activity'>
+<dl class='dl-horizontal structured-data'>
   <% if activity.activity.present? %>
     <dt>Activity:</dt>
     <dd>
@@ -10,7 +10,7 @@
     <dt>Friends:</dt>
     <dd>
       <% activity.friends.each_with_index do |friend, i| %>
-        <span class='friend'>
+        <span class='picture-plus-name'>
           <a href='<%= friend_href(friend.fb_id) %>'>
             <%= image_tag profile_pic(friend.fb_id), alt: friend.name %>
             <span><%= friend.name %></span>

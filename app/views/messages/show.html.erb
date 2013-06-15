@@ -1,8 +1,8 @@
-<div><!-- Without this div, 'bootstrap_flash' will break the layout -->
+<div class='row-fluid'>
   <div class='message-container span6'>
-    <div class='docs'>
-      <div class='docs-header'><h4>Parse preview</h4></div>
-      <%= render 'messages/message', message: @message %>
+    <div class='docs docs-activity'>
+      <header><h4>Parse preview</h4></header>
+      <%= render 'messages/message_well', message: @message %>
       <%= render 'structured_data', activity: @activity %>
     </div>
 
@@ -18,9 +18,11 @@
 
   <div class='rules-container span6 well hidden-phone'>
     <h4>Applicable rules</h4>
-    <%= render partial: 'rules/rule',
+    <%= render partial: 'rules/rule_docs',
                collection: @applicable_matchers,
                as: :matcher %>
-    <%= link_to 'Add new', new_rule_path(redirect_path: @redirect_path), class: 'btn' %>
+    <%= link_to 'Add new', new_rule_path(message_id: @message.id,
+                                         redirect_path: @redirect_path),
+                           class: 'btn' %>
   </div>
 </div>

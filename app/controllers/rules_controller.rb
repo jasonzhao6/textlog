@@ -45,6 +45,7 @@ class RulesController < ApplicationController
   
   def new
     @rule = Rule.new
+    @message = Message.find(params[:message_id]) if params[:message_id]
   end
   
   def update

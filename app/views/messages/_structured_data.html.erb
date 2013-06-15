@@ -1,4 +1,4 @@
-<dl class='dl-horizontal activity'>
+<dl class='dl-horizontal structured-data'>
   <dt>Activity:</dt>
   <dd>
     <%= dash_if_blank(activity.activity) %>
@@ -11,7 +11,7 @@
       <%= dash_if_blank(@friends) %>
     <% else %>
       <% activity.friends.sort_by(&:name).each_with_index do |friend, i| %>
-        <span class='friend'>
+        <span class='picture-plus-name'>
           <%= image_tag profile_pic(friend.fb_id), alt: friend.name %>
           <%= friend.name %>
           <% if friend.new_record? %><sup>new</sup><% end %>

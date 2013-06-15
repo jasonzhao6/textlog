@@ -10,7 +10,7 @@
     </ul>
   <% end %>
 
-  <%= render partial: 'rule', collection: @rules, as: :matcher %>
+  <%= render partial: 'rule_docs', collection: @rules, as: :matcher %>
 <% elsif params[:command].present? %>
   <h4>No match.</h4>
 <% else %>
