@@ -5,7 +5,7 @@ class Activity < ActiveRecord::Base
   has_many :companies
   has_many :friends, through: :companies
   scope :index, -> { includes(:message, :friends)
-                    .order('messages.created_at DESC') }
+                    .order('messages.created_at DESC, friends.name') }
   validates :activity, presence: true
   validates :message, presence: true
   
