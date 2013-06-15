@@ -71,7 +71,7 @@ class Activity < ActiveRecord::Base
   def add_friend(arg)
     hsh = indifferent_hash(arg)
     
-    # In case arg is a plain string shorthand for 'name, fb_id'
+    # In case arg is a plain string in the form of 'name, fb_id'
     if arg =~ FRIEND_STR_SYNTAX
       name, fb_id = arg.split(',').map(&:strip)
       hsh[:fb_id] ||= fb_id
@@ -79,7 +79,13 @@ class Activity < ActiveRecord::Base
     end
     
     friend = Friend.where(fb_id: hsh[:fb_id]).first_or_initialize
-    friend.name = hsh[:name] # In case friend's name has been updated
+    friend.name = hsh[:name]
+    
+    # In case an exsiting friend's name has been updated
+    if !friend.new_record? && friend.name_changed?
+      friend.save
+    end
+    
     self.friends << friend unless self.friends.map(&:fb_id).include?(hsh[:fb_id])
   end
   

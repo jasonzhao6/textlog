@@ -11,7 +11,8 @@
       <%= dash_if_blank(@friends) %>
     <% else %>
       <% activity.friends.each do |friend| %>
-        <%= image_tag profile_pic(friend.fb_id), alt: friend.name %>
+        <%= image_tag profile_pic(friend.fb_id), alt: friend.name,
+                                                 class: 'profile-pic' %>
         <%= friend.name %>
         <% if friend.new_record? %><sup>new</sup><% end %>
         <% unless friend == activity.friends.last %>,<% end %>

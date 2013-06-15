@@ -68,14 +68,26 @@ describe Activity do
         let(:friend_hsh) { { name: friend.name, fb_id: friend.fb_id } }
         let(:friend2) { Fabricate.build(:friend) }
         let(:friend2_hsh) { { name: friend2.name, fb_id: friend2.fb_id } }
+        let(:different_name_hsh) { { name: 'different name' } }
         before(:each) do
           subject.add_friend(friend_hsh)
         end
         its('friends.length') { should == 1 }
         its('friends.first.name') { should == friend.name }
         its('friends.first.fb_id') { should == friend.fb_id }
-        specify { Company.count.should == 0 }
-        specify { Friend.count.should == 0 }
+        
+        context "before save" do
+          specify { Company.count.should == 0 }
+          specify { Friend.count.should == 0 }
+        end
+
+        context "after save" do
+          before(:each) do
+            subject.save
+          end
+          specify { Company.count.should == 1 }
+          specify { Friend.count.should == 1 }
+        end
 
         context "when adding the same friend again" do
           before(:each) do
@@ -84,8 +96,11 @@ describe Activity do
           its('friends.length') { should == 1 }
           its('friends.first.name') { should == friend.name }
           its('friends.first.fb_id') { should == friend.fb_id }
-          specify { Company.count.should == 0 }
-          specify { Friend.count.should == 0 }
+
+          context "before save" do
+            specify { Company.count.should == 0 }
+            specify { Friend.count.should == 0 }
+          end
 
           context "after save" do
             before(:each) do
@@ -103,8 +118,11 @@ describe Activity do
           its('friends.length') { should == 2 }
           its('friends.last.name') { should == friend2.name }
           its('friends.last.fb_id') { should == friend2.fb_id }
-          specify { Company.count.should == 0 }
-          specify { Friend.count.should == 0 }
+
+          context "before save" do
+            specify { Company.count.should == 0 }
+            specify { Friend.count.should == 0 }
+          end
 
           context "after save" do
             before(:each) do
@@ -113,6 +131,18 @@ describe Activity do
             specify { Company.count.should == 2 }
             specify { Friend.count.should == 2 }
           end
+        end
+
+        context "when updating an existing friend's name" do
+          before(:each) do
+            subject.save # Existing friend should have already been saved
+            subject.add_friend(friend_hsh.merge(different_name_hsh))
+          end
+          its('friends.length') { should == 1 }
+          its('friends.first.reload.name') { should == different_name_hsh[:name] }
+          its('friends.first.fb_id') { should == friend.fb_id }
+          specify { Company.count.should == 1 }
+          specify { Friend.count.should == 1 }
         end
       end
 
