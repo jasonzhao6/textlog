@@ -3,7 +3,9 @@
     <li class='nav-header'>Sort by</li>
     <li>
       <form action='<%= rules_path %>' method='get'>
-        <%= hidden_field_tag :command, params[:command] %>
+        <% if params[:command].present? %>
+          <%= hidden_field_tag :command, params[:command] %>
+        <% end %>
         <%= select_tag 'sort-by',
                        options_for_select(sort_by_options, params['sort-by']) %>
       </form>

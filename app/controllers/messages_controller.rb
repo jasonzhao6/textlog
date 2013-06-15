@@ -43,7 +43,7 @@ class MessagesController < ApplicationController
     # them now and have user correct them by editing rules.
     @activity.valid?
 
-    # When a user clicks off to edit or add rules, instruct the rules controller
+    # When a user clicks off to edit or add a rule, instruct rules controller
     # to return user back to this page.
     @redirect_path = message_path(@message)
   end

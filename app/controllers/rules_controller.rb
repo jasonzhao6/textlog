@@ -33,10 +33,14 @@ class RulesController < ApplicationController
              else
                Rule.matchers
              end
-             
     if params['sort-by'] == 'most-frequently-used'
       @rules = @rules.order('rules.cnt DESC')
     end
+
+    # When a user clicks off to edit a rule, instruct edit form to preserve
+    # filter/sort params when redirecting user back.
+    @redirect_path = rules_path(command: params[:command],
+                                'sort-by' => params['sort-by'])
   end
   
   def new

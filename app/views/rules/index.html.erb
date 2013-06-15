@@ -1,16 +1,18 @@
-<% if @rules.present? %>
-  <% content_for :sidebar do %>
-    <%= render 'sidebar' %>
-  <% end %>
+<% content_for :sidebar do %>
+  <%= render 'sidebar' %>
+<% end %>
 
+<% if @rules.present? %>
   <% if params[:command].present? %>
     <ul class='breadcrumb'>
-      <li><%= link_to 'All', :rules %> <span class='divider'>/</span></li>
+      <li><%= link_to 'All', rules_path('sort-by' => params['sort-by']) %> <span class='divider'>/</span></li>
       <li class='active'><%= params[:command] %></li>
     </ul>
   <% end %>
 
   <%= render partial: 'rule', collection: @rules, as: :matcher %>
+<% elsif params[:command].present? %>
+  <h4>No match.</h4>
 <% else %>
   <h4>No rule yet.</h4>
 <% end %>
