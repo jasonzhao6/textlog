@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe RulesHelper do
-  describe "Attribute helpers" do
+  describe "attribute helpers" do
     describe "#matcher_arg" do
       context "when matcher arg has no named variable" do
         let(:arg_before) { 'ignore' }

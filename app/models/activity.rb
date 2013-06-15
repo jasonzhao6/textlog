@@ -1,3 +1,5 @@
+require 'yaml'
+
 class Activity < ActiveRecord::Base
   belongs_to :message
   has_many :companies
@@ -15,8 +17,8 @@ class Activity < ActiveRecord::Base
       Activity.find_by_activity(self.activity).nil?
   end
   
-  # Returns array of [activity, count]
-  # eg [["Biking", "3"], ["Climbing", "1"]]
+  # Returns an array of [activity, count] pairs
+  # eg [['Biking', '3'], ['Climbing', '1']]
   def self.top_activities
     self.group(:activity)
         .order('SUM(1) DESC LIMIT 5')
@@ -24,8 +26,8 @@ class Activity < ActiveRecord::Base
         .map { |result| result.flatten }
   end
 
-  # Returns array of [id, name, count]
-  # eg [[1, "Mary Ann Jawili", "3"], [5, "Takashi Mizohata", "2"]]
+  # Returns an array of [id, name, count] triplets
+  # eg [[1, 'Mary Ann Jawili', '3'], [5, 'Takashi Mizohata', '2']]
   def self.top_friends
     self.includes(:friends)
         .where('friend_id IS NOT NULL')
@@ -54,30 +56,35 @@ class Activity < ActiveRecord::Base
               'set_reps',
               'set_note']
   
-  # eg set_activity('biking')
+  # Takes hashes, string representation of hashes, and plain strings
   # eg set_activity({ activity: 'biking' })
+  # eg set_activity('biking')
   def set_activity(arg)
     hsh = indifferent_hash(arg)
     self.activity = titlecase_str(hsh[:activity] || arg)
   end
   
-  # eg add_friend('Lance Armstrong, lancearmstrong')
+  # Takes hashes, string representation of hashes, and plain strings
   # eg add_friend({ name: 'Lance Armstrong', fb_id: 'lancearmstrong' })
-  HASH_SYNTAX = /[{:=>}]/
+  # eg add_friend('Lance Armstrong, lancearmstrong')
+  FRIEND_STR_SYNTAX = /^[^{:=>}]+,[^{:=>}]+$/
   def add_friend(arg)
     hsh = indifferent_hash(arg)
-    if hsh.blank? && arg.is_a?(String) && arg !=~ HASH_SYNTAX
+    
+    # In case arg is a plain string shorthand for 'name, fb_id'
+    if arg =~ FRIEND_STR_SYNTAX
       name, fb_id = arg.split(',').map(&:strip)
       hsh[:fb_id] ||= fb_id
       hsh[:name] ||= name
     end
+    
     friend = Friend.where(fb_id: hsh[:fb_id]).first_or_initialize
-    friend.name = hsh[:name] # in case friend's name has been updated
+    friend.name = hsh[:name] # In case friend's name has been updated
     self.friends << friend unless self.friends.map(&:fb_id).include?(hsh[:fb_id])
   end
   
-  # eg add_duration({ duration: '1', unit: 'hr' })
-  # eg add_duration({ duration: '44', unit: 'min' })
+  # Takes hashes and string representation of hashes
+  # eg add_duration({ duration: '32', unit: 'min' })
   def add_duration(arg)
     hsh = indifferent_hash(arg)
     duration = normalize_duration(hsh[:duration], hsh[:unit])
@@ -87,7 +94,7 @@ class Activity < ActiveRecord::Base
     end
   end
   
-  # eg set_distance({ distance: '5', unit: 'k' })
+  # Takes hashes and string representation of hashes
   # eg set_distance({ distance: '17.4', unit: 'mi' })
   def set_distance(arg)
     hsh = indifferent_hash(arg)
@@ -95,12 +102,14 @@ class Activity < ActiveRecord::Base
     self.distance = distance if distance
   end
   
+  # Takes hashes and string representation of hashes
   # eg set_reps({ reps: '10' })
   def set_reps(arg)
     hsh = indifferent_hash(arg)
     self.reps = hsh[:reps].to_i
   end
   
+  # Takes hashes and string representation of hashes
   # eg set_note({ note: 'felt engaged' })
   def set_note(arg)
     hsh = indifferent_hash(arg)
@@ -112,14 +121,17 @@ class Activity < ActiveRecord::Base
     # 
     # Commands helpers
     # 
+    OLD_HASH_SYNTAX = /:([\w\d]+)[\s]*=>/
+    NEW_HASH_SYNTAX = '\1:'
     def indifferent_hash(arg)
-      # 'arg' should be either a user entered string that can be evaled into a
-      #       hash or a hash zipped from MatchData
-      begin
-        hsh = eval(arg) # TODO refactor this when other people can write rules
-      rescue
-        hsh = arg
+      hsh = arg
+      
+      # In case arg is a string representation of hash
+      if arg.is_a?(String)
+        yml = arg.gsub(OLD_HASH_SYNTAX, NEW_HASH_SYNTAX).gsub('=>', ':')
+        hsh = YAML.load(yml) rescue nil
       end
+
       hsh.with_indifferent_access rescue {}
     end
     
