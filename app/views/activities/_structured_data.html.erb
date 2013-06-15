@@ -8,14 +8,15 @@
   
   <% if activity.friends.present? %>
     <dt>Friends:</dt>
-    <dd class='friends'>
-      <% activity.friends.each do |friend| %>
-        <a href='<%= friend_href(friend.fb_id) %>'>
-          <%= image_tag profile_pic(friend.fb_id), alt: friend.name,
-                                                   class: 'profile-pic' %>
-          <span><%= friend.name %></span>
-        </a>
-        <% unless friend == activity.friends.last %>,<% end %>
+    <dd>
+      <% activity.friends.each_with_index do |friend, i| %>
+        <span class='friend'>
+          <a href='<%= friend_href(friend.fb_id) %>'>
+            <%= image_tag profile_pic(friend.fb_id), alt: friend.name %>
+            <span><%= friend.name %></span>
+          </a>
+          <% unless i == activity.friends.length - 1 %>,<% end %>
+        </span>
       <% end %>
     </dd>
   <% end %>

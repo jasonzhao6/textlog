@@ -10,12 +10,13 @@
     <% if activity.friends.blank? %>
       <%= dash_if_blank(@friends) %>
     <% else %>
-      <% activity.friends.each do |friend| %>
-        <%= image_tag profile_pic(friend.fb_id), alt: friend.name,
-                                                 class: 'profile-pic' %>
-        <%= friend.name %>
-        <% if friend.new_record? %><sup>new</sup><% end %>
-        <% unless friend == activity.friends.last %>,<% end %>
+      <% activity.friends.sort_by(&:name).each_with_index do |friend, i| %>
+        <span class='friend'>
+          <%= image_tag profile_pic(friend.fb_id), alt: friend.name %>
+          <%= friend.name %>
+          <% if friend.new_record? %><sup>new</sup><% end %>
+          <% unless i == activity.friends.length - 1 %>,<% end %>
+        </span>
       <% end %>
     <% end %>
   </dd>
