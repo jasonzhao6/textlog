@@ -31,7 +31,7 @@ class Activity < ActiveRecord::Base
   def self.top_friends
     self.includes(:friends)
         .where('friend_id IS NOT NULL')
-        .group(:friend_id, 'friends.name')
+        .group('friends.fb_id', 'friends.name')
         .references(:friends)
         .order('SUM(1) DESC LIMIT 5')
         .sum(1)

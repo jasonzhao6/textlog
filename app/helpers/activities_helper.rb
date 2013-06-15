@@ -14,8 +14,8 @@ module ActivitiesHelper
     "#{h(name)} <sup>(#{h(count)})</sup>".html_safe
   end
   
-  def top_friend_href(_, name, _)
-    activities_path(friend: name)
+  def top_friend_href(fb_id, _, _)
+    activities_path(friend: fb_id)
   end
   
   def top_friend_name(_, name, _)
@@ -26,8 +26,8 @@ module ActivitiesHelper
     activities_path(activity: activity)
   end
   
-  def friend_href(name)
-    activities_path(friend: name)
+  def friend_href(fb_id)
+    activities_path(friend: fb_id)
   end
   
   def profile_pic(fb_id, _ = nil, _ = nil)
