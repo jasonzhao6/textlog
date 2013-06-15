@@ -29,7 +29,7 @@ module RulesHelper
   # Link helpers
   # 
   def command_text(command, i)
-    "#{command} <sup>(#{@command_counts[i]})</sup>".html_safe
+    "#{h(command)} <sup>(#{h(@command_counts[i])})</sup>".html_safe
   end
 
   def command_href(command)
@@ -39,19 +39,19 @@ module RulesHelper
   # 
   # Attribute helpers
   # 
-  NAMED_VARIABLE = /\?<([a-z]+)>/
+  NAMED_CAPTURE = /\?&lt;([a-z]+)&gt;/
   def matcher_arg(arg)
-    arg.gsub(NAMED_VARIABLE, '?<<em>\1</em>>').html_safe
+    h(arg).gsub(NAMED_CAPTURE, '?&lt;<em>\1</em>&gt;').html_safe
   end
   
   def setter_arg(arg, matcher_arg)
     if arg.blank?
-      key_values = matcher_arg.scan(NAMED_VARIABLE).flatten
-                              .map { |name| "#{name}: <<em>#{name}</em>>" }
-                              .join(', ')
+      key_values = h(matcher_arg).scan(NAMED_CAPTURE).flatten
+                                 .map { |name| "#{name}: <<em>#{name}</em>>" }
+                                 .join(', ')
       "{ #{key_values} }".html_safe
     else
-      arg
+      h(arg)
     end
   end
 end

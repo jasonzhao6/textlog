@@ -3,7 +3,7 @@ module ActivitiesHelper
   # Link helpers
   # 
   def top_activity_text(activity, count)
-    "#{activity} <sup>(#{count})</sup>".html_safe
+    "#{h(activity)} <sup>(#{h(count)})</sup>".html_safe
   end
   
   def top_activity_href(activity, count)
@@ -11,7 +11,7 @@ module ActivitiesHelper
   end
   
   def top_friend_text(id, name, count)
-    "#{name} <sup>(#{count})</sup>".html_safe
+    "#{h(name)} <sup>(#{h(count)})</sup>".html_safe
   end
   
   def top_friend_href(id, name, count)

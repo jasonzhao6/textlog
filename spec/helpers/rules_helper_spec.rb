@@ -12,14 +12,14 @@ describe RulesHelper do
       
       context "when matcher arg has one named variable" do
         let(:arg_before) { '(?<note>felt.*)\.' }
-        let(:arg_after) { '(?<<em>note</em>>felt.*)\.' }
+        let(:arg_after) { '(?&lt;<em>note</em>&gt;felt.*)\.' }
         let(:matcher) { Rule.create(command: 'match', arg: arg_before) }
         specify { helper.matcher_arg(matcher.arg).should == arg_after }
       end
       
       context "when matcher arg has three named variables" do
-        let(:arg_before) { '(?<num>\d+) ?(?<unit>hr)' }
-        let(:arg_after) { '(?<<em>num</em>>\d+) ?(?<<em>unit</em>>hr)' }
+        let(:arg_before) { '(?<duration>\d+) ?(?<unit>hr)' }
+        let(:arg_after) { '(?&lt;<em>duration</em>&gt;\d+) ?(?&lt;<em>unit</em>&gt;hr)' }
         let(:matcher) { Rule.create(command: 'match', arg: arg_before) }
         specify { helper.matcher_arg(matcher.arg).should == arg_after }
       end
