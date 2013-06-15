@@ -43,11 +43,13 @@ module ActivitiesHelper
   
   def time_formatter(time)
     if time.present?
-      hours = time / (60 * 60)
+      days = time / (60 * 60 * 24)
+      hours = time / (60 * 60) % 24
+      minutes = time / 60 % 60
+      days_str = pluralize(days, 'day') if days > 0
       hours_str = "#{hours} hr" if hours > 0
-      minutes = (time / 60) % 60
       minutes_str = "#{minutes} min" if minutes > 0
-      [hours_str, minutes_str].join(' ')
+      [days_str, hours_str, minutes_str].join(' ')
     end
   end
   

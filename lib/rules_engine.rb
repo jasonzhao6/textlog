@@ -29,10 +29,11 @@ class RulesEngine
     [@activity, Array(@matchers.select { |rule| rule.changed? })]
   end
   
-  # Returns true or false
+  # Returns true or nil
   def save
     if @activity.save
-      @matchers.each do |matcher| # 'cnt' may have changed
+      # In case 'cnt' has been incremented
+      @matchers.each do |matcher|
         matcher.save if matcher.changed?
         matcher.setters.each { |setter| setter.save if setter.changed? }
       end

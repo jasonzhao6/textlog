@@ -156,16 +156,20 @@ class Activity < ActiveRecord::Base
     def normalize_duration(duration, unit)
       duration = duration.to_i
       case unit
-      when 'hr', 'hrs', 'hour', 'hours' then duration.send(:hour)
       when 'min', 'minute', 'minutes' then duration.send(:minute)
+      when 'hr', 'hrs', 'hour', 'hours' then duration.send(:hour)
+      when 'day', 'days' then duration.send(:day)
+      when 'wk', 'wks', 'week', 'weeks' then duration.send(:week)
+      when 'month', 'months' then duration.send(:month)
+      when 'yr', 'yrs', 'year', 'years' then duration.send(:year)
       end
     end
     
     def normalize_distance(distance, unit)
       distance = distance.to_f
       case unit
-      when 'k' then 0.621371 * distance # 1 k = 0.621371 mi
       when 'mi', 'mile', 'miles' then distance
+      when 'k' then 0.621371 * distance # 1 k = 0.621371 mi
       end
     end
 end
