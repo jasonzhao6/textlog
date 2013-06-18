@@ -9,7 +9,7 @@ class Message < ActiveRecord::Base
   validates :message, presence: true
   
   # 
-  # Commands that can be sent to message models
+  # Commands that can be called on message models
   # 
   COMMANDS = ['match']
   

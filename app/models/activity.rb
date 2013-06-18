@@ -49,8 +49,8 @@ class Activity < ActiveRecord::Base
   # 
   # Commands that can be called on activity models
   # 
-  COMMANDS = ['set_activity',
-              'add_friend',
+  COMMANDS = ['set_activity', # set_* methods can only be called once
+              'add_friend',   # add_* methods can be called multiple times
               'add_duration',
               'set_distance',
               'set_reps',

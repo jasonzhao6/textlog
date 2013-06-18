@@ -1,29 +1,31 @@
 class RulesEngine
   def initialize(message)
-    # Parse a raw message
-    @message = message        
-    # ...into structured activity data
+    # Parse a message
+    @message = message
+    # ...into structured data
     @activity = Activity.new(message_id: message.id)
     # ...with user defined rules
     @matchers = Rule.matchers
-    
-    # MatchData zipped into a hash
-    @match_data = nil         
   end
   
   # Returns [activity, applicable matchers]
   def execute
-    # 1st pass: calling regex matchers on message model
+    already_set = {}
     @matchers.each do |matcher|
-      @match_data = zip_match_data(@message.match(matcher.arg))
-      unless @match_data.nil?
-        matcher.cnt += 1
-        # 2nd pass: calling custom setters on activity model
+      matched_and_set = false
+      matches = @message.match(matcher.arg)
+      if matches
+        matches_hsh = Hash[matches.names.zip(matches.captures)]
         matcher.setters.each do |setter|
-          @activity.send(setter.command,
-                         setter.arg.present? ? setter.arg : @match_data)
-          setter.cnt +=1
+          unless already_set[setter.command]
+            already_set[setter.command] = true if setter.command =~ /^set_/
+            @activity.send(setter.command,
+                           setter.arg.present? ? setter.arg : matches_hsh)
+            setter.cnt += 1
+            matched_and_set = true
+          end
         end
+        matcher.cnt += 1 if matched_and_set
       end
     end
     [@activity, Array(@matchers.select { |rule| rule.changed? })]
@@ -40,10 +42,4 @@ class RulesEngine
       true
     end
   end
-  
-  private
-    
-    def zip_match_data(data)
-      data.nil? ? nil : Hash[data.names.zip(data.captures)]
-    end
 end
