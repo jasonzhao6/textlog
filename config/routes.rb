@@ -1,9 +1,13 @@
 Textlog::Application.routes.draw do
   root 'application#root'
   
-  resources :activities
   resources :messages
-  resources :rules
+  resources :rules do
+    member do
+      put 'bump'
+    end
+  end
+  resources :activities
   resources :sessions
   
   get '/login' => 'sessions#new'

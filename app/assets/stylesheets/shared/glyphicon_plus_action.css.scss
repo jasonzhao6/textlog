@@ -1,10 +1,6 @@
 .glyphicon-plus-action {
   display: inline-block;
-  .parse,
-  .edit,
-  .delete,
-  .new,
-  .clickoff {
+  a {
     opacity: .85;
     padding-left: 5px;
     i {

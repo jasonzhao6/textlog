@@ -13,7 +13,7 @@ class Rule < ActiveRecord::Base
   scope :matchers_for, lambda { |command| matchers
                                          .where('setters_rules.command = ?', command)
                                          .references(:setters) }
-  # These should never exist
+  # These should never exist TODO move to admin page
   scope :setters_without_matchers, -> { where('matcher_id not in (?)',
                                                Rule.matchers.pluck(:id)) }
   serialize :arg

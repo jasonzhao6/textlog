@@ -2,6 +2,10 @@
   <header>
     <h4><%= rule_heading(matcher) %></h4>
     <div class='glyphicon-plus-action'>
+      <a class='bump'
+         href='<%= bump_rule_path(matcher.id, redirect_path: @redirect_path) %>'
+         data-method='put' rel='nofollow'>
+         <i class='icon-circle-arrow-up'></i>bump up</a>
       <a class='edit'
          href='<%= edit_rule_path(matcher.id, redirect_path: @redirect_path) %>'>
         <i class='icon-edit'></i>edit</a>

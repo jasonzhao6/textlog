@@ -1,6 +1,11 @@
 class RulesController < ApplicationController
-  before_filter :custom_redirect_path, only: [:create, :destroy, :edit, :new, :update]
-  before_filter :must_be_logged_in, only: [:create, :destroy, :update]
+  before_filter :custom_redirect_path, only: [:bump, :create, :destroy, :edit, :new, :update]
+  before_filter :must_be_logged_in, only: [:bump, :create, :destroy, :update]
+  
+  def bump
+    Rule.find(params[:id]).touch
+    redirect_to @redirect_path, notice: 'Rule was successfully bumped up.'
+  end
   
   def create
     @rule = matcher = Rule.new(matcher_params)
