@@ -2,9 +2,14 @@
 
 Rule.delete_all
 
+# Will not match
+r_ = Rule.create(matcher_id: nil, command: 'match', arg: 'No Match')
+
+# Will match, but will not execute
 r0 = Rule.create(matcher_id: nil, command: 'match', arg: 'butterlap')
   r01 = Rule.create(matcher_id: r0.id, command: 'set_activity', arg: { activity: 'Error' })
-  
+
+# Will match, will execute
 r1 = Rule.create(matcher_id: nil, command: 'match', arg: 'butterlap')
   r11 = Rule.create(matcher_id: r1.id, command: 'set_activity', arg: { activity: 'Butterlap' })
   r12 = Rule.create(matcher_id: r1.id, command: 'set_distance', arg: { distance: '17.4', unit: 'mi' })

@@ -8,38 +8,64 @@ class RulesEngine
     @matchers = Rule.matchers
   end
   
-  # Returns [activity, applicable matchers]
+  # Returns [activity, matchers executed, other applicable matchers]
   def execute
-    already_set = {}
+    # States for this execution
+    applicable_matchers = []
+    matchers_executed = []
+    commands_executed = {}
+    
+    # Loop through each matcher
     @matchers.each do |matcher|
-      matched_and_set = false
+      
+      # States for this matcher
+      setter_executed = false
       matches = @message.match(matcher.arg)
+      
+      # If there was a match
       if matches
+        applicable_matchers << matcher
         matches_hsh = Hash[matches.names.zip(matches.captures)]
+        
+        # Loop through each setter
         matcher.setters.each do |setter|
-          unless already_set[setter.command]
-            already_set[setter.command] = true if setter.command =~ /^set_/
+          
+          # Do not execute the same set_* command twice
+          unless commands_executed[setter.command]
+            if setter.command =~ /^set_/
+              commands_executed[setter.command] = true
+            end
+            
+            # Execute 
             @activity.send(setter.command,
                            setter.arg.present? ? setter.arg : matches_hsh)
+            setter_executed = true
             setter.cnt += 1
-            matched_and_set = true
           end
         end
-        matcher.cnt += 1 if matched_and_set
+        
+        # If at least one setter executed
+        if setter_executed
+          matchers_executed << matcher
+          matcher.cnt += 1
+        end
       end
     end
-    [@activity, Array(@matchers.select { |rule| rule.changed? })]
+    
+    [@activity, matchers_executed, applicable_matchers - matchers_executed]
   end
   
   # Returns true or nil
   def save
     if @activity.save
-      # In case 'cnt' has been incremented
+      # Update setters and matchers who 'cnt' has changed
       @matchers.each do |matcher|
-        matcher.save if matcher.changed?
-        matcher.setters.each { |setter| setter.save if setter.changed? }
+        if matcher.cnt_changed?
+          matcher.save
+          matcher.setters.each { |setter| setter.save if setter.cnt_changed? }
+        end
       end
-      true
+      return true
     end
   end
 end

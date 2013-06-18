@@ -37,7 +37,7 @@ class MessagesController < ApplicationController
   
   def show
     @message = Message.find(params[:id])
-    @activity, @applicable_matchers = RulesEngine.new(@message).execute
+    @activity, @matchers_executed, @other_applicable_matchers = RulesEngine.new(@message).execute
     
     # Validate activity such that if there is any validation error, we can show
     # them now and have user correct them by editing rules.

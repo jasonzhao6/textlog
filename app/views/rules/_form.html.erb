@@ -10,7 +10,7 @@
 <div class='row-fluid'>
   <%= form_for rule, html: { id: 'rule', class: 'docs docs-small span6' } do |f| %>
     <!-- Hidden redirect_path -->
-    <% if params[:redirect_path] %>
+    <% if params[:redirect_path].present? %>
       <input type='hidden' name='redirect_path' value='<%= params[:redirect_path] %>' />
     <% end %>
 

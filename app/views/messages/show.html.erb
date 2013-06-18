@@ -19,8 +19,15 @@
   <div class='rules-container span6 well hidden-phone'>
     <h4>Applicable rules</h4>
     <%= render partial: 'rules/rule_docs',
-               collection: @applicable_matchers,
+               collection: @matchers_executed,
                as: :matcher %>
+    <% if @other_applicable_matchers.present? %>
+      <h4>Other applicable rules</h4>
+      <%= render partial: 'rules/rule_docs',
+                 locals: { show_bump: true },
+                 collection: @other_applicable_matchers,
+                 as: :matcher %>
+    <% end %>
     <%= link_to 'Add new', new_rule_path(message_id: @message.id,
                                          redirect_path: @redirect_path),
                            class: 'btn' %>

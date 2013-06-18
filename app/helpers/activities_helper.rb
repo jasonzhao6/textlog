@@ -31,7 +31,7 @@ module ActivitiesHelper
   end
   
   def profile_pic(fb_id, _ = nil, _ = nil)
-    "http://graph.facebook.com/#{fb_id}/picture"
+    "https://graph.facebook.com/#{fb_id}/picture"
   end
 
   # 
