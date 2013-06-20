@@ -19,7 +19,8 @@ class ActivitiesController < ApplicationController
     @activities = if params[:activity].present?
                     Activity.index.where(activity: params[:activity])
                   elsif params[:friend].present?
-                    Friend.find_by_fb_id(params[:friend]).activities.index
+                    @friend = Friend.find_by_fb_id(params[:friend])
+                    @friend.activities.index rescue []
                   else
                     Activity.index
                   end

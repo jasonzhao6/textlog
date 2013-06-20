@@ -2,31 +2,19 @@ module ActivitiesHelper
   # 
   # Link helpers
   # 
-  def top_activity_text(activity, count)
+  def activity_with_count(activity, count)
     "#{h(activity)} <sup>(#{h(count)})</sup>".html_safe
   end
   
-  def top_activity_href(activity, _)
+  def activity_href(activity, _ = nil)
     activities_path(activity: activity)
   end
   
-  def top_friend_text(_, name, count)
+  def friend_with_count(_, name, count)
     "#{h(name)} <sup>(#{h(count)})</sup>".html_safe
   end
   
-  def top_friend_href(fb_id, _, _)
-    activities_path(friend: fb_id)
-  end
-  
-  def top_friend_name(_, name, _)
-    name
-  end
-  
-  def activity_href(activity)
-    activities_path(activity: activity)
-  end
-  
-  def friend_href(fb_id)
+  def friend_href(fb_id, _ = nil, _ = nil)
     activities_path(friend: fb_id)
   end
   
@@ -41,7 +29,7 @@ module ActivitiesHelper
     attr.blank? ? '-' : attr
   end
   
-  def time_formatter(time)
+  def duration_formatter(time)
     if time.present?
       days = time / (60 * 60 * 24)
       hours = time / (60 * 60) % 24

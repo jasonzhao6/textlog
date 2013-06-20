@@ -7,19 +7,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   
   # 
-  # Controller actions
-  # 
-  def root
-    redirect_to :messages
-    # TODO landing page with messages via text + rules = activities
-    #      how to write rules with/out regex
-    #      explain structure of activities
-    #        maybe recommend typing 'bik' instead of 'biking|biked'
-    #        and typing 'butter' insead of 'butterlap|butter lap'
-    #      collect email of interest
-  end
-
-  # 
   # Session helpers
   # 
   helper_method :current_user?

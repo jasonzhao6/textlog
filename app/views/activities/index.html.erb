@@ -1,19 +1,21 @@
+<% content_for :sidebar do %>
+  <%= render 'sidebar' %>
+<% end %>
+
+<% if (params[:activity].present? || params[:friend].present?) %>
+  <ul class='breadcrumb'>
+    <li><%= link_to 'All', :activities %> <span class='divider'>/</span></li>
+    <% if params[:activity].present? %>
+      <li class='active'><%= params[:activity] %>
+        <sup>(<%= @activities.length %>)</sup></li>
+    <% elsif params[:friend].present? %>
+      <li class='active'><%= @friend.try(:name) || params[:friend] %>
+        <sup>(<%= @activities.length %>)</sup></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <% if @activities.present? %>
-  <% content_for :sidebar do %>
-    <%= render 'sidebar' %>
-  <% end %>
-
-  <% if (params[:activity].present? || params[:friend].present?) %>
-    <ul class='breadcrumb'>
-      <li><%= link_to 'All', :activities %> <span class='divider'>/</span></li>
-      <% if params[:activity].present? %>
-        <li class='active'><%= params[:activity] %></li>
-      <% elsif params[:friend].present? %>
-        <li class='active'><%= params[:friend] %></li>
-      <% end %>
-    </ul>
-  <% end %>
-
   <% @activities.each do |activity| %>
     <div class='docs docs-activity'>
       <header>
@@ -23,6 +25,8 @@
       <%= render 'structured_data', activity: activity %>
     </div>
   <% end %>
+<% elsif (params[:activity].present? || params[:friend].present?) %>
+  <h4>No match.</h4>
 <% else %>
   <h4>No activity yet.</h4>
 <% end %>

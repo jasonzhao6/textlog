@@ -23,7 +23,7 @@
   
   <% if activity.duration.present? %>
     <dt>Duration:</dt>
-    <dd><%= time_formatter(activity.duration) %></dd>
+    <dd><%= duration_formatter(activity.duration) %></dd>
   <% end %>
   
   <% if activity.distance.present? %>

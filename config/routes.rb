@@ -1,5 +1,7 @@
 Textlog::Application.routes.draw do
-  root 'application#root'
+  root 'welcome#homepage'
+  
+  get '/debug' => 'debug#index'
   
   resources :messages
   resources :rules do
@@ -8,8 +10,8 @@ Textlog::Application.routes.draw do
     end
   end
   resources :activities
-  resources :sessions
   
+  resources :sessions
   get '/login' => 'sessions#new'
   get '/logout' => 'sessions#destroy'
   

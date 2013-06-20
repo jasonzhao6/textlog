@@ -47,7 +47,7 @@
             <%= yield :sidebar %>
           </div>
         <% end %>
-        <div class="<%= (content_for? :sidebar) ? 'span9' : 'span12' %>">
+        <div id='main' class="<%= (content_for? :sidebar) ? 'span9' : 'span12' %>">
           <%= bootstrap_flash %>
           <%= yield %>
         </div>

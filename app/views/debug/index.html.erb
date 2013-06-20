@@ -1,0 +1,35 @@
+<div class='row-fluid'>
+  <div class='span2 offset1'>
+    <h4>All activities</h4>
+    <ul>
+      <% @activities.each do |activity| %>
+        <li><%= link_to activity, activity_href(activity) %></li>
+      <% end %>
+    </ul>
+  </div>
+  
+  <div class='span3'>
+    <h4>All activity partners</h4>
+    <ul>
+      <% @friends.each do |friend| %>
+        <li class='picture-plus-name'>
+          <a href='<%= friend_href(friend.fb_id) %>'>
+            <%= image_tag profile_pic(friend.fb_id) %>
+            <%= friend.name %>
+          </a>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class='span5'>
+    <h4>Setters without matchers <small>(should not exist)</small></h4>
+    <ul>
+      <% @setters_without_matchers.each do |setter| %>
+        <li>
+          <%= setter.command %>(<%= setter.arg %>)
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
