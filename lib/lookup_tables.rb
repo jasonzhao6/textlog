@@ -5,7 +5,7 @@ SETTER_PLACEHOLDERS = {
   set_distance: '{ distance: <distance>, unit: <unit> }',
   set_reps: '{ reps: <reps> }',
   set_note: '{ note: <note> }',
-  nil => 'string, hash, or leave blank for regex named captures',
+  nil => 'a string, hash, or leave blank for regex captures',
 }.with_indifferent_access
 
 SETTER_ICONS = {

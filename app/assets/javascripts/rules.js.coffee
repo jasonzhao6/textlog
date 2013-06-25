@@ -57,7 +57,7 @@ updatePlaceholder = ->
 validateForm = ->
   if $('#rule_arg').val().trim().length == 0
     #  TODO show bootstrap_flash and active record like errors thru js
-    alert("Regex can't be blank")
+    alert("Case-insensitive regex can't be blank")
     return false
   else
     return true
