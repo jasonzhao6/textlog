@@ -14,8 +14,9 @@ class Rule < ActiveRecord::Base
                                          .where('setters_rules.command = ?', command)
                                          .references(:setters) }
   serialize :arg
-  validates :command, inclusion: { in: (Message::COMMANDS + Activity::COMMANDS) }
   validates :arg, presence: true, if: :is_matcher?
+  validates :command, inclusion: { in: Message::COMMANDS }, if: :is_matcher?
+  validates :command, inclusion: { in: Activity::COMMANDS }, if: :is_setter?
   
   # 
   # Rspec helpers
@@ -37,5 +38,9 @@ class Rule < ActiveRecord::Base
     
     def is_matcher?
       self.matcher_id.nil?
+    end
+    
+    def is_setter?
+      self.matcher_id.present?
     end
 end

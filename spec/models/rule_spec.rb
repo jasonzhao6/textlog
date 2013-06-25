@@ -3,17 +3,20 @@ require 'spec_helper'
 describe Rule do
   describe "before_filters" do
     describe "#set_cnt_was_last_updated" do
-      subject { Rule.create(command: 'add_duration', arg: 'ignore') }
+      subject { Rule.create(command: 'match', arg: 'ignore') }
       context "cnt was last updated" do
         before(:each) do
-          subject.update_attributes(command: 'add_friend')
+          subject.update_attributes(arg: 'ignore again')
         end
+        its(:cnt) { should == 0 }
         its(:cnt_was_last_updated?) { should_not be }
       end
       context "cnt was not last updated" do
         before(:each) do
           subject.update_attributes(cnt: 1)
+          subject.reload
         end
+        its(:cnt) { should == 1 }
         its(:cnt_was_last_updated?) { should be }
       end
     end
