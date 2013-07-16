@@ -32,7 +32,7 @@
     <!-- Setters -->
     <div id='setters'>
       <% if rule.new_record? %>
-        <%= render 'fieldset', setter: rule %>
+        <%= render 'fieldset', setter: Rule.new %>
       <% else %>
         <%= render partial: 'fieldset', collection: rule.setters, as: :setter %>
       <% end %>
