@@ -2,25 +2,25 @@
 
 $ ->
   $html.on('change', '.rules-controller #sort-by', changeSortBy)
-  
+
   $html.on('keyup', '.rules-controller #rule_arg', detectSetter)
   $html.on('click', '.rules-controller .new', appendFieldset)
   $html.on('click', '.rules-controller .delete', removeFieldset)
   $html.on('change', '.rules-controller #setters select', updatePlaceholder)
   $html.on('submit', '.rules-controller form#rule', validateForm)
-  
-# 
+
+#
 # Sidebar
-# 
+#
 changeSortBy = (e) ->
   $this = $(this)
   $form = $this.closest('form')
   $this.attr('name', null) if $this.val() != 'most-frequently-used'
   $form.submit()
 
-# 
+#
 # New/edit forms
-# 
+#
 activityRegex = /\?<activity>/
 durationRegex = /\?<duration>.*\?<unit>/
 distanceRegex = /\?<distance>.*\?<unit>/
@@ -57,7 +57,16 @@ updatePlaceholder = ->
 validateForm = ->
   if $('#rule_arg').val().trim().length == 0
     #  TODO show bootstrap_flash and active record like errors thru js
-    alert("Case-insensitive regex can't be blank")
-    return false
+    alert('Rule must have a matcher')
+  else if !hasSetter()
+    alert('Rule must have at least 1 setter')
   else
     return true
+
+  return false
+
+#
+# Helpers
+#
+hasSetter = ->
+  !!_.map($('#setters select'), (setter) -> $(setter).val()).join().length
