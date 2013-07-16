@@ -14,7 +14,7 @@ group :development do
 
   # Enable the REPL and local/instance variable inspection in Better Errors
   gem 'binding_of_caller'
-  
+
   # Bullet will watch your queries while you develop your application and notify you when you should add eager loading (N+1 queries), when you’re using eager loading that isn’t necessary and when you should use counter cache
   gem 'bullet'
 
@@ -23,7 +23,7 @@ group :development do
 
   # Share localhost web servers to the rest of the world
   gem 'localtunnel'
-  
+
   # Turn off the Rails asset pipeline log
   gem 'quiet_assets'
 end
@@ -53,9 +53,6 @@ group :test do
   gem 'spork-rails', git: 'https://github.com/A-gen/spork-rails.git'
 end
 
-# Automatically creates JavaScript client-side validations from your existing server-side model validations
-# gem 'client_side_validations'
-
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.0.1'
 
@@ -72,13 +69,10 @@ gem 'newrelic_rpm'
 gem 'pg'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.0.rc1'
-  
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0.rc1'
+gem 'rails', '4.0.0'
 
-# DSL for building forms and no opinion on markup
-# gem 'simple_form'
+# Use SCSS for stylesheets
+gem 'sass-rails', '~> 4.0.0'
 
 # SOLR powered full-text search engine
 # gem 'sunspot'
