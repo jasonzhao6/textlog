@@ -27,7 +27,7 @@
     <ul>
       <% @setters_without_matchers.each do |setter| %>
         <li>
-          <%= setter.command %>(<%= setter.arg %>)
+          <%= "##{setter.id}, #{setter.command}(#{setter.arg}), created #{time_ago(setter.created_at)} ago" %>
         </li>
       <% end %>
     </ul>
