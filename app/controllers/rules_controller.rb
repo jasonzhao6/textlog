@@ -85,7 +85,7 @@ class RulesController < ApplicationController
         @rule.errors.add(:setter, "can't be blank") and return
       end
 
-      setters_zipped.each do |command, arg|
+      params[:commands].zip(params[:args]).each do |command, arg|
         if command.present? && arg.blank?
           unless params[:rule][:arg].index("(?<#{command.split('_').last}>")
             @rule.errors.add(command, "can't be blank unless captured") and return
@@ -98,14 +98,10 @@ class RulesController < ApplicationController
 
     def setters_create
       if params[:commands].present?
-        setters_zipped.map do |command, arg|
+        params[:commands].zip(params[:args]).map do |command, arg|
           Rule.create(command: command, arg: arg, matcher_id: @rule.id)
         end
       end
-    end
-
-    def setters_zipped
-      @setters_zipped ||= params[:commands].zip(params[:args])
     end
 
     #

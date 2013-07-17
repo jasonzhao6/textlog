@@ -8,10 +8,13 @@
 <% end %>
 
 <div class='row-fluid'>
-  <%= form_for rule, html: { id: 'rule', class: 'docs docs-small span6' } do |f| %>
+  <%= form_for rule, html: { id: 'rule',
+                             class: 'docs docs-small span6' } do |f| %>
     <!-- Hidden redirect_path -->
     <% if params[:redirect_path].present? %>
-      <input type='hidden' name='redirect_path' value='<%= params[:redirect_path] %>' />
+      <input type='hidden'
+             name='redirect_path'
+             value='<%= params[:redirect_path] %>' />
     <% end %>
 
     <!-- Matcher -->
@@ -26,18 +29,17 @@
       </div>
     </div>
     <div class='row-fluid'>
-      <%= f.text_field :arg, class: 'span12', placeholder: 'a case-insensitive regex' %>
+      <%= f.text_field :arg, class: 'span12',
+                             placeholder: 'a case-insensitive regex' %>
     </div>
-  
+
     <!-- Setters -->
     <div id='setters'>
-      <% if rule.new_record? %>
-        <%= render 'fieldset', setter: Rule.new %>
-      <% else %>
-        <%= render partial: 'fieldset', collection: rule.setters, as: :setter %>
-      <% end %>
+      <%= render partial: 'fieldset',
+                 collection: current_setters(rule),
+                 as: :setter %>
     </div>
-  
+
     <!-- New setter link -->
     <div class='row-fluid'>
       <div class='glyphicon-plus-action offset1'>
@@ -46,15 +48,15 @@
         </a>
       </div>
     </div>
-  
+
     <!-- Form errors -->
     <%= render 'shared/form_errors', model: rule %>
-  
+
     <!-- Submit button -->
     <div class='row-fluid'>
       <%= f.submit class: 'btn btn-primary span12' %>
     </div>
-  
+
     <!-- Cancel link -->
     <div class='row-fluid'>
       <%= link_to 'Cancel', @redirect_path, class: 'cancel' %>

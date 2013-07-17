@@ -37,7 +37,7 @@ describe Rule do
           before(:each) do
             subject.valid?
           end
-          its('errors.full_messages') { should == ["Arg can't be blank"] }
+          its('errors.full_messages') { should == ["Matcher can't be blank"] }
         end
       end
       
