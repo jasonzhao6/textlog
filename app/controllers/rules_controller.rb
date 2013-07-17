@@ -81,7 +81,7 @@ class RulesController < ApplicationController
     #
     def setters_valid?
       if params[:commands].nil? || params[:commands].join.blank?
-        @rule.errors.add(:rule, 'must have at least 1 setter') and return false
+        @rule.errors.add(:setter, "can't be blank") and return false
       else
         true
       end

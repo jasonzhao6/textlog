@@ -10,36 +10,37 @@ class Rule < ActiveRecord::Base
   scope :matchers, -> { where(matcher_id: nil)
                        .includes(:setters)
                        .order('rules.updated_at DESC') }
-  scope :matchers_for, lambda { |command| matchers
-                                         .where('setters_rules.command = ?', command)
-                                         .references(:setters) }
+  scope :matchers_for,
+    lambda { |command| matchers
+                      .where('setters_rules.command = ?', command)
+                      .references(:setters) }
   serialize :arg
   validates :arg, presence: true, if: :is_matcher?
   validates :command, inclusion: { in: Message::COMMANDS }, if: :is_matcher?
   validates :command, inclusion: { in: Activity::COMMANDS }, if: :is_setter?
-  
-  # 
+
+  #
   # Rspec helpers
-  # 
+  #
   def as_json(options = {})
     super(except: [:created_at, :updated_at, :id, :matcher_id],
           include: [matcher: { except: [:created_at, :updated_at, :id] }])
   end
-  
+
   private
-  
-    # 
+
+    #
     # Before filters
-    # 
+    #
     def set_cnt_was_last_updated
       self.cnt_was_last_updated = self.cnt_changed?
       return # Rails is not happy when a before filter returns false
     end
-    
+
     def is_matcher?
       self.matcher_id.nil?
     end
-    
+
     def is_setter?
       self.matcher_id.present?
     end

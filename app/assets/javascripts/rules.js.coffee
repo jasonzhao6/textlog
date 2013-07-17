@@ -2,12 +2,10 @@
 
 $ ->
   $html.on('change', '.rules-controller #sort-by', changeSortBy)
-
   $html.on('keyup', '.rules-controller #rule_arg', detectSetter)
   $html.on('click', '.rules-controller .new', appendFieldset)
   $html.on('click', '.rules-controller .delete', removeFieldset)
   $html.on('change', '.rules-controller #setters select', updatePlaceholder)
-  $html.on('submit', '.rules-controller form#rule', validateForm)
 
 #
 # Sidebar
@@ -53,20 +51,3 @@ updatePlaceholder = ->
   $select = $(this)
   $input = $select.closest('fieldset').find('input')
   $input.attr('placeholder', SETTER_PLACEHOLDERS[$select.val()])
-
-validateForm = ->
-  if $('#rule_arg').val().trim().length == 0
-    #  TODO show bootstrap_flash and active record like errors thru js
-    alert('Rule must have a matcher')
-  else if !hasSetter()
-    alert('Rule must have at least 1 setter')
-  else
-    return true
-
-  return false
-
-#
-# Helpers
-#
-hasSetter = ->
-  !!_.map($('#setters select'), (setter) -> $(setter).val()).join().length
