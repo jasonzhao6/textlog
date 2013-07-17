@@ -1,5 +1,6 @@
 class RulesController < ApplicationController
-  before_filter :custom_redirect_path, only: [:bump, :create, :destroy, :edit, :new, :update]
+  before_filter :custom_redirect_path, only: [:bump, :create, :destroy, :edit,
+                                              :new, :update]
   before_filter :must_be_logged_in, only: [:bump, :create, :destroy, :update]
 
   def bump
@@ -81,18 +82,30 @@ class RulesController < ApplicationController
     #
     def setters_valid?
       if params[:commands].nil? || params[:commands].join.blank?
-        @rule.errors.add(:setter, "can't be blank") and return false
-      else
-        true
+        @rule.errors.add(:setter, "can't be blank") and return
       end
+
+      setters_zipped.each do |command, arg|
+        if command.present? && arg.blank?
+          unless params[:rule][:arg].index("(?<#{command.split('_').last}>")
+            @rule.errors.add(command, "can't be blank unless captured") and return
+          end
+        end
+      end
+
+      true
     end
 
     def setters_create
       if params[:commands].present?
-        params[:commands].zip(params[:args]).map do |command, arg|
+        setters_zipped.map do |command, arg|
           Rule.create(command: command, arg: arg, matcher_id: @rule.id)
         end
       end
+    end
+
+    def setters_zipped
+      @setters_zipped ||= params[:commands].zip(params[:args])
     end
 
     #
