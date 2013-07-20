@@ -1,20 +1,20 @@
 Textlog::Application.routes.draw do
   root 'welcome#homepage'
-  
+
   get '/debug' => 'debug#index'
-  
+
   resources :messages
-  resources :rules do
+  resources :rules, except: [:show] do
     member do
       put 'bump'
     end
   end
-  resources :activities
-  
-  resources :sessions
+  resources :activities, only: [:create, :index]
+
+  resources :sessions, only: [:new, :create, :destroy]
   get '/login' => 'sessions#new'
   get '/logout' => 'sessions#destroy'
-  
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

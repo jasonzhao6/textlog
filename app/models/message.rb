@@ -7,12 +7,12 @@ class Message < ActiveRecord::Base
   scope :unparsed, -> { where('id not in (?)', Activity.pluck(:message_id) + [0])
                        .order('created_at DESC') }
   validates :message, presence: true
-  
-  # 
+
+  #
   # Commands that can be called on message models
-  # 
+  #
   COMMANDS = ['match']
-  
+
   def match(pattern)
     # This line raises an error when 'pattern' is not valid regex. When that
     # happens, rescue nil and act as if there was no match.

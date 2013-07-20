@@ -1,11 +1,11 @@
 <dl class='dl-horizontal structured-data'>
-  <% if activity.activity.present? %>
+  <% if activity.activity? %>
     <dt>Activity:</dt>
     <dd>
       <%= link_to activity.activity, activity_href(activity.activity) %>
     </dd>
   <% end %>
-  
+
   <% if activity.friends.present? %>
     <dt>Friends:</dt>
     <dd>
@@ -20,23 +20,23 @@
       <% end %>
     </dd>
   <% end %>
-  
-  <% if activity.duration.present? %>
+
+  <% if activity.duration? %>
     <dt>Duration:</dt>
     <dd><%= duration_formatter(activity.duration) %></dd>
   <% end %>
-  
-  <% if activity.distance.present? %>
+
+  <% if activity.distance? %>
     <dt>Distance:</dt>
     <dd><%= distance_formatter(activity.distance) %></dd>
   <% end %>
-  
-  <% if activity.reps.present? %>
+
+  <% if activity.reps? %>
     <dt>Reps:</dt>
     <dd><%= activity.reps %></dd>
   <% end %>
-  
-  <% if activity.note.present? %>
+
+  <% if activity.note? %>
     <dt>Note:</dt>
     <dd><%= activity.note %></dd>
   <% end %>

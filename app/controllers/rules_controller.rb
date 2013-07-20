@@ -1,5 +1,5 @@
 class RulesController < ApplicationController
-  before_filter :custom_redirect_path, only: [:bump, :create, :destroy, :edit,
+  before_filter :set_redirect_path, only: [:bump, :create, :destroy, :edit,
                                               :new, :update]
   before_filter :must_be_logged_in, only: [:bump, :create, :destroy, :update]
 
@@ -15,7 +15,7 @@ class RulesController < ApplicationController
       setters_create
       redirect_to @redirect_path, notice: 'Rule was successfully created.'
     else
-      render action: :new
+      render :new
     end
   end
 
@@ -64,7 +64,7 @@ class RulesController < ApplicationController
       setters_create
       redirect_to @redirect_path, notice: 'Rule was successfully updated.'
     else
-      render action: :edit
+      render :edit
     end
   end
 
@@ -73,7 +73,7 @@ class RulesController < ApplicationController
     #
     # Before filters
     #
-    def custom_redirect_path
+    def set_redirect_path
       @redirect_path = params[:redirect_path] || :rules
     end
 

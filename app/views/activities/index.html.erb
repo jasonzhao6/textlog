@@ -19,7 +19,7 @@
   <% @activities.each do |activity| %>
     <div class='docs docs-activity'>
       <header>
-        <h4><%= "Logged #{time_ago(activity.message.updated_at)} ago" %></h4>
+        <h4><%= "Logged #{time_ago(activity.created_at)} ago" %></h4>
       </header>
       <%= render 'messages/message_well', message: activity.message %>
       <%= render 'structured_data', activity: activity %>

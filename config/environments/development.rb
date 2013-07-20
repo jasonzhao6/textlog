@@ -26,7 +26,7 @@ Textlog::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
-  
+
   # Configure bullet gem
   config.after_initialize do
     Bullet.enable = true

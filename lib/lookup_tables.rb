@@ -1,4 +1,4 @@
-SETTER_PLACEHOLDERS = { 
+SETTER_PLACEHOLDERS = {
   set_activity: '{ activity: <activity> }',
   add_friend: '{ name: <name>, fb_id: <fb_id> }',
   add_duration: '{ duration: <duration>, unit: <unit> }',

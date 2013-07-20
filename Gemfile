@@ -26,6 +26,9 @@ group :development do
 
   # Turn off the Rails asset pipeline log
   gem 'quiet_assets'
+
+  # Code metrics
+  gem 'rails_best_practices'
 end
 
 group :doc do

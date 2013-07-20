@@ -17,19 +17,19 @@
          <i class='icon-trash'></i>delete</a>
     </div>
   </header>
-  
+
   <dl>
     <dt>
       <span class='label label-info hidden-phone'><%= matcher.command %></span>
       <span><i class='matcher-icon icon-filter visible-phone'></i></span>
-      <code class='alert-info'><%= matcher_arg(matcher.arg) %></code> 
+      <code class='alert-info'><%= matcher_arg(matcher.arg) %></code>
     </dt>
     <% matcher.setters.each do |setter| %>
       <dd>
         <span class='label label-success hidden-phone'><%= setter.command %></span>
         <span><i class='setter-icon icon-<%= SETTER_ICONS[setter.command] %>
                         visible-phone'></i></span>
-        <code class='alert-success'><%= setter_arg(setter.arg, matcher.arg) %></code> 
+        <code class='alert-success'><%= setter_arg(setter.arg, matcher.arg) %></code>
       </dd>
     <% end %>
   </dl>

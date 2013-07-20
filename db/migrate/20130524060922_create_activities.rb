@@ -2,7 +2,7 @@ class CreateActivities < ActiveRecord::Migration
   def change
     # I manually curate unparsed messages at the end of the day
     add_column :messages, :parsed, :boolean
-    
+
     create_table :activities do |t|
       t.integer :message_id # "Biked Butterlap with Scott, Alan, Mary Ann. 1 hr 30 min. Engaged."
       t.string :name # "Biking"
